@@ -67,6 +67,7 @@
     background-color: #fff;
     width: 100%;
     padding: 1em;
+    z-index: 999;
     
     /*shadow*/
     -webkit-box-shadow: 4px 4px 4px 0px rgba(111,111,111,0.22);

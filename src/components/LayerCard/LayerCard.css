@@ -1,0 +1,18 @@
+.layer-card{
+    padding: 4px;
+    height: 152px;
+    width: 152px;
+    background-color: #0161D8;
+    border-radius: 4px;
+}
+
+.layer-desc{
+    color: #76819A;
+    font-size: 12;
+}
+
+.add-layer-button{
+    background-color: #fff;
+    color: #000;
+    display: inline;
+}

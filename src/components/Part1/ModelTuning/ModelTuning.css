@@ -1,0 +1,59 @@
+.tuning-wrapper{
+    padding: 2em;
+}
+
+.tuning-wrapper h5{
+    font-weight: 700;
+}
+
+.top-row{
+    display: flex;
+}
+
+.input{
+    flex:1;
+}
+
+.layers{
+    flex:5;
+    margin-left: 0.75em;
+}
+
+.input-inside{
+    background-color: #F2F5FD;
+    height: 600px;
+    border-radius: 4px;
+    padding: 24px;
+}
+
+.input-inside h6{
+    color: #76819A;
+    font-size: 12;
+}
+
+.layers-inside{
+    background-color: #F2F5FD;
+    height: 600px;
+    border-radius: 4px;
+}
+
+.divider{
+    height: 1px;
+    background-color: #76819A;
+    margin: 1.5em;
+}
+
+.addLayers{
+    margin: 1.5em 0;
+}
+
+.add-inside{
+    background-color: #F2F5FD;
+    height: 250px;
+    border-radius: 4px;
+    padding: 24px;
+}
+
+.make-model{
+    right:0;
+}

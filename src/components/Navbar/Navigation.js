@@ -21,7 +21,7 @@ export default function Navigation() {
             <div>
                 <div className="nav-wrapper">
                     <Navbar className="gradient-nav" expand="lg">
-                        <Navbar.Brand id="nav-brand" href="#home">Assignment 2: Explainability</Navbar.Brand>
+                        <Navbar.Brand id="nav-brand" href="#">Assignment 2: Explainability</Navbar.Brand>
                             <div className="nav-links">
                                 <Nav>    
                                     <Nav.Link href="#modeltuning">Model Tuning</Nav.Link>
@@ -35,12 +35,12 @@ export default function Navigation() {
                             </div>
                             <div className="burger">
                                 <div onClick = {toggleCollapse}>
-                                    {stateClicked ? <BiMenuAltRight size={32}/> : <BiX size={32}/>}
+                                    {stateClicked ? <BiX size={32}/> : <BiMenuAltRight size={32}/>}
                                 </div>
                             </div>
                     </Navbar>
                     <div onClick={toggleCollapse}>
-                        <Nav className={stateClicked ? "dropdown-menu" : "dropdown-show"}>    
+                        <Nav className={stateClicked ? "dropdown-show" : "dropdown-menu"}>    
                             <ul className="dropdown-links">
                                 <li><Nav.Link href="#modeltuning">Model Tuning</Nav.Link></li>
                                 <li><Nav.Link href="#modelresult">Model Result</Nav.Link></li>
