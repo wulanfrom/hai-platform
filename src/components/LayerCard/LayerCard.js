@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button'
 import './LayerCard.css'
 
 export default function LayerCard(props) {
-    const {id, index, title, desc} = props;
+    const {id, index, title, desc} = props.props;
+    // console.log(props.props)
 
     return (
         <div className="layer-card">

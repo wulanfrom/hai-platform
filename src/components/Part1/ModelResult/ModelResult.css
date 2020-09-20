@@ -1,0 +1,39 @@
+.result-wrapper{
+    margin: 2em;
+}
+
+.result-inside{
+    background-color: #F2F5FD;
+    height: 100%;
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.result-inside p:nth-child(2){
+    font-weight: 700;
+    color: #0161D8;
+    font-size: 20px;
+    margin: 0;
+}
+
+.result-inside p:nth-child(1){
+    margin: 0;
+}
+
+.result h5{
+    font-weight: 700;
+}
+
+.chart-wrapper{
+    margin-top: 1em;
+    border: 5px solid #F2F5FD;
+    height: 100%;
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
