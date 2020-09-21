@@ -28,7 +28,6 @@
 
 .input-inside h6{
     color: #76819A;
-    font-size: 12;
 }
 
 .layers-inside{
@@ -38,6 +37,7 @@
     padding: 24px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .divider{
@@ -61,4 +61,16 @@
 
 .make-model{
     float:right;
+    margin-bottom: 2em;
+}
+
+.param-desc{
+    font-size: 12px;
+    margin:0;
+    color: #76819A;
+    margin-bottom: 1em;
+}
+
+.param-name{
+    margin:0;
 }

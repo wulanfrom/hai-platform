@@ -24,8 +24,8 @@ export default function ModelTuning() {
                 <div className="input">
                     <h5>INPUT</h5>
                     <div className="input-inside">
-                        <p>DATA DIVISION</p>
-                        <h6>How would you divide the training and testing data?</h6>
+                        <p className="param-name">DATA DIVISION</p>
+                        <p className="param-desc">How would you divide the training and testing data?</p>
                         <Form>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Control as="select">
@@ -38,8 +38,8 @@ export default function ModelTuning() {
                             </Form.Group>
                         </Form>
                         <div className="divider"></div>
-                        <p>BATCH SIZE</p>
-                        <h6>Number of Batches per Epochs</h6>
+                        <p className="param-name">BATCH SIZE</p>
+                        <p className="param-desc">Number of Batches per Epochs</p>
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Control as="select">
                             <option>1</option>
@@ -50,8 +50,8 @@ export default function ModelTuning() {
                             </Form.Control>
                         </Form.Group>
                         <div className="divider"></div>
-                        <p>EPOCHS</p>
-                        <h6>Number of passes through the entire training dataset</h6>
+                        <p className="param-name">EPOCHS</p>
+                        <p className="param-desc">Number of passes through the entire training dataset</p>
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Control as="select">
                             <option>1</option>

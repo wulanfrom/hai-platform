@@ -10,10 +10,11 @@ export default function Report() {
                 <div className="report-inside">
                     <p>You can submit multiple times. The report you submit here will be used for grading.</p>
                     <div className="give-report">
-                        <Button className="global-button"> Choose a file..</Button>
+                        <Button className="outline-button"> Choose a file..</Button>
                         <p>Example.pdf</p>
                     </div>
                 </div>
+            <Button className="global-button submit-button">Submit Report</Button>
         </div>
     )
 }

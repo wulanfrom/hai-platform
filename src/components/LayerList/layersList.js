@@ -3,7 +3,7 @@ const layersList = [
         'id':'input-layer',
         'index': 0,
         "title":"Input Layer",
-        "desc":"Test and Training Images",
+        "desc":"Input Test and Training Images",
     },
     {
         'id':'convo-layer',
