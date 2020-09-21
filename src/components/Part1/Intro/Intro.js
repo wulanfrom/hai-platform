@@ -18,7 +18,7 @@ export default function Intro() {
                 <h3 className="sub-title">Discussion Questions</h3>
                 <p>Please answer the following questions after you complete the exploration and implementation through the platform above. Make sure to cite any external sources when you refer to examples, ideas, and quotes to support your arguments.</p>
             </div>
-            <Link exact to="modeltuning">
+            <Link exact to="#part1-modeltuning">
                 <Button className="middle global-button">Proceed to Part 1</Button>
             </Link>
         </div>

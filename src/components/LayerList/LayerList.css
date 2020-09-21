@@ -1,4 +1,4 @@
-.layerList-outer{
+/* .layerList-outer{
     display: inline-block;
     margin: 0 2em;
 }
@@ -27,4 +27,49 @@
 .layer-desc p:nth-child(2){
     font-size: 12px;
     color: #76819A;
+} */
+
+
+.layerList-outer{
+    margin-top: 1em;
+    display: block;
+    /* margin: 0 2em; */
+    background-color:#03BCDB;
+    border-radius: 4px;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.layerList-wrapper{
+   padding: 0.5em 2em;
+}
+
+.layer-desc{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.layer-desc p:nth-child(1){
+    margin: 0;
+    /* margin-top: 1em; */
+    color: #fff;
+    font-weight: 700;
+}
+
+.layer-desc p:nth-child(2){
+    font-size: 12px;
+    color: #76819A;
+    color: #fff;
+    margin: 0 0 0 1em;
+} 
+
+.minus-button{
+    background-color: #fff;
+    color:#000;
+    font-size: 20px;
+    /* float: right; */
 }

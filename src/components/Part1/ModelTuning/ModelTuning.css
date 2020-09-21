@@ -6,28 +6,24 @@
     font-weight: 700;
 }
 
-.top-row{
-    display: flex;
-}
-
-.input{
-    flex:1;
-}
-
-.layers{
-    flex:5;
-    margin-left: 0.75em;
-}
-
 .input-inside{
     background-color: #F2F5FD;
     height: 100%;
     border-radius: 4px;
     padding: 24px;
+    align-items: center;
 }
 
 .input-inside h6{
     color: #76819A;
+}
+
+.layers{
+    margin: 1.5em 0;
+}
+
+.addlayer-button{
+    margin-left: 1em;
 }
 
 .layers-inside{
@@ -35,9 +31,11 @@
     height: 100%;
     border-radius: 4px;
     padding: 24px;
+}
+
+.layer-input{
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .divider{
@@ -73,4 +71,13 @@
 
 .param-name{
     margin:0;
+}
+
+.param-info{
+    display:flex;
+    align-items: center;
+}
+
+.param-info p:nth-child(1){
+    margin-right: 4px;
 }

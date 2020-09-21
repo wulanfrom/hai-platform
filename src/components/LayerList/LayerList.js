@@ -1,6 +1,8 @@
 import React from 'react'
 import './LayerList.css'
 
+import Button from 'react-bootstrap/Button'
+
 export default function LayerList(props) {
     const {id, index, title, desc} = props.props;
 
@@ -13,6 +15,7 @@ export default function LayerList(props) {
                     <p>{desc}</p>
                 </div>
             </div>
+            <Button className="minus-button">-</Button>
         </div>
     )
 }

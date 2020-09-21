@@ -13,7 +13,7 @@ export default function Report() {
                         <Button className="outline-button"> Choose a file..</Button>
                         <p>Example.pdf</p>
                     </div>
-                </div>
+                </div> zx
             <Button className="global-button submit-button">Submit Report</Button>
         </div>
     )
