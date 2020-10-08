@@ -10,7 +10,7 @@ import navLinks from '../../../navLinks'
 export default function Report() {
     return (
         <div>
-            {/* <Navigation props={navLinks.part1}/>  */}
+            {/* <Navigation props={navLinks.part2}/>  */}
             <div className="report-wrapper">
                 <h5>REPORT SUBMISSION</h5>
                     <div className="report-inside">

@@ -30,7 +30,7 @@ export default function ModelTuning() {
  
     return (
         <div>
-            {/* <Navigation props={navLinks.part1}/>  */}
+            {/* <Navigation props={navLinks.part2}/>  */}
             <div className="tuning-wrapper">
                 <div className="top-row">
                     <div className="input">

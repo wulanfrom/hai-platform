@@ -3,7 +3,7 @@ const navLinks = {
         {
             'id':'part1',
             'index':0,
-            'home':'#part1',
+            'home':'#',
             'tuning':'#part1-modeltuning',
             'result':'#part1-modelresult',
             'report':'#part1-reportsubmission',
@@ -14,7 +14,7 @@ const navLinks = {
     'part2': [
         {
             'id':'part2',
-            'index':0,
+            'index': 1,
             'home':'#part2',
             'tuning':'#part2-modeltuning',
             'result':'#part2-modelresult',
