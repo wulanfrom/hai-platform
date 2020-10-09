@@ -1,0 +1,40 @@
+#navbar{
+    background-color: #0161D8;
+    padding: 1em 1em;
+}
+
+#navbar a{
+  color: #fff;
+}
+
+#navbar-dropdown {
+    color: white;
+  }
+
+  #navbar-brand {
+    font-size: 1rem;
+    color: #fff;
+    position: absolute;
+    left: 1rem;
+  }
+
+  .image-icon{
+      width: 24px;
+      height: 24px;
+  }
+
+/*Introduction Page*/
+.intro-navbar{
+  background-color: #0161D8;
+  padding: 2em 2em;
+
+}
+
+.introduction-page{
+  margin: 2em 2em;
+}
+
+.tutorial-button{
+  position: absolute;
+  right: 1rem;
+}
