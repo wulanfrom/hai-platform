@@ -3,9 +3,9 @@
     padding: 1em 1em;
 }
 
-#navbar a{
+/* #navbar a{
   color: #fff;
-}
+} */
 
 #navbar-dropdown {
     color: white;
@@ -37,4 +37,8 @@
 .tutorial-button{
   position: absolute;
   right: 1rem;
+}
+
+#navbar-dropdown .dropdown-item {
+  color: black;
 }
