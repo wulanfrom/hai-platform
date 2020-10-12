@@ -1,11 +1,16 @@
 import React from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import Navbar from 'react-bootstrap/Navbar'
+import {setSection} from '../actions'
 import '../styles/Navigation.css'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import {AiOutlineQuestionCircle} from 'react-icons/ai'
 
 function Introduction(){
+
+    const dispatch = useDispatch()
+
     return (
         <div className="App">
             <Navbar className='intro-navbar'>
@@ -40,7 +45,7 @@ function Introduction(){
                 
 
                 <div className="text-center">
-                    <button className='btn btn-green start-btn'> <a href='/hai-platform/#/exploration'>Start Activity </a></button>
+                    <button className='btn btn-green start-btn'> <a href='/hai-platform/#/exploration' onClick={() => dispatch(setSection(1))}>Start Activity </a></button>
                 </div>
                
             </div>
