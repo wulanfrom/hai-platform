@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.1/dist/tf.min.js"> </script> //
+    <!-- Load the MobileNet model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.0.4/dist/mobilenet.min.js"> </script>
+    <title>Image Classifier with Mobilenet</title>
+    <script src="mobilenetmodel.js"></script>
+    <script data-main="main" src="require.js"></script>
+    <!-- <script src="run.js"></script> -->
+    <script>
+        //Don't load everything else before main.js!
+        require(['main','mobilenetmodel'], function(x,y){
+            y
+        });
+    </script>
+  </head>
+  <body>
+    <h1>Image Classifier with Mobilenet</h1>
+    <p id='predictions'></p>
+    <img src="cat.jpg" id="cat">
+  </body>
+</html>
