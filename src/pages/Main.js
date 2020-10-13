@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux'
 import Exploration from './Exploration'
 import Visualization from './Visualization'
 import Implementation from './Implementation'
+import DataSearching from './DataSearching'
 import Finish from './Finish'
 
 
@@ -17,6 +18,7 @@ const Main = () =>{
             <Navigation/>
             <Switch>
                 <Route path="/exploration">{Exploration}</Route>
+                <Route path="/datasearching" component={DataSearching}></Route>
                 <Route path="/implementation">{Implementation}</Route>
                 <Route path="/visualization">{Visualization}</Route>
                 <Route path="/finish">{Finish}</Route>
