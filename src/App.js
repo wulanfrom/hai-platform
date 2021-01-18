@@ -1,16 +1,30 @@
 import React from 'react';
 import './App.css';
-import Introduction from './pages/Introduction'
-import {Switch, Route} from 'react-router-dom'
-import Main from './pages/Main'
+import Navigation from './components/Navigation/Navigation'
+import {
+  BrowserRouter as Router,
+  Switch, 
+  Link,
+  Route
+} from 'react-router-dom';
+
+// Pages
+import GetStarted from './components/GetStarted/GetStarted';
+import Upload from './components/ApplyModels/Upload'
+import Explore from './components/Explore/Explore'
 
 function App() {
   return (
-    <div className="rootDiv">
-      <Switch>
-        <Route exact path="/" component={Introduction}></Route>
-        <Route path="/" component={Main}></Route>
-      </Switch>
+    <div>
+      <Navigation />
+
+      <Router>
+        <Switch>
+          <Route exact path="/getStarted" component ={GetStarted} />
+          <Route path="/applyModels" component ={Upload} />
+          <Route path="/explore" component = {Explore} />
+        </Switch>
+      </Router>
     </div>
   );
 }

@@ -1,25 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter} from 'react-router-dom'
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {createStore} from "redux";
-import allReducers from "./reducers"
-import { Provider } from "react-redux"
-
-const myStore = createStore(allReducers, 
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom';
 
 ReactDOM.render(
-  <HashRouter>
-    <Provider store={myStore}>
-      {/* <ScrollToTop />
-      <Route path='/' component={App} /> */}
-      <App />
-    </Provider>
-  </HashRouter>,
+  <Router>
+    <App />
+  </Router>,
   document.getElementById('root')
 );
 
