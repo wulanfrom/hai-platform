@@ -20,11 +20,11 @@ export default class Navigation extends Component {
         return (
             <div>
                 <Navbar collapseOnSelect bg="dark" variant="dark">
-                    <Navbar.Brand href="/getStarted">XAIPlatform</Navbar.Brand>
+                    <Navbar.Brand href="/hai-platform/getStarted">XAIPlatform</Navbar.Brand>
                     <Nav className="ml-auto">
-                        <Nav.Link href="/getStarted">GET STARTED</Nav.Link>
-                        <Nav.Link href="/applyModels">APPLY MODELS</Nav.Link>
-                        <Nav.Link href="/explore">EXPLORE</Nav.Link>
+                        <Nav.Link href="/hai-platform/getStarted">GET STARTED</Nav.Link>
+                        <Nav.Link href="/hai-platform/applyModels">APPLY MODELS</Nav.Link>
+                        <Nav.Link href="/hai-platform/explore">EXPLORE</Nav.Link>
                     </Nav>
                 </Navbar>
             </div>

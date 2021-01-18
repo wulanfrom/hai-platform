@@ -30,13 +30,13 @@ export default function GetStarted() {
                     </li>
                 </ul>
                 <div className="mx-auto">
-                    <Button href="/applyModels" type="button" className="getStarted-btn">Get Started</Button>
+                    <Button href="/hai-platform/applyModels" type="button" className="getStarted-btn">Get Started</Button>
                 </div>
                 <hr></hr>
 
                 <h2 className="mt-4">Explore What Others Found</h2>
                 <p>Explore the observations done by other users and compare it to yours.</p>
-                <Button href="/explore" className="explore-btn">Explore</Button>
+                <Button href="/hai-platform/explore" className="explore-btn">Explore</Button>
 
             </div>
         </div>

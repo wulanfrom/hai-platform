@@ -20,9 +20,9 @@ function App() {
 
       <Router>
         <Switch>
-          <Route exact path="/getStarted" component ={GetStarted} />
-          <Route path="/applyModels" component ={Upload} />
-          <Route path="/explore" component = {Explore} />
+          <Route exact path="/hai-platform/getStarted" component ={GetStarted} />
+          <Route path="/hai-platform/applyModels" component ={Upload} />
+          <Route path="/hai-platform/explore" component = {Explore} />
         </Switch>
       </Router>
     </div>

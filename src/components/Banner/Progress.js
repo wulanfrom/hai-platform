@@ -38,6 +38,16 @@ function getStepContent(step) {
   }
 }
 
+function nextDisabledHandler(step) {
+    switch (step) {
+        //for 0, if images are not uploaded, cannot proceed
+
+        //for 1, if all labels are not done, then cannot proceed
+        //for 2, if all bales are not done, then cannot proceed
+        //for 3 can always proceed
+    }
+}
+
 export default function Progress() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -45,6 +55,8 @@ export default function Progress() {
   const steps = getSteps();
 
   const handleNext = () => {
+    //do alert handling here
+    
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
