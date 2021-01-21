@@ -2,14 +2,21 @@ import React, { useState, useEffect, useRef } from 'react'
 import './DropZone.css'
 import Button from 'react-bootstrap/Button'
 
-export default function DropZone() {
+export default function DropZone(props) {
+    const currentStep = props.currentStep;
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [validFiles, setValidFiles] = useState([]);
+    const pageUrl = ['applyModels/upload', 'applyModels/apply', 'applyModels/explain', 'applyModels/share']
 
     // For previewing images
     const modalImageRef = useRef();
     const modalRef = useRef();
+
+    // Give data back to parent
+    const giveDataToParent = () => {
+        props.parentCallBack(selectedFiles.length + 1);
+    }
 
     // Remove duplicate files
     useEffect(() => {
@@ -53,6 +60,8 @@ export default function DropZone() {
                 // setErrorMessage('File type not permitted');
             }
         }
+
+        props.parentCallBack(selectedFiles.length + 1);
     }
 
     // Check if the file is in the right format
@@ -70,6 +79,8 @@ export default function DropZone() {
         if (files.length) {
             handleFiles(files);
         }
+
+        
     }
 
     // Show file size of uploaded items
@@ -100,6 +111,8 @@ export default function DropZone() {
 
         // update selectedFiles array
         setSelectedFiles([...selectedFiles]);
+
+        props.parentCallBack(selectedFiles.length);
     }
 
     // open Image
@@ -117,10 +130,12 @@ export default function DropZone() {
         modalImageRef.current.style.backgroundImage = 'none';
     }
 
+    //Upload files
+    // Should the files be uploaded online or in server?
+
     return (
         <div>
-            <div className="container">
-                {/* {validFiles.length > 0 ? <button className="file-upload-btn" onClick={() => uploadFiles()}>Upload Files</button> : ''}  */}
+            <div className={`container ${currentStep == 0 ? "" : "hidden"}`}>
                 {/* to follow the html drag and drop api */}
                 <div className="drop-container" 
                     onDragOver={dragOver}
@@ -136,8 +151,8 @@ export default function DropZone() {
                     {/* Itterate through the files and show them in a list */}
                     { validFiles.map((data, i) => 
                         <div className="file-status-bar" key={i}>
-                            <div onClick={!data.invalid ? () => openImageModal(data) : () => removeFile(data.name)}>
-                                <div>
+                            <div>
+                                <div onClick={!data.invalid ? () => openImageModal(data) : () => removeFile(data.name)}>
                                     <div className="file-type-logo"></div>
                                     <div className="file-type">{fileType(data.name)}</div>
                                     <span className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</span>

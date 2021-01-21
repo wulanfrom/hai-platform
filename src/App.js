@@ -12,6 +12,7 @@ import {
 import GetStarted from './components/GetStarted/GetStarted';
 import Upload from './components/ApplyModels/Upload'
 import Explore from './components/Explore/Explore'
+import MasterUpload from './components/MasterUpload/MasterUpload'
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/hai-platform/getStarted" component ={GetStarted} />
-          <Route path="/hai-platform/applyModels" component ={Upload} />
+          <Route path="/hai-platform/upload" component ={MasterUpload} />
           <Route path="/hai-platform/explore" component = {Explore} />
         </Switch>
       </Router>

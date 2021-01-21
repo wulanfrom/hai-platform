@@ -1,5 +1,6 @@
 .container {
-    transform: translateY(-100%);
+    display: block;
+    transform: translateY(20%);
 }
 
 .container p {
@@ -154,4 +155,8 @@
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
+}
+
+.hidden {
+    display: none;
 }

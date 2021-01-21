@@ -5,6 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from "react-router-dom"; 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,35 +39,45 @@ function getStepContent(step) {
   }
 }
 
-function nextDisabledHandler(step) {
-    switch (step) {
-        //for 0, if images are not uploaded, cannot proceed
-
-        //for 1, if all labels are not done, then cannot proceed
-        //for 2, if all bales are not done, then cannot proceed
-        //for 3 can always proceed
-    }
-}
-
-export default function Progress() {
+export default function Progress(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  // const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
+  const activeStep = props.currentStep;
 
-  const handleNext = () => {
-    //do alert handling here
-    
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  // const handleNext = (step) => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   props.parentCallBack(activeStep);
+  // };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  // const handleBack = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  //   props.parentCallBack(activeStep);
+  // };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  // const handleReset = () => {
+  //   setActiveStep(0);
+  // };
+
+  // const nextDisabledHandler = (step) => {
+  //       switch (step) {
+  //           //for 0, if images are not uploaded, cannot proceed
+  //           case 0:
+  //               // console.log(props.imageCount);
+  //               if (props.imageCount > 0) {
+  //                   return 0
+  //               }
+  //               return 1;
+  //           default:
+  //               return 1
+  //           //for 1, if all labels are not done, then cannot proceed
+  //           //for 2, if all bales are not done, then cannot proceed
+  //           //for 3 can always proceed
+  //       }
+  //   }
+
+    // UploadFiles
 
   return (
     <div className={classes.root}>
@@ -83,7 +94,7 @@ export default function Progress() {
       </Stepper>
 
       {/* The lower part with buttons and caption */}
-      <div>
+      {/* <div>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
@@ -104,6 +115,7 @@ export default function Progress() {
               <Button
                 variant="contained"
                 color="primary"
+                disabled={ nextDisabledHandler(activeStep) }
                 onClick={handleNext}
                 className={classes.button}
               >
@@ -112,7 +124,7 @@ export default function Progress() {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
