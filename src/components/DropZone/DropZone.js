@@ -13,6 +13,7 @@ export default function DropZone(props) {
     
     // For adding input by clicking
     const fileInputRef = useRef();
+    const imageIcon = useRef();
 
     const fileInputClicked = () => {
         fileInputRef.current.click();
@@ -76,6 +77,7 @@ export default function DropZone(props) {
             if (validateFile(files[i])) {
                 // add to an array so we can display the name of file
                 setSelectedFiles(prevArray => [...prevArray, files[i]]);
+                applyIcon(files[i]);
                 // setValidFiles(prevArray => [...prevArray, files[i]]);
             } else {
                 // add a new property called invalid
@@ -86,6 +88,7 @@ export default function DropZone(props) {
                 setErrorMessage('File type not permitted');
                 // add files that are invalid
                 setUnsupportedFiles(prevArray => [...prevArray, files[i]]);
+                applyIcon(files[i]);
             }
         }
 
@@ -147,6 +150,14 @@ export default function DropZone(props) {
         }
     }
 
+    const applyIcon = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e) {
+            imageIcon.current.style.backgroundImage = `url(${e.target.result})`;
+        }
+    }
+
     const closeModal = () => {
         modalRef.current.style.display = "none";
         modalImageRef.current.style.backgroundImage = 'none';
@@ -187,7 +198,7 @@ export default function DropZone(props) {
                         validFiles.map((data, i) => 
                             <div className="file-status-bar" key={i}>
                                 <div onClick={!data.invalid ? () => openImageModal(data) : () => removeFile(data.name)}>
-                                    <div className="file-type-logo"></div>
+                                    <div className="file-type-logo" ref={imageIcon}></div>
                                     <div className="file-type">{fileType(data.name)}</div>
                                     <span className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</span>
                                     <span className="file-size">({fileSize(data.size)})</span> {data.invalid && <span className='file-error-message'>({errorMessage})</span>}
