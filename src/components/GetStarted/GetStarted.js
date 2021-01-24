@@ -30,7 +30,7 @@ export default function GetStarted() {
                     </li>
                 </ul>
                 <div className="mx-auto">
-                    <Button href="/hai-platform/applyModels" type="button" className="getStarted-btn">Get Started</Button>
+                    <Button href="/hai-platform/upload" type="button" className="getStarted-btn">Get Started</Button>
                 </div>
                 <hr></hr>
 

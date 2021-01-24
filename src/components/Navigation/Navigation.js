@@ -23,7 +23,7 @@ export default class Navigation extends Component {
                     <Navbar.Brand href="/hai-platform/getStarted">XAIPlatform</Navbar.Brand>
                     <Nav className="ml-auto">
                         <Nav.Link href="/hai-platform/getStarted">GET STARTED</Nav.Link>
-                        <Nav.Link href="/hai-platform/applyModels">APPLY MODELS</Nav.Link>
+                        <Nav.Link href="/hai-platform/upload">APPLY MODELS</Nav.Link>
                         <Nav.Link href="/hai-platform/explore">EXPLORE</Nav.Link>
                     </Nav>
                 </Navbar>
