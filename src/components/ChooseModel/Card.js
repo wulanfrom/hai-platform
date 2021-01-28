@@ -34,11 +34,11 @@ export default function Card(props) {
     useEffect(() => {
         values = {
             id: dataName,
-            data: data,
+            // data: data,
             agreeLabel: agreeValue,
-            agreeExp: 0,
-            explanation: "",
-            LIMEPic: null,
+            // agreeExp: 0,
+            // explanation: "",
+            // LIMEPic: null,
         }
         // send changed data to parent
         props.sendChangedData(values);
@@ -73,7 +73,7 @@ export default function Card(props) {
                                     variant="secondary"
                                     name="radio"
                                     value={radio.value}
-                                    checked={ agreeValue == radio.value}
+                                    checked={ agreeValue == radio.value }
                                     onChange={(e) => setAgreeValue(e.currentTarget.value)}
                                 >
                                     {radio.name}

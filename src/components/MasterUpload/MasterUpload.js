@@ -17,13 +17,14 @@ export default function MasterUpload() {
     const [validNext, setValidNext] = useState(false); //whether next is disabled or not
     const [allData, setAllData] = useState([]); //holds all the cards and their id, data, and agreeValues
     const [editAgreeId, setAgreeId] = useState(""); //keeps the name of the id with changed agree value
+    const [improvement, updateImprovement] = useState("");
 
     // check when to make next button appear
     const handleNext = (step) => {
         const nextStep = currentStep + 1;
         //So it doesnt go beyond bounds
-        if (currentStep == 4) {
-            setCurrentStep(4);
+        if (currentStep >= 3) {
+            setCurrentStep(3);
         }
         
         else {
@@ -83,8 +84,21 @@ export default function MasterUpload() {
         setAllData(modifiedList);
     }
 
-    console.log("all data");
-    console.log(allData);
+    // update the value taken from explanation page
+    const sendExpToMasterUpload = (updatedList) => {
+        setAllData(updatedList);
+    }
+
+    // get value from giveExplanation and update improvement
+    const sendImprovement = (data) => {
+        updateImprovement(data);
+    }
+
+    // console.log("all data");
+    // console.log(allData);
+
+    console.log("improvement");
+    console.log(improvement);
 
     return (
         <div>
@@ -103,7 +117,7 @@ export default function MasterUpload() {
                     </div>
                 ): ""}
                 {/* if the current step is 2, then show the page */}
-                { currentStep == 2 ? <GiveExplanation /> : "" }
+                { currentStep == 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
             </div>
         </div>
     )
