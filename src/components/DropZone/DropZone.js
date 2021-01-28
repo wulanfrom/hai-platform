@@ -3,6 +3,7 @@ import './DropZone.css'
 
 // Bootstrap components
 import Button from 'react-bootstrap/Button'
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
 
 export default function DropZone(props) {
     const [selectedFiles, setSelectedFiles] = useState([]); // all files dropped to the zone
@@ -28,6 +29,11 @@ export default function DropZone(props) {
     // Display images
     const modalImageRef = useRef();
     const modalRef = useRef();
+
+    // on mount
+    useEffect(() => {
+
+    }, []);
 
     // Remove duplicate files
     useEffect(() => {
@@ -78,7 +84,16 @@ export default function DropZone(props) {
                 // add to an array so we can display the name of file
                 setSelectedFiles(prevArray => [...prevArray, files[i]]);
                 applyIcon(files[i]);
-                // setValidFiles(prevArray => [...prevArray, files[i]]);
+                
+                // create new card post? and add to globalCardList
+                props.addData({
+                    id: files[i].name,
+                    data: files[i],
+                    agreeLabel: 0,
+                    agreeExp: 0,
+                    explanation: "",
+                    LIMEPic: null,
+                })
             } else {
                 // add a new property called invalid
                 files[i]['invalid'] = true;
@@ -91,7 +106,6 @@ export default function DropZone(props) {
                 applyIcon(files[i]);
             }
         }
-
     }
 
     // checks the validity of the files
@@ -139,6 +153,9 @@ export default function DropZone(props) {
             // update unsupportedFiles array
             setUnsupportedFiles([...unsupportedFiles]);
         }
+
+        // send name of deleted item to the master upload
+        props.getDeletedItem(name);
     }
 
     const openImageModal = (file) => {
