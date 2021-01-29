@@ -82,7 +82,7 @@ export default function TableBody(props) {
                 <div className="labelName">
                     <p>Label</p>
                     {/* Put result of label here */}
-                    <p>Bird</p>
+                    <p>{ data.label }</p>
                 </div>
                 <div className="agreeLabel">
                     <p>Is the explanation easy to understand?</p>
@@ -103,11 +103,11 @@ export default function TableBody(props) {
                     </ButtonGroup>
                 </div>
                 <div>
-                <Form.Group controlId="explanationTextArea">
-                    <Form.Label>Is the Explanation Sufficient to Trust the model prediction?</Form.Label>
-                    {/* whenever it changes, update the globaldata in master upload */}
-                    <Form.Control as="textarea" value={ explanation } rows={3} onChange={ updateExplanation } />
-                </Form.Group>
+                    <Form.Group controlId="explanationTextArea">
+                        <Form.Label>Is the Explanation Sufficient to Trust the model prediction?</Form.Label>
+                        {/* whenever it changes, update the globaldata in master upload */}
+                        <Form.Control as="textarea" value={ explanation } rows={3} onChange={ updateExplanation } />
+                    </Form.Group>
                 </div>
             </td>
         </tr>

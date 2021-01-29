@@ -10,6 +10,8 @@ import ChooseModel from '../ChooseModel/ChooseModel'
 import Card from '../ChooseModel/Card'
 import { faClipboardList } from '@fortawesome/free-solid-svg-icons'
 import GiveExplanation from '../GiveExplanation/GiveExplanation'
+import Summary from '../Summary/Summary'
+import LabelPage from '../LabelPage/LabelPage'
 
 export default function MasterUpload() {
     const [currentStep, setCurrentStep] = useState(0); //current step
@@ -60,6 +62,10 @@ export default function MasterUpload() {
         // console.log(allData);
     }
 
+    const updateAllData = (updatedList) => {
+        setAllData(updatedList);
+    }
+
     //toggle whether to disable next or not
     const checkNext = (validity) => {
         setValidNext(validity);
@@ -94,11 +100,11 @@ export default function MasterUpload() {
         updateImprovement(data);
     }
 
-    // console.log("all data");
-    // console.log(allData);
+    console.log("all data");
+    console.log(allData);
 
-    console.log("improvement");
-    console.log(improvement);
+    // console.log("improvement");
+    // console.log(improvement);
 
     return (
         <div>
@@ -110,14 +116,15 @@ export default function MasterUpload() {
             <div>
                 <DropZone addData = { addData } getImages = {getImages} checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem }/>
                 {/* <ChooseModel getLabelResult = {getLabelResult} imageList = {uploadImages} currentStep = { currentStep } /> */}
-                { currentStep == 1 ? allData.map((item) => 
+                {/* { currentStep == 1 ? allData.map((item) => 
                     <div key={item.id}>
                         <Card name = {item.id} data = {item.data} agreeValue = {item.agreeLabel} sendChangedData = {sendChangedData}/>
-                        {/* <Card name = {data.name} data = {data} /> */}
                     </div>
-                ): ""}
+                ): ""} */}
+                { currentStep == 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
                 {/* if the current step is 2, then show the page */}
                 { currentStep == 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
+                { currentStep == 3 ? <Summary totalData={allData}/> : ""}
             </div>
         </div>
     )

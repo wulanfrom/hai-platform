@@ -93,6 +93,7 @@ export default function DropZone(props) {
                     agreeExp: 0,
                     explanation: "",
                     LIMEPic: null,
+                    label: "",
                 })
             } else {
                 // add a new property called invalid

@@ -9,6 +9,7 @@ import './Card.css'
 export default function Card(props) {
     const data = props.data;
     const dataName = props.name;
+    const dataLabel = props.label;
     const imageRef = useRef();
     const [agreeValue, setAgreeValue] = useState(0); //set the do you agree with the lab to false
     var values = {
@@ -36,6 +37,7 @@ export default function Card(props) {
             id: dataName,
             // data: data,
             agreeLabel: agreeValue,
+            label: dataLabel,
             // agreeExp: 0,
             // explanation: "",
             // LIMEPic: null,
@@ -62,7 +64,7 @@ export default function Card(props) {
                 <div className="photo-container" ref={ imageRef }></div>
                 <div>
                     <p className="card-label">Label</p>
-                    {/* <p>{ dataName }</p> */}
+                    <p>{ dataLabel }</p>
                     <div>
                         <p className="card-label">Do you Agree with the Label?</p>
                         <ButtonGroup toggle>
