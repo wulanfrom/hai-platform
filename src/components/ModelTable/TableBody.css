@@ -1,4 +1,4 @@
-.image-container {
+.image-container, .exp-container {
     position: relative;
     background-color: grey;
     width: 100%;

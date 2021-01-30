@@ -5,6 +5,9 @@ import './DropZone.css'
 import Button from 'react-bootstrap/Button'
 import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
 
+// pages
+import ListItem from './ListItem'
+
 export default function DropZone(props) {
     const [selectedFiles, setSelectedFiles] = useState([]); // all files dropped to the zone
     const [errorMessage, setErrorMessage] = useState(''); 
@@ -83,7 +86,7 @@ export default function DropZone(props) {
             if (validateFile(files[i])) {
                 // add to an array so we can display the name of file
                 setSelectedFiles(prevArray => [...prevArray, files[i]]);
-                applyIcon(files[i]);
+                // applyIcon(files[i]);
                 
                 // create new card post? and add to globalCardList
                 props.addData({
@@ -104,7 +107,7 @@ export default function DropZone(props) {
                 setErrorMessage('File type not permitted');
                 // add files that are invalid
                 setUnsupportedFiles(prevArray => [...prevArray, files[i]]);
-                applyIcon(files[i]);
+                // applyIcon(files[i]);
             }
         }
     }
@@ -168,13 +171,13 @@ export default function DropZone(props) {
         }
     }
 
-    const applyIcon = (file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function(e) {
-            imageIcon.current.style.backgroundImage = `url(${e.target.result})`;
-        }
-    }
+    // const applyIcon = (file) => {
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onload = function(e) {
+    //         imageIcon.current.style.backgroundImage = `url(${e.target.result})`;
+    //     }
+    // }
 
     const closeModal = () => {
         modalRef.current.style.display = "none";
@@ -214,14 +217,8 @@ export default function DropZone(props) {
                     <div className="file-display-container">
                     {
                         validFiles.map((data, i) => 
-                            <div className="file-status-bar" key={i}>
-                                <div onClick={!data.invalid ? () => openImageModal(data) : () => removeFile(data.name)}>
-                                    <div className="file-type-logo" ref={imageIcon}></div>
-                                    <div className="file-type">{fileType(data.name)}</div>
-                                    <span className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</span>
-                                    <span className="file-size">({fileSize(data.size)})</span> {data.invalid && <span className='file-error-message'>({errorMessage})</span>}
-                                </div>
-                                <div className="file-remove" onClick={() => removeFile(data.name)}>X</div>
+                            <div>
+                                <ListItem data={data} key={i} fileSize={fileSize(data.size)} fileType={fileType(data.name)} errorMessage={errorMessage} openImageModal={openImageModal} removeFile={removeFile}/>
                             </div>
                         )
                     }

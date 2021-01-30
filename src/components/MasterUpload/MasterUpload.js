@@ -1,14 +1,13 @@
 import React, { useState, useRef } from 'react'
+import './MasterUpload.css'
 
 // bootstrap component
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
 
 // Pages
 import Progress from '../Banner/Progress'
 import DropZone from '../DropZone/DropZone'
-import ChooseModel from '../ChooseModel/ChooseModel'
-import Card from '../ChooseModel/Card'
-import { faClipboardList } from '@fortawesome/free-solid-svg-icons'
 import GiveExplanation from '../GiveExplanation/GiveExplanation'
 import Summary from '../Summary/Summary'
 import LabelPage from '../LabelPage/LabelPage'
@@ -108,11 +107,17 @@ export default function MasterUpload() {
 
     return (
         <div>
-            <h1>Step: { currentStep + 1 }</h1>
-            <Progress currentStep = { currentStep } />
-            { currentStep > 0 ? <Button className="btn btn-secondary" type="button" onClick={ handleBack }>Previous</Button> : ""}
-            {/* Change the function of currentStep to disabled once we make function of photo upload */}
-            { validNext ? <Button className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button> : <Button disabled className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>}
+            <div>
+                <h1>Step: { currentStep + 1 }</h1>
+                <div className="progress-button">
+                    <Progress currentStep = { currentStep } />
+                    <div className="nextPrev-btn">
+                        { currentStep > 0 ? <Button className="prevBtn btn btn-secondary" type="button" onClick={ handleBack }>Previous</Button> : ""}
+                        {/* Change the function of currentStep to disabled once we make function of photo upload */}
+                        { validNext ? <Button id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button> : <Button disabled id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>}
+                    </div>
+                </div>
+            </div>
             <div>
                 <DropZone addData = { addData } getImages = {getImages} checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem }/>
                 {/* <ChooseModel getLabelResult = {getLabelResult} imageList = {uploadImages} currentStep = { currentStep } /> */}

@@ -8,32 +8,14 @@
     display: flex;
 }
 
-.crcLabelcrcExp {
+.crcLabelcrcExp, .crcLabelWrngExp, .wrngLabelcrcExp, .wrngLabelWrngExp {
     width: 25%;
     height: 500px;
-    background-color: red;
+    /* background-color: red; */
+    border: 1px solid black;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
-}
-
-.crcLabelWrngExp {
-    width: 25%;
-    height: 500px;
-    background-color: yellow;
-}
-
-.wrngLabelcrcExp {
-    width: 25%;
-    height: 500px;
-    background-color: green;
-}
-
-.wrngLabelWrngExp {
-    width: 25%;
-    height: 500px;
-    background-color: blue;
 }
 
 .top-bar { 
@@ -53,4 +35,9 @@
 .scrollable-summary {
     overflow-y: scroll;
     height: 460px;
+}
+
+.share-container {
+    border: 4px dashed #4aa1f3;
+    padding: 2rem;
 }

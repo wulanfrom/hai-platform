@@ -58,7 +58,7 @@ export default function GiveExplanation(props) {
             </Form>
             <div>
                 { selectedModel == "lime" && showTable ? <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/> : "" }
-                { selectedModel == "shap" && showTable ? <ShapTable data={ allData }/> : "" }
+                { selectedModel == "shap" && showTable ? <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/> : "" }
             </div>
             <div>
                 <Form.Group controlId="improvementTextArea" className="improvementTextArea">

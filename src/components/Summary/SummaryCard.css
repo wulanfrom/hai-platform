@@ -2,6 +2,7 @@
     width: 230px;
     /* height: 200px; */
     background-color: #fff;
+    margin: 1rem auto;
 }
 
 .label-card {
@@ -34,7 +35,7 @@
 }
 
 .exp-indicator {
-    background-color: red;
+    /* background-color: red; */
     height: 100%;
     width: 50%;
 }
@@ -42,4 +43,17 @@
 /* Modal overlay */
 .modal-backdrop { 
     z-index: 0;
+}
+
+.modal-dialog {
+    max-width: 60%!important;
+}
+
+.modalImage { 
+    width: 230px;
+    height: 160px;
+    background: no-repeat center center; 
+    background-size: 100% 100%;
+    position: relative;
+    background-color: grey;
 }

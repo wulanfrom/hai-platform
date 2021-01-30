@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form'
 export default function TableBody(props) {
     const data = props.data;
     const imageRef = useRef();
+    const expRef = useRef();
     const [expAgree, setExpAgree] = useState(data.agreeExp); //set the do you agree with the lab to false
     const [explanation, setExplanation] = useState(data.explanation);
     var values = {
@@ -22,7 +23,7 @@ export default function TableBody(props) {
     }
 
     // add images to the table
-    const loadImage = (file) => {
+    const loadImage = (file, imageRef) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function(e) {
@@ -33,7 +34,8 @@ export default function TableBody(props) {
     // Similar to componentDidMount and componentDidUpdate:
      useEffect(() => {
         // Update the document title using the browser API
-        loadImage(data.data);
+        loadImage(data.data, imageRef);
+        loadImage(data.data, expRef);
     }, []);
 
 
@@ -76,7 +78,7 @@ export default function TableBody(props) {
             </td>
             <td>
                 {/* Put lime picture here */}
-                {/* <img>Lime Picture</img> */}
+                <div className="exp-container" ref={ expRef }></div>
             </td>
             <td>
                 <div className="labelName">

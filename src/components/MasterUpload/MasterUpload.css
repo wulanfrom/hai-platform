@@ -1,0 +1,24 @@
+.container {
+    transform: translateY(8%);
+    max-width: 98%;
+}
+
+.progress-button {
+    /* position: absolute; */
+    display: flex;
+}
+
+.nextPrev-btn {
+    /* position: relative; */
+    display: inline;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    /* right: 0; */
+    /* float: right; */
+}
+
+#nextBtn {
+    /* height: auto; */
+    margin-left: 0.5rem;
+}
