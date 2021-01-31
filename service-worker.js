@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/hai-platform/getStarted/precache-manifest.4ca200a324e57a965e372cdc123a44ce.js"
+  "/hai-platform/getStarted/precache-manifest.cc6226b117cd6b64e90c7d731b3320ba.js"
 );
 
 self.addEventListener('message', (event) => {

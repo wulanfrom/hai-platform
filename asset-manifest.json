@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/hai-platform/getStarted/static/css/main.5a438b21.chunk.css",
-    "main.js": "/hai-platform/getStarted/static/js/main.bc49e20e.chunk.js",
-    "main.js.map": "/hai-platform/getStarted/static/js/main.bc49e20e.chunk.js.map",
+    "main.css": "/hai-platform/getStarted/static/css/main.21e16c25.chunk.css",
+    "main.js": "/hai-platform/getStarted/static/js/main.fe0dd82d.chunk.js",
+    "main.js.map": "/hai-platform/getStarted/static/js/main.fe0dd82d.chunk.js.map",
     "runtime-main.js": "/hai-platform/getStarted/static/js/runtime-main.494015e2.js",
     "runtime-main.js.map": "/hai-platform/getStarted/static/js/runtime-main.494015e2.js.map",
     "static/css/2.d9ad5f5c.chunk.css": "/hai-platform/getStarted/static/css/2.d9ad5f5c.chunk.css",
-    "static/js/2.cc1f1640.chunk.js": "/hai-platform/getStarted/static/js/2.cc1f1640.chunk.js",
-    "static/js/2.cc1f1640.chunk.js.map": "/hai-platform/getStarted/static/js/2.cc1f1640.chunk.js.map",
+    "static/js/2.3f4a5c9a.chunk.js": "/hai-platform/getStarted/static/js/2.3f4a5c9a.chunk.js",
+    "static/js/2.3f4a5c9a.chunk.js.map": "/hai-platform/getStarted/static/js/2.3f4a5c9a.chunk.js.map",
     "index.html": "/hai-platform/getStarted/index.html",
-    "precache-manifest.4ca200a324e57a965e372cdc123a44ce.js": "/hai-platform/getStarted/precache-manifest.4ca200a324e57a965e372cdc123a44ce.js",
+    "precache-manifest.cc6226b117cd6b64e90c7d731b3320ba.js": "/hai-platform/getStarted/precache-manifest.cc6226b117cd6b64e90c7d731b3320ba.js",
     "service-worker.js": "/hai-platform/getStarted/service-worker.js",
     "static/css/2.d9ad5f5c.chunk.css.map": "/hai-platform/getStarted/static/css/2.d9ad5f5c.chunk.css.map",
-    "static/css/main.5a438b21.chunk.css.map": "/hai-platform/getStarted/static/css/main.5a438b21.chunk.css.map",
-    "static/js/2.cc1f1640.chunk.js.LICENSE.txt": "/hai-platform/getStarted/static/js/2.cc1f1640.chunk.js.LICENSE.txt"
+    "static/css/main.21e16c25.chunk.css.map": "/hai-platform/getStarted/static/css/main.21e16c25.chunk.css.map",
+    "static/js/2.3f4a5c9a.chunk.js.LICENSE.txt": "/hai-platform/getStarted/static/js/2.3f4a5c9a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.494015e2.js",
     "static/css/2.d9ad5f5c.chunk.css",
-    "static/js/2.cc1f1640.chunk.js",
-    "static/css/main.5a438b21.chunk.css",
-    "static/js/main.bc49e20e.chunk.js"
+    "static/js/2.3f4a5c9a.chunk.js",
+    "static/css/main.21e16c25.chunk.css",
+    "static/js/main.fe0dd82d.chunk.js"
   ]
 }
