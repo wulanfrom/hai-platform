@@ -17,7 +17,6 @@ export default function MasterUpload() {
     const [uploadImages, setUploadedImages] = useState([]); //the uploaded images from the dropzone
     const [validNext, setValidNext] = useState(false); //whether next is disabled or not
     const [allData, setAllData] = useState([]); //holds all the cards and their id, data, and agreeValues
-    const [editAgreeId, setAgreeId] = useState(""); //keeps the name of the id with changed agree value
     const [improvement, updateImprovement] = useState("");
 
     // check when to make next button appear
@@ -99,6 +98,45 @@ export default function MasterUpload() {
         updateImprovement(data);
     }
 
+    // Resetting the reset function
+    const triggerResetFunction = () => {
+        setCurrentStep(0);
+        setUploadedImages([]);
+        setAllData([]);
+        setValidNext(false);
+        updateImprovement("");
+    }
+
+    // render next button
+    const getNextButton = (currentStep) => {
+        if (currentStep == 3) {
+            return (
+                ""
+            )
+        }
+        else if (validNext && currentStep < 3) {
+            return (
+                <Button id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>
+            )
+        }
+        else {
+            return (
+                <Button disabled id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>
+            )
+        }
+    }
+
+    const getPrevButton = (currentStep) => {
+        if (currentStep > 0) {
+            return (
+                <Button className="prevBtn btn btn-secondary" type="button" onClick={ handleBack }>Previous</Button>
+            )
+        }
+        else {
+            return ""
+        }
+    }
+
     console.log("all data");
     console.log(allData);
 
@@ -112,24 +150,16 @@ export default function MasterUpload() {
                 <div className="progress-button">
                     <Progress currentStep = { currentStep } />
                     <div className="nextPrev-btn">
-                        { currentStep > 0 ? <Button className="prevBtn btn btn-secondary" type="button" onClick={ handleBack }>Previous</Button> : ""}
-                        {/* Change the function of currentStep to disabled once we make function of photo upload */}
-                        { validNext ? <Button id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button> : <Button disabled id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>}
+                        { getPrevButton(currentStep) }
+                        { getNextButton(currentStep) }
                     </div>
                 </div>
             </div>
             <div>
-                <DropZone addData = { addData } getImages = {getImages} checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem }/>
-                {/* <ChooseModel getLabelResult = {getLabelResult} imageList = {uploadImages} currentStep = { currentStep } /> */}
-                {/* { currentStep == 1 ? allData.map((item) => 
-                    <div key={item.id}>
-                        <Card name = {item.id} data = {item.data} agreeValue = {item.agreeLabel} sendChangedData = {sendChangedData}/>
-                    </div>
-                ): ""} */}
+                { currentStep == 0 ? <DropZone addData = { addData } getImages = {getImages} checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem }/> : ""}
                 { currentStep == 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
-                {/* if the current step is 2, then show the page */}
                 { currentStep == 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
-                { currentStep == 3 ? <Summary totalData={allData}/> : ""}
+                { currentStep == 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}
             </div>
         </div>
     )

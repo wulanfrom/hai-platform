@@ -13,7 +13,6 @@ export default function DropZone(props) {
     const [errorMessage, setErrorMessage] = useState(''); 
     const [validFiles, setValidFiles] = useState([]); // all the non duplicated files
     const [unsupportedFiles, setUnsupportedFiles] = useState([]); // displays invalid files
-    const currentStep = props.currentStep;
     
     // For adding input by clicking
     const fileInputRef = useRef();
@@ -189,7 +188,6 @@ export default function DropZone(props) {
     
     return (
         <div>
-            {currentStep == 0 ? 
             <div>
                 {/* <p className="title">React Drag and Drop Image Upload</p> */}
                 <div className="container">
@@ -230,7 +228,6 @@ export default function DropZone(props) {
                     <div className="modal-image" ref={modalImageRef}></div>
                 </div>
             </div>
-            : ""}
         </div>
     )
 }

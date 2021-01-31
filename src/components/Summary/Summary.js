@@ -73,6 +73,10 @@ export default function Summary(props) {
                 <h2>Share your Model with Other Users</h2>
                 <div className="share-container">
                     <div>
+                        <p>Test Another Set of Images</p>
+                        <Button variant="primary" onClick={props.triggerResetFunction}>Test More Images</Button>
+                    </div>
+                    <div>
                         <p>Want to share your findings with other users? Upload to database.</p>
                         <Button variant="primary">Share Findings</Button>
                     </div>
