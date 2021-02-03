@@ -7,6 +7,7 @@ import {
     Link,
     Route
 } from 'react-router-dom';
+import './Navigation.css'
 
 
 // Pages
@@ -19,8 +20,8 @@ export default class Navigation extends Component {
     render() {
         return (
             <div>
-                <Navbar collapseOnSelect bg="dark" variant="dark">
-                    <Navbar.Brand href="/hai-platform/getStarted">XAIPlatform</Navbar.Brand>
+                <Navbar collapseOnSelect className="navbar">
+                    <Navbar.Brand href="/hai-platform/getStarted"><b>XAIPlatform</b></Navbar.Brand>
                     <Nav className="ml-auto">
                         <Nav.Link href="/hai-platform/getStarted">Get Started</Nav.Link>
                         <Nav.Link href="/hai-platform/upload">Apply Models</Nav.Link>

@@ -2,16 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import './DropZone.css'
 
 // Bootstrap components
-import Button from 'react-bootstrap/Button'
-import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import Container from 'react-bootstrap/Container'
 
 // pages
 import ListItem from './ListItem'
 
 export default function DropZone(props) {
-    const [selectedFiles, setSelectedFiles] = useState([]); // all files dropped to the zone
+    const [selectedFiles, setSelectedFiles] = useState(props.currentData); // all files dropped to the zone
     const [errorMessage, setErrorMessage] = useState(''); 
-    const [validFiles, setValidFiles] = useState([]); // all the non duplicated files
+    const [validFiles, setValidFiles] = useState(props.currentData); // all the non duplicated files
     const [unsupportedFiles, setUnsupportedFiles] = useState([]); // displays invalid files
     
     // For adding input by clicking
@@ -54,7 +53,7 @@ export default function DropZone(props) {
     useEffect(() => {
         const res = unsupportedFiles.length === 0 && validFiles.length > 0;
         props.checkNext(res);
-        props.getImages(validFiles);
+        // props.getImages(validFiles);
     }, [unsupportedFiles, validFiles])
 
 
@@ -170,14 +169,6 @@ export default function DropZone(props) {
         }
     }
 
-    // const applyIcon = (file) => {
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onload = function(e) {
-    //         imageIcon.current.style.backgroundImage = `url(${e.target.result})`;
-    //     }
-    // }
-
     const closeModal = () => {
         modalRef.current.style.display = "none";
         modalImageRef.current.style.backgroundImage = 'none';
@@ -185,12 +176,16 @@ export default function DropZone(props) {
 
     const uploadFiles = () => {
     }
+
+    console.log("valid Files");
+    console.log(validFiles);
     
     return (
         <div>
-            <div>
+            <Container fluid>
                 {/* <p className="title">React Drag and Drop Image Upload</p> */}
-                <div className="container">
+                {/* <div className="container"> */}
+                <div>
                     {/* {unsupportedFiles.length === 0 && validFiles.length ? <Button className="file-upload-btn" onClick={() => uploadFiles()}>Upload Files</Button> : ''}  */}
                     {unsupportedFiles.length ? <p>Please remove all unsupported files.</p> : ''}
                     {/* <p>Validity of Next: {(unsupportedFiles.length === 0 && validFiles.length > 0).toString()}</p> */}
@@ -222,12 +217,13 @@ export default function DropZone(props) {
                     }
                     </div>
                 </div>
+                {/* </div> */}
                 <div className="modal" ref={ modalRef }>
                     <div className="overlay"></div>
                     <span className="close" onClick={(() => closeModal())}>X</span>
                     <div className="modal-image" ref={modalImageRef}></div>
                 </div>
-            </div>
+            </Container>
         </div>
     )
 }

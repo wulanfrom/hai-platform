@@ -29,13 +29,11 @@
 }
 
 .label-indicator {
-    background-color: green;
     height: 100%;
     width: 50%;
 }
 
 .exp-indicator {
-    /* background-color: red; */
     height: 100%;
     width: 50%;
 }

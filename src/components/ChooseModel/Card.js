@@ -11,7 +11,7 @@ export default function Card(props) {
     const dataName = props.name;
     const dataLabel = props.label;
     const imageRef = useRef();
-    const [agreeValue, setAgreeValue] = useState(0); //set the do you agree with the lab to false
+    const [agreeValue, setAgreeValue] = useState(props.agreeValue); //set the do you agree with the lab to false
     var values = {
         id: dataName,
         data: data,

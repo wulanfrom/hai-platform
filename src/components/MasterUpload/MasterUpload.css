@@ -1,21 +1,27 @@
-.container {
-    transform: translateY(8%);
-    max-width: 98%;
+.stepsWrapper {
+    background-color: #eff3fb;
+}
+
+.container-fluid {
+    padding: 1.5rem 2rem;
+}
+
+.MuiStepper-root {
+    padding: 24px 0!important;
+}
+
+.progressWrapper {
+    width: 100%!important;
 }
 
 .progress-button {
-    /* position: absolute; */
-    display: flex;
-}
-
-.nextPrev-btn {
-    /* position: relative; */
-    display: inline;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
-    /* right: 0; */
-    /* float: right; */
+    justify-items: flex-end;
+}
+
+.step-button {
+    margin-left: auto;
 }
 
 #nextBtn {

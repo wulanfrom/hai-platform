@@ -1,9 +1,11 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './MasterUpload.css'
 
 // bootstrap component
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 // Pages
 import Progress from '../Banner/Progress'
@@ -70,9 +72,9 @@ export default function MasterUpload() {
     }
 
     // gets images from the dropzone and saves it in the local uploaded images value
-    const getImages = (imageList) => {
-        setUploadedImages(imageList);
-    }
+    // const getImages = (imageList) => {
+    //     setUploadedImages(imageList);
+    // }
 
     // add cards to the global card list
     const addData = (data) => {
@@ -137,30 +139,78 @@ export default function MasterUpload() {
         }
     }
 
+    const getStepDesc = (currentStep) => {
+        if (currentStep == 0) {
+            return (
+                <p>Upload pictures you want to label.</p>
+            )
+        }
+        else if (currentStep == 1) {
+            return (
+                <p>Label Whether you agree with the label created by the model or not.</p>
+            )
+        }
+        else if (currentStep == 2) {
+            return (
+                <p>Apply an explanation model to the picture.</p>
+            )
+        }
+        else {
+            return (
+                <p>Summarization of your inputs.</p>
+            )
+        }
+    }
+
+    const updateUploadedImages = () => {
+        const modifiedList = allData.map(eachItem => eachItem.data);
+        // console.log("modifiedList");
+        // console.log(modifiedList);
+        setUploadedImages(modifiedList);
+    }
+
+     // on mount
+     useEffect(() => {
+        updateUploadedImages();
+    }, [currentStep]);
+
     console.log("all data");
     console.log(allData);
+
+    console.log("uploadImages");
+    console.log(uploadImages);
 
     // console.log("improvement");
     // console.log(improvement);
 
     return (
         <div>
-            <div>
-                <h1>Step: { currentStep + 1 }</h1>
-                <div className="progress-button">
-                    <Progress currentStep = { currentStep } />
-                    <div className="nextPrev-btn">
-                        { getPrevButton(currentStep) }
-                        { getNextButton(currentStep) }
-                    </div>
+            <Container fluid className="stepsWrapper">
+                <div>
+                    <h3><b>Step: { currentStep + 1 }</b></h3>
+                    { getStepDesc(currentStep) }
                 </div>
-            </div>
-            <div>
-                { currentStep == 0 ? <DropZone addData = { addData } getImages = {getImages} checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem }/> : ""}
-                { currentStep == 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
-                { currentStep == 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
-                { currentStep == 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}
-            </div>
+                <Row>
+                    <Col sm={8}>
+                        <Progress className="progress" currentStep = { currentStep } />
+                    </Col>
+                    <Col className="progress-button" sm={4}>
+                        <div className="step-button">
+                            { getPrevButton(currentStep) }
+                            { getNextButton(currentStep) }
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+                <div>
+                    {/* getImages = {getImages} */}
+                    { currentStep == 0 ? <DropZone addData = { addData } checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem } currentData={ uploadImages } /> : ""}
+                    { currentStep == 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
+                    { currentStep == 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
+                    { currentStep == 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}
+                </div>
+            </Container>
         </div>
     )
 }

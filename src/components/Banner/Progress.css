@@ -1,3 +1,7 @@
 .progressWrapper {
     width: 70%!important;
 }
+
+.MuiPaper-root {
+    background-color: #eff3fb!important;
+}

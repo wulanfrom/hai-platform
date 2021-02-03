@@ -5,15 +5,26 @@ import './SummaryCard.css'
 import Card from 'react-bootstrap/Card'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import { red } from '@material-ui/core/colors'
 
 export default function SummaryCard(props) {
     const data = props.data.data;
     const labelName = props.data.label;
     const explanation = props.data.explanation;
+    const agreeLabel = props.data.agreeLabel;
+    const agreeExp = props.data.agreeExp;
     const imageRef = useRef(); //for the card image
     const orgImgRef = useRef(); //for the original image
     const modelImgRef = useRef(); //for the explanation image
     const [modalOpen, updateModal] = useState(false); //checks whether the modal is open
+
+    const wrong = {
+        backgroundColor: 'red',
+    }
+
+    const right = {
+        backgroundColor: 'green',
+    }
 
     // openModal
     const openModal = () => {
@@ -42,6 +53,9 @@ export default function SummaryCard(props) {
         loadImage(data, imageRef);
         // loadImage(data, orgImgRef);
     }, []);
+    console.log(data);
+    console.log(agreeExp);
+    console.log(agreeLabel);
 
     return (
         <div>
@@ -49,8 +63,8 @@ export default function SummaryCard(props) {
                 <Card className="summary-card" onClick={openModal}>
                     <div>
                         <div className="indicator">
-                            <div className="label-indicator"></div>
-                            <div className="exp-indicator"></div>
+                            <div className="label-indicator" style={agreeLabel ? right : wrong}></div>
+                            <div className="exp-indicator" style={agreeExp ? right : wrong}></div>
                         </div>
                         <Card.Img variant="top" className="photo-container" ref={imageRef} />
                     </div>
