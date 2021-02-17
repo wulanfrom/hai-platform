@@ -13,6 +13,7 @@ import DropZone from '../DropZone/DropZone'
 import GiveExplanation from '../GiveExplanation/GiveExplanation'
 import Summary from '../Summary/Summary'
 import LabelPage from '../LabelPage/LabelPage'
+import Improve from '../Improve/Improve'
 
 export default function MasterUpload() {
     const [currentStep, setCurrentStep] = useState(0); //current step
@@ -25,8 +26,8 @@ export default function MasterUpload() {
     const handleNext = (step) => {
         const nextStep = currentStep + 1;
         //So it doesnt go beyond bounds
-        if (currentStep >= 3) {
-            setCurrentStep(3);
+        if (currentStep >= 5) {
+            setCurrentStep(5);
         }
         
         else {
@@ -111,12 +112,12 @@ export default function MasterUpload() {
 
     // render next button
     const getNextButton = (currentStep) => {
-        if (currentStep == 3) {
+        if (currentStep == 5) {
             return (
                 ""
             )
         }
-        else if (validNext && currentStep < 3) {
+        else if (validNext && currentStep < 5) {
             return (
                 <Button id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>
             )
@@ -155,9 +156,24 @@ export default function MasterUpload() {
                 <p>Apply an explanation model to the picture.</p>
             )
         }
-        else {
+        else if (currentStep == 3) {
             return (
                 <p>Summarization of your inputs.</p>
+            )
+        }
+        else if (currentStep == 4) {
+            return (
+                <p>How would you Improve the explanation model?</p>
+            )
+        }
+        else if (currentStep == 5) {
+            return (
+                <p>Share your Findings with Others.</p>
+            )
+        }
+        else {
+            return (
+                <p>Share your Findings with Others.</p>
             )
         }
     }
@@ -191,10 +207,10 @@ export default function MasterUpload() {
                     { getStepDesc(currentStep) }
                 </div>
                 <Row>
-                    <Col sm={8}>
+                    <Col sm={10}>
                         <Progress className="progress" currentStep = { currentStep } />
                     </Col>
-                    <Col className="progress-button" sm={4}>
+                    <Col className="progress-button" sm={2}>
                         <div className="step-button">
                             { getPrevButton(currentStep) }
                             { getNextButton(currentStep) }
@@ -209,6 +225,7 @@ export default function MasterUpload() {
                     { currentStep == 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
                     { currentStep == 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
                     { currentStep == 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}
+                    { currentStep == 4 ? <Improve /> : ""}
                 </div>
             </Container>
         </div>

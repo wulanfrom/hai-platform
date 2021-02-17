@@ -1,4 +1,4 @@
-.image-container, .exp-container {
+#image-container, .exp-container {
     position: relative;
     background-color: grey;
     width: 100%;
@@ -15,3 +15,28 @@
 .agreeLabel {
     display: flex;
 }
+
+/* input image */
+tr td:nth-child(1) {
+    width: 20%;
+}
+
+/* image in first table column */
+tr td:nth-child(1) > #image-container {
+    max-height: 100px;
+    /* width: 100%; */
+    background: no-repeat center center; 
+    aspect-ratio: attr(width) / attr(height);
+}
+
+/* explanation */
+tr td:nth-child(2) {
+    width: 40%;
+}
+
+/* labelling */
+tr td:nth-child(3) {
+    width: 40%;
+}
+
+

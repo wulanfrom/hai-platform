@@ -66,7 +66,7 @@ export default function SummaryCard(props) {
                             <div className="label-indicator" style={agreeLabel ? right : wrong}></div>
                             <div className="exp-indicator" style={agreeExp ? right : wrong}></div>
                         </div>
-                        <Card.Img variant="top" className="photo-container" ref={imageRef} />
+                        <div className="photo-container" ref={imageRef}></div>
                     </div>
                     <Card.Body>
                         {/* <Card.Title>Card Title</Card.Title> */}

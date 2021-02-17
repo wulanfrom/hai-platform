@@ -30,14 +30,25 @@
 
 .top-bar p {
     font-size: 14px;
+    margin: 0;
 }
 
 .scrollable-summary {
     overflow-y: scroll;
     height: 460px;
+    width: 100%;
 }
 
 .share-container {
     border: 4px dashed #4aa1f3;
     padding: 2rem;
+}
+
+.title-container {
+    padding-bottom: 1rem;
+}
+
+.title-share {
+    padding-bottom: 24px;
+    margin: 0;
 }

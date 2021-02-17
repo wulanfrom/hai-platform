@@ -1,8 +1,11 @@
 .summary-card {
     width: 230px;
-    /* height: 200px; */
-    background-color: #fff;
     margin: 1rem auto;
+    border: none;
+    border-radius: .25rem;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 12%);
+    box-sizing: border-box;
 }
 
 .label-card {

@@ -187,7 +187,7 @@ export default function DropZone(props) {
                 {/* <div className="container"> */}
                 <div>
                     {/* {unsupportedFiles.length === 0 && validFiles.length ? <Button className="file-upload-btn" onClick={() => uploadFiles()}>Upload Files</Button> : ''}  */}
-                    {unsupportedFiles.length ? <p>Please remove all unsupported files.</p> : ''}
+                    {unsupportedFiles.length ? <p className="remove-unsupported">Please remove all unsupported files.</p> : ''}
                     {/* <p>Validity of Next: {(unsupportedFiles.length === 0 && validFiles.length > 0).toString()}</p> */}
                     {/* <p>Validity of Next: { validityOfNext.toString() }</p> */}
                     <div className="drop-container" 

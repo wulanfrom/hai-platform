@@ -22,23 +22,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['UPLOAD', 'APPLY MODEL', 'GET EXPLANATION', 'SUMMARIZE & SHARE'];
+  return ['UPLOAD', 'APPLY MODEL', 'GET EXPLANATION', 'OBSERVATION SUMMARY', 'IMPROVE', 'SHARE'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return 'Upload pictures to apply the model on';
-    case 1:
-      return 'Label model to pictures';
-    case 2:
-      return 'Does the explanation make sense?';
-    case 3:
-      return 'What did you learn?';
-    default:
-      return 'Unknown step';
-  }
-}
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return 'Upload pictures to apply the model on';
+//     case 1:
+//       return 'Label model to pictures';
+//     case 2:
+//       return 'Does the explanation make sense?';
+//     case 3:
+//       return 'What did you learn?';
+//     case 4:
+//       return 'How would you Improve the explanation model?'
+//     case 5:
+//       return 'Share your Findings with Others.'
+//       default:
+//       return 'Unknown step';
+//   }
+// }
 
 export default function Progress(props) {
   const classes = useStyles();

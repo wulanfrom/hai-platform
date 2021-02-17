@@ -5,6 +5,7 @@ import Table from 'react-bootstrap/Table'
 
 // pages
 import TableBody from '../ModelTable/TableBody'
+import './LimeTable.css'
 
 export default function LimeTable(props) {
     const [allData, updateData] = useState(props.data);
@@ -34,8 +35,7 @@ export default function LimeTable(props) {
 
     return (
         <div>
-            <p>This is the lime table</p>
-            <Table striped bordered hover>
+            <Table striped bordered hover className="lime-table">
                 <thead>
                     <tr>
                         <th>Input Image</th>

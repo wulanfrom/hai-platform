@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import './LabelPage.css'
 
 // pages
-import Card from '../ChooseModel/Card'
+import LabelCard from '../ChooseModel/LabelCard'
+import { Container } from 'react-bootstrap';
 
 export default function LabelPage(props) {
     const [allData, setAllData] = useState(props.data);
@@ -34,12 +35,14 @@ export default function LabelPage(props) {
     }
 
     return (
-        <div>
-            { allData.map((item) => 
-                <div key={item.id}>
-                    <Card name = {item.id} data = {item.data} label="" agreeValue = {item.agreeLabel} sendChangedData = { sendChangedData } />
-                </div>
-            )}
-        </div>
+        <Container fluid>
+            <div className="label-cards-wrappers">
+                { allData.map((item) => 
+                    <div key={item.id}>
+                        <LabelCard name = {item.id} data = {item.data} label="" agreeValue = {item.agreeLabel} sendChangedData = { sendChangedData } />
+                    </div>
+                )}
+            </div>
+        </Container>
     )
 }

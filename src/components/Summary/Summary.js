@@ -6,6 +6,7 @@ import SummaryCard from '../Summary/SummaryCard'
 
 // bootstrap components
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
 
 export default function Summary(props) {
     const allData = props.totalData;
@@ -17,12 +18,13 @@ export default function Summary(props) {
 
     return (
         <div>
-            <h2>Your Observations Summary</h2>
+            <Container fluid className="title-container">
+                <h2>Your Observations Summary</h2>
+            </Container>
             <div className="summary-container">
                 <div className="crcLabelcrcExp">
                     <div className="top-bar">
-                        <p><b>Tab 1</b></p>
-                        <p>Correct Label, Correct Explanation</p>
+                        <p><b>Tab 1</b> Correct Label, Correct Explanation</p>
                     </div>
                     <div className="scrollable-summary">
                         {/* for correct label and explanation */}
@@ -33,8 +35,7 @@ export default function Summary(props) {
                 </div>
                 <div className="crcLabelWrngExp">
                     <div className="top-bar">
-                        <p><b>Tab 2</b></p>
-                        <p>Correct Label, Wrong Explanation</p>
+                        <p><b>Tab 2</b> Correct Label, Wrong Explanation</p>
                     </div>
                     <div className="scrollable-summary">
                         {/* for correct label and explanation */}
@@ -45,8 +46,7 @@ export default function Summary(props) {
                 </div>
                 <div className="wrngLabelcrcExp">
                     <div className="top-bar">
-                        <p><b>Tab 3</b></p>
-                        <p>Wrong Label, Correct Explanation</p>
+                        <p><b>Tab 3</b> Wrong Label, Correct Explanation</p>
                     </div>
                     <div className="scrollable-summary">
                         {/* for correct label and explanation */}
@@ -57,8 +57,7 @@ export default function Summary(props) {
                 </div>
                 <div className="wrngLabelWrngExp">
                     <div className="top-bar">
-                        <p><b>Tab 4</b></p>
-                        <p>Wrong Label, Wrong Explanation</p>
+                        <p><b>Tab 4</b> Wrong Label, Wrong Explanation</p>
                     </div>
                     <div className="scrollable-summary">
                         {/* for correct label and explanation */}
@@ -69,8 +68,8 @@ export default function Summary(props) {
                 </div>
             </div>
 
-            <div>
-                <h2>Share your Model with Other Users</h2>
+            {/* <Container fluid>
+                <h2 className="title-share">Share your Model with Other Users</h2>
                 <div className="share-container">
                     <div>
                         <p>Test Another Set of Images</p>
@@ -85,7 +84,7 @@ export default function Summary(props) {
                         <Button variant="primary">Explore Database</Button>
                     </div>
                 </div>
-            </div>
+            </Container> */}
         </div>
     )
 }

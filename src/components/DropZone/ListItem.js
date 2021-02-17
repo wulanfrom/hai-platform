@@ -19,7 +19,12 @@ export default function ListItem(props) {
         // modalRef.current.style.display = "block";
         reader.readAsDataURL(file);
         reader.onload = function(e) {
-            imageIcon.current.style.backgroundImage = `url(${e.target.result})`;
+            if (!data.invalid){
+                imageIcon.current.style.backgroundImage = `url(${e.target.result})`;
+            }
+            else{
+                // imageIcon.current.style.background = `url(../../images/file.svg) no-repeat center center`;
+            }
         }
     }
 
@@ -41,8 +46,8 @@ export default function ListItem(props) {
                             <p className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</p>
                             <p className="file-size">({ fileSize })</p> {data.invalid && <p className='file-error-message'>({errorMessage})</p>}
                         </div>
-                        <div className="file-remove" onClick={() => {removeFile(data.name)}}>X</div>
                     </div>
+                    <div className="file-remove" onClick={() => {removeFile(data.name)}}>X</div>
                 </div>
             </Container>
         </div>

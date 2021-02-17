@@ -4,10 +4,12 @@ import './GiveExplanation.css'
 // Bootstrap components
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
 
 // Pages 
 import LimeTable from '../ModelTable/LimeTable'
 import ShapTable from '../ModelTable/ShapTable'
+import EmptyTable from './EmptyTable'
 
 
 export default function GiveExplanation(props) {
@@ -44,8 +46,26 @@ export default function GiveExplanation(props) {
         props.sendImprovement(improvement);
     }, [improvement]);
 
+    const getTable = (selectedModel) => {
+        if (selectedModel == "lime" && showTable) {
+            return (
+                <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/>
+            )
+        }
+        else if (selectedModel == "lime" && showTable) {
+            return (
+                <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/>
+            )
+        }
+        else {
+            return (
+                <EmptyTable />
+            )
+        }
+    }
+
     return (
-        <div>
+        <Container fluid>
             <Form>
             <Form.Group controlId="explainabilityModelSelect">
                 <Form.Label>Choose an Explainability Model</Form.Label>
@@ -57,8 +77,9 @@ export default function GiveExplanation(props) {
             <Button variant="primary" onClick = { changeModel }>Apply Explanation</Button>
             </Form>
             <div>
-                { selectedModel == "lime" && showTable ? <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/> : "" }
-                { selectedModel == "shap" && showTable ? <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/> : "" }
+                { getTable(selectedModel) }
+                {/* { selectedModel == "lime" && showTable ? <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/> : <EmptyTable /> }
+                { selectedModel == "shap" && showTable ? <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/> : <EmptyTable /> } */}
             </div>
             <div>
                 <Form.Group controlId="improvementTextArea" className="improvementTextArea">
@@ -68,6 +89,6 @@ export default function GiveExplanation(props) {
                     <Form.Control as="textarea" value={ improvement } rows={3} onChange={ changeImprovement } />
                 </Form.Group>
             </div>
-        </div>
+        </Container>
     )
 }
