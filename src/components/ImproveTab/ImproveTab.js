@@ -102,7 +102,7 @@ export default function ImproveTab() {
                 <h3>Improvements</h3>
                 <p>List a few representative questions your UI can answer.</p>
                 <div>
-                    { improvementList.map((item) => <ImprovementPoint deleteItem = {deleteImprovement} key={item.id} data={item}/>) }
+                    { improvementList.map((item, idx) => <ImprovementPoint idx={idx + 1} deleteItem = {deleteImprovement} key={item.id} data={item}/>) }
                 </div>
                 <Button variant="primary" onClick={addImprovement}>+ Add Improvement</Button>
             </div>

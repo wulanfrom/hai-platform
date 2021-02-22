@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './ImprovementPoint.css'
 
 // bootstrap component
@@ -15,30 +15,29 @@ import { CKEditor } from '@ckeditor/ckeditor5-react'
 import 'ckeditor5-custom-build/build/translations/de';
 
 export default function ImprovementPoint(data) {
-    const editorConfiguration = {
-        toolbar:  ["alignment:left", "alignment:right", "alignment:center", "alignment:justify", "alignment", "blockQuote", "bold", "ckfinder", "code", "codeBlock", "selectAll", "undo", "redo", "exportPdf", "exportWord", "fontColor", "fontFamily", "fontSize", "heading", "horizontalLine", "imageTextAlternative", "imageUpload", "imageInsert", "imageResize:original", "imageResize:25", "imageResize:50", "imageResize:75", "imageResize", "imageStyle:full", "imageStyle:side", "indent", "outdent", "italic", "link", "numberedList", "bulletedList", "mediaEmbed", "strikethrough", "insertTable", "tableColumn", "tableRow", "mergeTableCells", "tableCellProperties", "tableProperties", "underline"],
-        language: 'en',
-    };
-    const [exp, setExp] = useState(data.explanation); //set the do you agree with the lab to false
-    const [improvement, setImprovement] = useState(data.improvement);
-
-    
+    // const editorConfiguration = {
+    //     toolbar:  ["alignment:left", "alignment:right", "alignment:center", "alignment:justify", "alignment", "blockQuote", "bold", "ckfinder", "code", "codeBlock", "selectAll", "undo", "redo", "exportPdf", "exportWord", "fontColor", "fontFamily", "fontSize", "heading", "horizontalLine", "imageTextAlternative", "imageUpload", "imageInsert", "imageResize:original", "imageResize:25", "imageResize:50", "imageResize:75", "imageResize", "imageStyle:full", "imageStyle:side", "indent", "outdent", "italic", "link", "numberedList", "bulletedList", "mediaEmbed", "strikethrough", "insertTable", "tableColumn", "tableRow", "mergeTableCells", "tableCellProperties", "tableProperties", "underline"],
+    //     language: 'en',
+    // };
+    // const [exp, setExp] = useState(data.explanation); //set the do you agree with the lab to false
+    // const [improvement, setImprovement] = useState(data.improvement);
 
     return (
         <div>
             <Form>
                 <Form.Group as={Row} controlId="formPassword">
-                    <Form.Label xs="auto">1</Form.Label>
+                    <Form.Label xs="auto">{data.idx}</Form.Label>
                     <Col xs={11}>
-                        <Form.Control type="text" placeholder="Insert Important Point here" onChange={updatePoint}/>
+                        <Form.Control type="text" placeholder="Insert Important Point here" />
                     </Col>
                     <Col>
-                        <Button onClick={props.deleteItem} type="submit" variant="danger" className="deleteBtn">-</Button>
+                        <Button onClick={data.deleteItem} type="submit" variant="danger" className="deleteBtn">-</Button>
                     </Col>
                 </Form.Group>
             </Form>
             <div className="text-editor">
-           <CKEditor
+                
+           {/* <CKEditor
                     editor={ Editor }
                     config={ editorConfiguration }
                     data="<p>Elaborate your improvement points here!</p>"
@@ -58,7 +57,7 @@ export default function ImprovementPoint(data) {
                     onFocus={ ( event, editor ) => {
                         console.log( 'Focus.', editor );
                     } }
-                />
+                /> */}
             </div>
         </div>
     )
