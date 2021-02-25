@@ -18,6 +18,7 @@ export default function ListItem(props) {
         const reader = new FileReader();
         // modalRef.current.style.display = "block";
         reader.readAsDataURL(file);
+        // console.log(reader.readAsDataURL(file));
         reader.onload = function(e) {
             if (!data.invalid){
                 imageIcon.current.style.backgroundImage = `url(${e.target.result})`;

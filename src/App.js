@@ -5,7 +5,8 @@ import {
   BrowserRouter as Router,
   Switch, 
   Link,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 
 // Pages
@@ -21,6 +22,16 @@ function App() {
 
       <Router>
         <Switch>
+
+        <Route
+                exact
+                path="/"
+                render={() => {
+                    return (
+                      <Redirect to="/hai-platform/getStarted" />
+                    )
+                }}
+              />
           <Route exact path="/hai-platform/getStarted" component ={GetStarted} />
           <Route path="/hai-platform/upload" component ={MasterUpload} />
           <Route path="/hai-platform/explore" component = {Explore} />
