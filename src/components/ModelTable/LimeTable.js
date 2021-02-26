@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // react components
 import Table from 'react-bootstrap/Table'
@@ -13,6 +13,7 @@ export default function LimeTable(props) {
     // received changed data from Card whenever the agree value is changed
     // assign it to the editAgreeId
     const sendChangedExplanation = (data) => {
+        console.log("sendChangedExp");
         const updatedList = allData.map(eachCard => {
             // if they have the same id
             if (eachCard.id == data.id) {
@@ -27,9 +28,27 @@ export default function LimeTable(props) {
         props.sendExpToGive(updatedList);
     }
 
+    //apply lime model
+    const applyLimeModel = (data) => {
+        console.log("applied model");
+        const updatedList = allData.map(eachCard => {
+            // if they have the same id
+            if (eachCard.id == data.id) {
+                // apply the assigne LIME picture to the item.LIMEPic
+                let item = eachCard;
+                console.log(data);
+                item.LIMEPic = data.LIMEPic;
+            }
+
+            return eachCard;
+        });
+
+        props.sendExpToGive(updatedList);
+    }
+
     const rows = allData.map((data, i) => {
         return (
-            <TableBody data={data} key={i} sendChangedExplanation = { sendChangedExplanation }/>
+            <TableBody data={data} key={i} sendChangedExplanation = { sendChangedExplanation } applyLimeModel = { applyLimeModel } />
         )
     });
 

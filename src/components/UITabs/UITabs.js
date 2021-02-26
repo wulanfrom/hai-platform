@@ -13,7 +13,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export default function UITabs() {
+export default function UITabs(props) {
     // list of all tabs
     const [tabList, setTabList] = useState([
         {
@@ -77,7 +77,7 @@ export default function UITabs() {
                             {tabList.map(tab => (
                                 <Tab key={tab.key.toString()} eventKey={tab.key.toString()} 
                                 title={<span>UI_{tab.id} <X onClick={deleteTab} id={tab.id}/> </span>} className="uiTab">
-                                    <ImproveTab />
+                                    <ImproveTab allData={ props.allData } />
                                 </Tab>
                             ))}
                         </Tabs>

@@ -225,7 +225,7 @@ export default function MasterUpload() {
                     { currentStep == 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
                     { currentStep == 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
                     { currentStep == 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}
-                    { currentStep == 4 ? <Improve /> : ""}
+                    { currentStep == 4 ? <Improve allData={allData} /> : ""}
                 </div>
             </Container>
         </div>

@@ -15,11 +15,9 @@ export default function TableBody(props) {
     const [explanation, setExplanation] = useState(data.explanation);
     var values = {
         id: data.id,
-        // data: data,
-        // agreeLabel: agreeValue,
         agreeExp: expAgree,
         explanation: explanation,
-        LIMEPic: null,
+        // LIMEPic: data.data,
     }
 
     // add images to the table
@@ -36,6 +34,10 @@ export default function TableBody(props) {
         // Update the document title using the browser API
         loadImage(data.data, imageRef);
         loadImage(data.data, expRef);
+        props.applyLimeModel({
+            id: data.id,
+            LIMEPic: data.data,
+        });
     }, []);
 
 
@@ -44,15 +46,17 @@ export default function TableBody(props) {
         setExplanation(e.target.value);
     }
 
+    // apply lime model
+    const getLimePic = () => {
+
+    }
+
     // send data to LimeTable whenever the expAgree and explanation changes.
     useEffect(() => {
         values = {
             id: data.id,
-            // data: data,
             agreeExp: expAgree,
-            // agreeExp: 0,
             explanation: explanation,
-            // LIMEPic: null,
         }
 
         // send changed data to parent

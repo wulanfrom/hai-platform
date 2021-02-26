@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button'
 // pages
 import ModelPicture from '../ModelPicture/ModelPicture'
 
-export default function ImprovementPoint(data) {
+export default function ImprovementPoint(props) {
     const [value, setValue] = useState("Please elaborate on your points");
     const [modalShow, setModalShow] = useState(false); //modal show state
 
@@ -36,12 +36,12 @@ export default function ImprovementPoint(data) {
         <div>
             <Form>
                 <Form.Group as={Row} controlId="formPassword">
-                    <Form.Label xs="auto">{data.idx}</Form.Label>
+                    <Form.Label xs="auto">{props.idx}</Form.Label>
                     <Col xs={11}>
                         <Form.Control type="text" placeholder="Insert Important Point here" />
                     </Col>
                     <Col>
-                        <Button onClick={data.deleteItem} type="submit" variant="danger" className="deleteBtn">-</Button>
+                        <Button onClick={props.deleteItem} type="submit" variant="danger" className="deleteBtn">-</Button>
                     </Col>
                 </Form.Group>
             </Form>  
@@ -55,7 +55,7 @@ export default function ImprovementPoint(data) {
                 />
             </div>
             <div>
-                <ModelPicture show={modalShow} updateModalShow={setModalShow} />
+                <ModelPicture allData={ props.allData } show={modalShow} updateModalShow={setModalShow} />
             </div>
         </div>
     )

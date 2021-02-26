@@ -11,7 +11,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
-export default function ImproveTab() {
+export default function ImproveTab(props) {
     const generateKey = (pre) => {
         return `${ pre }_${ new Date().getTime() }`;
     }
@@ -102,7 +102,7 @@ export default function ImproveTab() {
                 <h3>Improvements</h3>
                 <p>List a few representative questions your UI can answer.</p>
                 <div>
-                    { improvementList.map((item, idx) => <ImprovementPoint idx={idx + 1} deleteItem = {deleteImprovement} key={item.id} data={item}/>) }
+                    { improvementList.map((item, idx) => <ImprovementPoint allData={ props.allData } idx={idx + 1} deleteItem = {deleteImprovement} key={item.id} data={item}/>) }
                 </div>
                 <Button variant="primary" onClick={addImprovement}>+ Add Improvement</Button>
             </div>
