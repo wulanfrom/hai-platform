@@ -35,16 +35,12 @@ function ImageItem(props) {
 function MyVerticallyCenteredModal(props) {
     const [allItems, updateItems] = useState([]);
 
-    //if you close the modal, it clears the list
+    //on Mount
     useEffect(() => {
-      //if there elements selected
-      // if (allItems.length > 0) {
-      //   props.getItems(allItems);
-      // }
-
       //clear the list
-      updateItems([]);
-    }, [props.show])
+      console.log("all items is updated");
+      props.finalizeItems(allItems);
+    }, [allItems])
 
     // send item to selectedItem if clicked
     const selectItem = (e, file) => {
@@ -102,21 +98,23 @@ function MyVerticallyCenteredModal(props) {
 
 export default function ModelPicture(props) {
   const [selectedItem, updateSelectedItem] = useState([]);
+  // const [allItems, updateItems] = useState([]);
 
   const finalizeItems = (arr) => {
+    // console.log("item finalized");
     updateSelectedItem(arr);
   }
 
   // console.log("all data: ");
   // console.log(props.allData);
-  console.log("selectedItem");
-  console.log(selectedItem);
+  // console.log("selectedItem");
+  // console.log(selectedItem);
     return (
         <div>
             <MyVerticallyCenteredModal
-                // getItems = { finalizeItems }
-                show={ props.how }
-                // selectItem={ selectItem }
+                onEnter={() => updateSelectedItem([])} //selectedItem is emptied when modal is created
+                finalizeItems={ finalizeItems }
+                onExit={() => props.addToEditor(selectedItem)} //send items to the improvementPoint
                 alldata={ props.allData }
                 show={props.show}
                 onHide={() => props.updateModalShow(false)}

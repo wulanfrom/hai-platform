@@ -5,6 +5,8 @@ import './GiveExplanation.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 // Pages 
 import LimeTable from '../ModelTable/LimeTable'
@@ -67,14 +69,20 @@ export default function GiveExplanation(props) {
     return (
         <Container fluid>
             <Form>
-            <Form.Group controlId="explainabilityModelSelect">
-                <Form.Label>Choose an Explainability Model</Form.Label>
-                <Form.Control as="select" value={ dropdownVal } onChange={ getDropdownVal } >
-                    <option value="lime">LIME</option>
-                    <option value="shap">SHAP</option>
-                </Form.Control>
-            </Form.Group>
-            <Button variant="primary" onClick = { changeModel }>Apply Explanation</Button>
+                <Row>
+                    <Col xs lg="9">
+                        <Form.Group controlId="explainabilityModelSelect">
+                            <Form.Label>Choose an Explainability Model</Form.Label>
+                            <Form.Control as="select" value={ dropdownVal } onChange={ getDropdownVal } >
+                                <option value="lime">LIME</option>
+                                <option value="shap">SHAP</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col xs lg="3" className="apply-model">
+                        <Button variant="primary" onClick = { changeModel }>Apply Explanation</Button>
+                    </Col>
+                </Row>
             </Form>
             <div>
                 { getTable(selectedModel) }

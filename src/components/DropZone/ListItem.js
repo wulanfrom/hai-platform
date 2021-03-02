@@ -3,6 +3,7 @@ import './ListItem.css'
 
 // bootstrap components
 import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
 
 export default function ListItem(props) {
     const data = props.data;
@@ -15,6 +16,8 @@ export default function ListItem(props) {
     const openImageModal = props.openImageModal;
 
     const loadImage = (file) => {
+        console.log("filename");
+        console.log(file.name);
         const reader = new FileReader();
         // modalRef.current.style.display = "block";
         reader.readAsDataURL(file);
@@ -29,8 +32,8 @@ export default function ListItem(props) {
         }
     }
 
-     // on mount
-     useEffect(() => {
+    // on mount
+    useEffect(() => {
         loadImage(data);
     }, []);
 
@@ -41,14 +44,18 @@ export default function ListItem(props) {
                     <div className="list-content" onClick={!data.invalid ? () => openImageModal(data) : () => removeFile(data.name)}>
                         <div className="photo-info">
                             <div className="file-type-logo" ref={ imageIcon }></div>
-                            <div className="file-type">{ fileType }</div>
+                            {/* <div className="file-type">{ fileType }</div> */}
                         </div>
                         <div className="file-cred">
-                            <p className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</p>
-                            <p className="file-size">({ fileSize })</p> {data.invalid && <p className='file-error-message'>({errorMessage})</p>}
+                            <div className="file-title">
+                                <p className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</p> {data.invalid && <p className='file-error-message'>({errorMessage})</p>}
+                            </div>
+                            <p className="file-size">({ fileSize })</p> 
                         </div>
                     </div>
-                    <div className="file-remove" onClick={() => {removeFile(data.name)}}>X</div>
+                    <div className="file-remove" onClick={() => {removeFile(data.name)}}>
+                        <Button className="btn">X</Button>
+                    </div>
                 </div>
             </Container>
         </div>

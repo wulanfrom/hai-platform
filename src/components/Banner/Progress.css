@@ -2,7 +2,6 @@
     width: 100%!important;
 }
 
-.MuiPaper-root {
-    /* width: 90%!important; */
-    background-color: #eff3fb!important;
+.MuiStepIcon-root.MuiStepIcon-active, .MuiStepIcon-root.MuiStepIcon-completed {
+    color: #2C98F0!important;
 }

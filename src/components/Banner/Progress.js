@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['UPLOAD', 'APPLY MODEL', 'GET EXPLANATION', 'OBSERVATION SUMMARY', 'IMPROVE', 'SHARE'];
+  return ['Upload Pictures', 'Get Label', 'Get Explanation', 'Summary', 'Improvements', 'Share your UI'];
 }
 
 // function getStepContent(step) {
@@ -54,7 +54,7 @@ export default function Progress(props) {
   return (
     // <div className={classes.root}>
     <div className={'progressWrapper ' + classes.root}>
-      <Stepper activeStep={activeStep}>
+      <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
