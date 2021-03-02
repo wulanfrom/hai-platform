@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Card from 'react-bootstrap/Card'
+import Badge from 'react-bootstrap/Badge'
 import './LabelCard.css'
 
 export default function LabelCard(props) {
@@ -64,28 +65,35 @@ export default function LabelCard(props) {
             <Card className="card-container">
                 <Card.Body>
                     <div className="photo-container" ref={ imageRef }></div>
-                    <div>
-                        <p className="card-label">Label</p>
-                        {/* <Card.Title>{ dataLabel }</Card.Title> */}
-                        <Card.Title>Bird</Card.Title>
-                    </div>
-                    <div>
-                        <Card.Text className="card-label">Do you Agree with the Label?</Card.Text>
-                        <ButtonGroup toggle>
-                            {radios.map((radio, idx) => (
-                                <ToggleButton
-                                    key={idx}
-                                    type="radio"
-                                    variant="secondary"
-                                    name="radio"
-                                    value={radio.value}
-                                    checked={ agreeValue == radio.value }
-                                    onChange={(e) => setAgreeValue(e.currentTarget.value)}
-                                >
-                                    {radio.name}
-                                </ToggleButton>
-                            ))}
-                        </ButtonGroup>
+                    <div className="info-body">
+                        <div>
+                            <div className="label-result">
+                            <p className="card-label">Label</p>
+                                <h5><Badge className="class-result">Airplane</Badge></h5>
+                            </div>
+                            {/* <div id="separator"></div> */}
+                            <p className="class-badge">Classification Model</p>
+                            <h5><Badge pill className="class-model">InceptionV3</Badge></h5>
+                        </div>
+                        <hr></hr>
+                        <div>
+                            <Card.Text>Do you Agree with the Label?</Card.Text>
+                            <ButtonGroup toggle>
+                                {radios.map((radio, idx) => (
+                                    <ToggleButton
+                                        key={idx}
+                                        type="radio"
+                                        variant="secondary"
+                                        name="radio"
+                                        value={radio.value}
+                                        checked={ agreeValue == radio.value }
+                                        onChange={(e) => setAgreeValue(e.currentTarget.value)}
+                                    >
+                                        {radio.name}
+                                    </ToggleButton>
+                                ))}
+                            </ButtonGroup>
+                        </div>
                     </div>
                 </Card.Body>
             </Card>

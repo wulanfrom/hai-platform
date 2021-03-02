@@ -3,6 +3,7 @@ import './DropZone.css'
 
 // Bootstrap components
 import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
 
 // pages
 import ListItem from './ListItem'
@@ -12,10 +13,10 @@ export default function DropZone(props) {
     const [errorMessage, setErrorMessage] = useState(''); 
     const [validFiles, setValidFiles] = useState(props.currentData); // all the non duplicated files
     const [unsupportedFiles, setUnsupportedFiles] = useState([]); // displays invalid files
-    
+
     // For adding input by clicking
     const fileInputRef = useRef();
-    const imageIcon = useRef();
+    // const imageIcon = useRef();
 
     const fileInputClicked = () => {
         fileInputRef.current.click();
@@ -33,7 +34,7 @@ export default function DropZone(props) {
 
     // on mount
     useEffect(() => {
-
+        
     }, []);
 
     // Remove duplicate files
@@ -54,6 +55,8 @@ export default function DropZone(props) {
         const res = unsupportedFiles.length === 0 && validFiles.length > 0;
         props.checkNext(res);
         // props.getImages(validFiles);
+        // listFiles();
+        // console.log("valid files changed");
     }, [unsupportedFiles, validFiles])
 
 
@@ -77,6 +80,17 @@ export default function DropZone(props) {
             handleFiles(files);
         }
     }
+
+    //re-render the file list
+    // const listFiles = () => {
+    //     changeListItems((
+    //         validFiles.map((data, i) => 
+    //             <div>
+    //                 <ListItem data={data} key={i} fileSize={fileSize(data.size)} fileType={fileType(data.name)} errorMessage={errorMessage} openImageModal={openImageModal} removeFile={removeFile}/>
+    //             </div>
+    //         )
+    //     ))
+    // }
 
     // Handles files when you upload them
     const handleFiles = (files) => {
@@ -177,12 +191,15 @@ export default function DropZone(props) {
     const uploadFiles = () => {
     }
 
-    console.log("valid Files");
-    console.log(validFiles);
+    // console.log("valid Files");
+    // console.log(validFiles);
     
+    const listItems = validFiles.map((data, i) => <ListItem data={data} key={i} fileSize={fileSize(data.size)} fileType={fileType(data.name)} errorMessage={errorMessage} openImageModal={openImageModal} removeFile={removeFile}/>)
+
     return (
         <div>
             <Container fluid>
+                <h3 className="dropzone-title"><b>Upload Files</b></h3>
                 {/* <p className="title">React Drag and Drop Image Upload</p> */}
                 {/* <div className="container"> */}
                 <div>
@@ -204,17 +221,18 @@ export default function DropZone(props) {
                                 multiple
                                 onChange={filesSelected} />
                             <div className="upload-icon"></div>
-                            Drag & Drop files here or click to upload
+                            Drag & Drop files here or <Button className="upload-btn">Browse</Button>
                         </div>
                     </div>
                     <div className="file-display-container">
-                    {
+                    {/* {
                         validFiles.map((data, i) => 
                             <div>
                                 <ListItem data={data} key={i} fileSize={fileSize(data.size)} fileType={fileType(data.name)} errorMessage={errorMessage} openImageModal={openImageModal} removeFile={removeFile}/>
                             </div>
                         )
-                    }
+                    } */}
+                    {listItems}
                     </div>
                 </div>
                 {/* </div> */}

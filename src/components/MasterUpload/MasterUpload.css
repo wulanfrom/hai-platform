@@ -1,5 +1,5 @@
 .stepsWrapper {
-    background-color: #eff3fb;
+    /* background-color: #eff3fb; */
 }
 
 .container-fluid {
@@ -27,4 +27,11 @@
 #nextBtn {
     /* height: auto; */
     margin-left: 0.5rem;
+    background-color: #2C98F0;
+    font-weight: 700;
+    border: none; 
+}
+
+.first-next {
+    margin-left: 0!important;
 }

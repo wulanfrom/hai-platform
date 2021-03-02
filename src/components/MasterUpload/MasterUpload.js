@@ -117,7 +117,17 @@ export default function MasterUpload() {
                 ""
             )
         }
-        else if (validNext && currentStep < 5) {
+        else if (!validNext && currentStep == 0) {
+            return (
+                <Button disabled id="nextBtn" className="btn btn-secondary first-next" type="button" onClick={ handleNext }>Next</Button>
+            )
+        }
+        else if (validNext && currentStep == 0) {
+            return (
+                <Button id="nextBtn" className="btn btn-secondary first-next" type="button" onClick={ handleNext }>Next</Button>
+            )
+        }
+        else if (validNext && currentStep > 0 && currentStep < 5) {
             return (
                 <Button id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>
             )
@@ -203,10 +213,9 @@ export default function MasterUpload() {
         <div>
             <Container fluid className="stepsWrapper">
                 <div>
-                    <h3><b>Step: { currentStep + 1 }</b></h3>
-                    { getStepDesc(currentStep) }
+                    <Progress className="progress" currentStep = { currentStep } />
                 </div>
-                <Row>
+                {/* <Row>
                     <Col sm={10}>
                         <Progress className="progress" currentStep = { currentStep } />
                     </Col>
@@ -216,7 +225,15 @@ export default function MasterUpload() {
                             { getNextButton(currentStep) }
                         </div>
                     </Col>
-                </Row>
+                </Row> */}
+                <div>
+                    <h6><b>Step { currentStep + 1 }</b></h6>
+                    { getStepDesc(currentStep) }
+                </div>
+                <div className="step-button progress-button">
+                    { getPrevButton(currentStep) }
+                    { getNextButton(currentStep) }
+                </div>
             </Container>
             <Container>
                 <div>
