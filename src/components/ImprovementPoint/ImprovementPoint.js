@@ -1,7 +1,13 @@
-import React, { useState, useRef } from 'react'
+// reference code
+// https://codesandbox.io/s/react-async-dialog-forked-5rzbi?file=/src/getValue/index.js
+import React, { useState, useRef, useEffect } from 'react'
 import ReactDOM from "react-dom";
 import MDEditor, { commands, ICommand, TextState, TextApi } from '@uiw/react-md-editor';
+// import { selectWord } from '../utils/markdownUtils';
 import './ImprovementPoint.css'
+
+// firebase
+import { storage } from '../../firebase';
 
 // bootstrap component
 import Row from 'react-bootstrap/Row'
@@ -12,32 +18,112 @@ import Button from 'react-bootstrap/Button'
 // pages
 import ModelPicture from '../ModelPicture/ModelPicture'
 
+// function import
+import getImages from '../ModelPicture/ModelPicture'
+
 export default function ImprovementPoint(props) {
     const [value, setValue] = useState("Please elaborate on your points");
     const [modalShow, setModalShow] = useState(false); //modal show state
     const [selectedImage, updateSelectedImage] = useState([]); // hold the selected images from the modal
+    const [progress, setProgress] = useState(0); //upload progress
     const modalRef = useRef();
+
+    const handleUpload = (file) => {
+        const uploadTask = storage.ref(`images/${file.name}`).put(file);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                // console.log(progress);
+                setProgress(progress);
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+                storage.ref("images")
+                .child(file.name)
+                .getDownloadURL()
+                .then(url => {
+                    // console.log(url);
+                    return url;
+                });
+            }
+        )
+    }
     
     const useModelImage: ICommand = {
         name: "Use Uploaded Images",
         keyCommand: "getUploadedImages",
         buttonProps: {"aria-label": "Use Uploaded Images"},
         icon: (
-            <svg className="uploadImage" width="12" height="12" viewBox="0 0 20 20">
+            <svg className="uploadImage" width="8" height="8" viewBox="0 0 8 8">
             </svg>
           ),
         execute: (state: TextState, api: TextApi) => {
-            // change the modalShow of modal
-            setModalShow(true);
-            // showModal();
+            // open the dialog and update the selected image field
+            getSelectedImages().then(response => {
+                console.log("inside API");
+                console.log(response);
 
-            // wait until the modal is closed
-            
-            
-            // if closed, check the selectedImage list
+                // Select everything
+                console.log("state");
+                console.log(state);
 
-            //add the images in the selected image list to the text
+                // Replaces the current selection with the image
+                
+                // if length of response.selectedItems > 0
+                const selectedImages = response.selectedImages;
+                if (selectedImages.length > 0) {
+                    console.log("some items were selected");
+                    // for each file
+                    selectedImages.forEach((item) => {
+                        // get a firebase url
+                        console.log("item");
+                        console.log(item);
+                        const uploadTask = storage.ref(`images/${item.data.name}`).put(item.data);
+                        uploadTask.on(
+                            "state_changed",
+                            snapshot => {},
+                            error => {
+                                console.log(error);
+                            },
+                            () => {
+                                storage.ref("images")
+                                .child(item.data.name)
+                                .getDownloadURL()
+                                .then(url => {
+                                    console.log(url);
+                                    let modifyText = `![](${url})\n`;
+                                    api.replaceSelection(modifyText);
+                                });
+                            }
+                        )
+                    });
+                }
+            });
         }
+    }
+
+    // const openModal = () => {
+    //     setModalShow(true);
+    // }
+
+    // asyc function to get images from modal
+    async function getSelectedImages() {
+        // send some data to t  he modal
+        setModalShow(true);
+        const res = await getImages({allData: props.allData, initialValue: [], modalShow: modalShow});
+        console.log("selected images got in improvement point")
+        // console.log(res.status);
+        // console.log(res.selectedImages);
+        return res;
+
+        //update selected images with the result gotten from the modal
+        // updateSelectedImage(res.selectedImages);
+        // return res.selectedImages;
     }
 
     // const showModal = () => {
@@ -58,12 +144,14 @@ export default function ImprovementPoint(props) {
     //     console.log("waiting for modal to close")
     // }
 
-    async function addToEditor(arr) {
-        //update the selected Image 
-        updateSelectedImage(arr);
-    }
+    // const addToEditor = async (arr) => {
+    //     //update the selected Image 
+    //     // updateSelectedImage(arr);
+    //     // return the array
+    //     return await arr;
+    // }
 
-    console.log("seelcted Image");
+    console.log("seelcted Image improvement point");
     console.log(selectedImage);
 
     return (
@@ -90,7 +178,8 @@ export default function ImprovementPoint(props) {
                 />
             </div>
             <div>
-                <ModelPicture ref={ modalRef } addToEditor={ addToEditor } allData={ props.allData } show={ modalShow } updateModalShow={setModalShow} />
+                {/* <ModelPicture ref={ modalRef } addToEditor={ addToEditor } allData={ props.allData } show={ modalShow } updateModalShow={setModalShow} /> */}
+                {/* <ModelPicture ref={ modalRef } allData={ props.allData } show={ modalShow } updateModalShow={ setModalShow } /> */}
             </div>
         </div>
     )

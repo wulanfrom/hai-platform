@@ -54,7 +54,7 @@ export default function LimeTable(props) {
 
     return (
         <div>
-            <Table striped bordered hover className="lime-table">
+            <Table bordered className="lime-table">
                 <thead>
                     <tr>
                         <th>Input Image</th>

@@ -75,7 +75,9 @@ export default function TableBody(props) {
             <td>
                 <div>
                     {/* image */}
-                    <div id="image-container" ref={ imageRef }></div>
+                    <div class="image-wrapper">
+                        <div id="image-container" ref={ imageRef }></div>
+                    </div>
                     {/* image name */}
                     <p>{ data.id }</p>
                 </div>
