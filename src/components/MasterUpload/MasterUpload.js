@@ -14,13 +14,15 @@ import GiveExplanation from '../GiveExplanation/GiveExplanation'
 import Summary from '../Summary/Summary'
 import LabelPage from '../LabelPage/LabelPage'
 import Improve from '../Improve/Improve'
+import Finalize from '../Finalize/Finalize'
 
 export default function MasterUpload() {
     const [currentStep, setCurrentStep] = useState(0); //current step
     const [uploadImages, setUploadedImages] = useState([]); //the uploaded images from the dropzone
     const [validNext, setValidNext] = useState(false); //whether next is disabled or not
     const [allData, setAllData] = useState([]); //holds all the cards and their id, data, and agreeValues
-    const [improvement, updateImprovement] = useState("");
+    const [improvement, updateImprovement] = useState(""); //explanation part in the give explanation page
+    const [improvementList, updateImprovementList] = useState([]); // list of improvements from the ui page
 
     // check when to make next button appear
     const handleNext = (step) => {
@@ -72,10 +74,10 @@ export default function MasterUpload() {
         setValidNext(validity);
     }
 
-    // gets images from the dropzone and saves it in the local uploaded images value
-    // const getImages = (imageList) => {
-    //     setUploadedImages(imageList);
-    // }
+    //changes the current step
+    const changeCurStep = (step) => {
+        setCurrentStep(step);
+    }
 
     // add cards to the global card list
     const addData = (data) => {
@@ -110,6 +112,14 @@ export default function MasterUpload() {
         updateImprovement("");
     }
 
+
+    // update the improvements given by users
+    const updateImprovementTab = (dataSent) => {
+        // handleNext(currentStep);
+        //update ImprovementList
+        updateImprovementList(dataSent);
+    }
+
     // render next button
     const getNextButton = (currentStep) => {
         if (currentStep == 5) {
@@ -132,6 +142,12 @@ export default function MasterUpload() {
                 <Button id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>
             )
         }
+        // else if (currentStep == 4) {
+        //     // on the 4th step, you can
+        //     return (
+        //         <Button id="nextBtn" className="btn btn-secondary" type="button" onClick={ updateImprovementTab }>Next</Button>
+        //     )
+        // }
         else {
             return (
                 <Button disabled id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>
@@ -183,7 +199,8 @@ export default function MasterUpload() {
         }
         else {
             return (
-                <p>Share your Findings with Others.</p>
+                // <p>Share your Findings with Others.</p>
+                <p>Finalize your Ideas.</p>
             )
         }
     }
@@ -200,14 +217,16 @@ export default function MasterUpload() {
         updateUploadedImages();
     }, [currentStep]);
 
-    console.log("all data");
-    console.log(allData);
+    // console.log("all data");
+    // console.log(allData);
 
-    console.log("uploadImages");
-    console.log(uploadImages);
+    // console.log("uploadImages");
+    // console.log(uploadImages);
 
     // console.log("improvement");
     // console.log(improvement);
+
+    console.log("improvementList masterupload: ", improvementList);
 
     return (
         <div>
@@ -215,17 +234,6 @@ export default function MasterUpload() {
                 <div>
                     <Progress className="progress" currentStep = { currentStep } />
                 </div>
-                {/* <Row>
-                    <Col sm={10}>
-                        <Progress className="progress" currentStep = { currentStep } />
-                    </Col>
-                    <Col className="progress-button" sm={2}>
-                        <div className="step-button">
-                            { getPrevButton(currentStep) }
-                            { getNextButton(currentStep) }
-                        </div>
-                    </Col>
-                </Row> */}
                 <div>
                     <h6><b>Step { currentStep + 1 }</b></h6>
                     { getStepDesc(currentStep) }
@@ -242,7 +250,8 @@ export default function MasterUpload() {
                     { currentStep == 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
                     { currentStep == 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
                     { currentStep == 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}
-                    { currentStep == 4 ? <Improve allData={allData} /> : ""}
+                    { currentStep == 4 ? <Improve updateImprovementTab={updateImprovementTab} currentImprovement={improvementList} allData={allData} /> : ""}
+                    { currentStep == 5 ? <Finalize changeCurStep={changeCurStep} /> : ""}
                 </div>
             </Container>
         </div>

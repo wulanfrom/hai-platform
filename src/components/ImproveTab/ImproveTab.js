@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './ImproveTab.css'
 import FigmaEmbed from 'react-figma-embed';
 
@@ -16,13 +16,18 @@ export default function ImproveTab(props) {
         return `${ pre }_${ new Date().getTime() }`;
     }
 
-    const [figmaURL, setFigmaURL] = useState("");
-    const [embedLink, setEmbedLink] = useState("");
-    const [improvementList, updateImprovement] = useState([{
-        id: generateKey("point"),
-        improvement: "",
-        explanation: null, 
-    }]);
+    const [figmaURL, setFigmaURL] = useState(props.tabInfo.figmaLink);
+    // console.log(props.improvementInfo.figmaLink);
+    const [embedLink, setEmbedLink] = useState(figmaURL);
+    var initialValue = props.tabInfo.improvements;
+    if (initialValue.length == 0) {
+        initialValue = [{
+            id: generateKey("point"),
+            improvement: "",
+            explanation: "", 
+        }]
+    }
+    const [improvementList, updateImprovement] = useState(initialValue);
 
     // constantly gets updated with the text input
     const updateFigmaURL = (e) => {
@@ -57,6 +62,32 @@ export default function ImproveTab(props) {
         e.preventDefault();
     }
 
+    // update the improvement listt from the improvementPoint
+    const sendDataToTab = (sentData) => {
+        const newList = improvementList.map((item) => {
+            console.log("sendData id: ", sentData.id);
+            if (item.id == sentData.id) {
+                const updatedItem = {
+                    ...item,
+                    explanation: sentData.explanation,
+                    improvement: sentData.improvement,
+                }
+                return updatedItem;
+            }
+            return item;
+        });
+        updateImprovement(newList);
+    }
+
+    // update UITab info everytime the improvementList Changes
+    useEffect(() => {
+        props.updateTab({
+            id: props.id,
+            improvements: improvementList,
+            figmaLink: embedLink,
+        });
+    }, [improvementList, embedLink]);
+
     //update the explanation point
     const sendChangedExplanation = (data) => {
         const updatedList = improvementList.map(item => {
@@ -74,7 +105,7 @@ export default function ImproveTab(props) {
     }
 
 
-    console.log(improvementList);
+    // console.log("improvementLInfo: ", props.improvementInfo);
 
     return (
         <div className="improvement-wrapper">
@@ -102,7 +133,7 @@ export default function ImproveTab(props) {
                 <h3>Improvements</h3>
                 <p>List a few representative questions your UI can answer.</p>
                 <div>
-                    { improvementList.map((item, idx) => <ImprovementPoint allData={ props.allData } idx={idx + 1} deleteItem = {deleteImprovement} key={item.id} data={item}/>) }
+                    { improvementList.map((item, idx) => <ImprovementPoint allData={ props.allData } idx={idx + 1} deleteItem = {deleteImprovement} key={item.id} data={item} sendDataToTab={sendDataToTab} />) }
                 </div>
                 <Button variant="primary" onClick={addImprovement}>+ Add Improvement</Button>
             </div>

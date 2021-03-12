@@ -22,11 +22,25 @@ import ModelPicture from '../ModelPicture/ModelPicture'
 import getImages from '../ModelPicture/ModelPicture'
 
 export default function ImprovementPoint(props) {
-    const [value, setValue] = useState("Please elaborate on your points");
+    var initialValue = {
+        value: props.data.explanation,
+        explanation: props.data.improvement,
+    }
+    const [value, setValue] = useState(initialValue.value);
     const [modalShow, setModalShow] = useState(false); //modal show state
     const [selectedImage, updateSelectedImage] = useState([]); // hold the selected images from the modal
     const [progress, setProgress] = useState(0); //upload progress
+    const [improvementPoint, changePoint] = useState(initialValue.explanation);
     const modalRef = useRef();
+
+    // send data to improve tab if the value and improvementPoint state changes
+    useEffect(() => {
+        props.sendDataToTab({
+            id: props.data.id,
+            explanation: value, 
+            improvement: improvementPoint
+        })
+    }, [value, improvementPoint]);
 
     const handleUpload = (file) => {
         const uploadTask = storage.ref(`images/${file.name}`).put(file);
@@ -53,6 +67,11 @@ export default function ImprovementPoint(props) {
             }
         )
     }
+
+    // update the improvement point
+    const handlePointChange = (e) => {
+        changePoint(e.target.value);
+    }
     
     const useModelImage: ICommand = {
         name: "Use Uploaded Images",
@@ -65,28 +84,35 @@ export default function ImprovementPoint(props) {
         execute: (state: TextState, api: TextApi) => {
             // open the dialog and update the selected image field
             getSelectedImages().then(response => {
-                console.log("inside API");
-                console.log(response);
+                // console.log("inside API");
+                // console.log(response);
 
-                // Select everything
-                console.log("state");
-                console.log(state);
+                // // Select everything
+                // console.log("state");
+                // console.log(state);
 
                 // Replaces the current selection with the image
                 
                 // if length of response.selectedItems > 0
                 const selectedImages = response.selectedImages;
                 if (selectedImages.length > 0) {
-                    console.log("some items were selected");
+                    // console.log("some items were selected");
                     // for each file
                     selectedImages.forEach((item) => {
                         // get a firebase url
-                        console.log("item");
-                        console.log(item);
+                        // console.log("item");
+                        // console.log(item);
                         const uploadTask = storage.ref(`images/${item.data.name}`).put(item.data);
                         uploadTask.on(
                             "state_changed",
-                            snapshot => {},
+                            // show progress
+                            snapshot => {
+                                const progress = Math.round(
+                                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                                );
+                                setProgress({ progress });
+                                // console.log(progress);
+                            },
                             error => {
                                 console.log(error);
                             },
@@ -107,52 +133,15 @@ export default function ImprovementPoint(props) {
         }
     }
 
-    // const openModal = () => {
-    //     setModalShow(true);
-    // }
-
     // asyc function to get images from modal
     async function getSelectedImages() {
         // send some data to t  he modal
-        setModalShow(true);
-        const res = await getImages({allData: props.allData, initialValue: [], modalShow: modalShow});
-        console.log("selected images got in improvement point")
-        // console.log(res.status);
-        // console.log(res.selectedImages);
+        const res = await getImages({allData: props.allData, initialValue: [], modalShow: true, progress: progress});
         return res;
-
-        //update selected images with the result gotten from the modal
-        // updateSelectedImage(res.selectedImages);
-        // return res.selectedImages;
     }
 
-    // const showModal = () => {
-    //     const modal = modalRef.current;
-    //     console.log(modal);
-    //     setTimeout(async () => {
-    //         try {
-    //             // open modal
-    //             setModalShow(true);
-    //             // wait for modal to close
-    //             const result = await modal.show();
-    //             console.log("result");
-    //             console.log(result);
-    //         } catch (err) {
-    //             alert("error!");
-    //         }
-    //     }, 100);
-    //     console.log("waiting for modal to close")
-    // }
-
-    // const addToEditor = async (arr) => {
-    //     //update the selected Image 
-    //     // updateSelectedImage(arr);
-    //     // return the array
-    //     return await arr;
-    // }
-
-    console.log("seelcted Image improvement point");
-    console.log(selectedImage);
+    // console.log("improvementPoint, ", improvementPoint);
+    // console.log("value, ", value);
 
     return (
         <div>
@@ -160,7 +149,7 @@ export default function ImprovementPoint(props) {
                 <Form.Group as={Row} controlId="formPassword">
                     <Form.Label xs="auto">{props.idx}</Form.Label>
                     <Col xs={11}>
-                        <Form.Control type="text" placeholder="Insert Important Point here" />
+                        <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Important Point here" />
                     </Col>
                     <Col>
                         <Button onClick={props.deleteItem} type="submit" variant="danger" className="deleteBtn">-</Button>
@@ -170,16 +159,13 @@ export default function ImprovementPoint(props) {
             <div className="container">
                 <MDEditor
                     value={value}
+                    onChange={setValue}
                     commands={[
                         useModelImage,
                         commands.divider,
                         commands.image
                     ]}
                 />
-            </div>
-            <div>
-                {/* <ModelPicture ref={ modalRef } addToEditor={ addToEditor } allData={ props.allData } show={ modalShow } updateModalShow={setModalShow} /> */}
-                {/* <ModelPicture ref={ modalRef } allData={ props.allData } show={ modalShow } updateModalShow={ setModalShow } /> */}
             </div>
         </div>
     )
