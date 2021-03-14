@@ -35,7 +35,7 @@ export default function ListItem(props) {
     // on mount
     useEffect(() => {
         loadImage(data);
-    }, []);
+    }, [data]);
 
     return (
         <div>

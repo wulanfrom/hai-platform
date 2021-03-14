@@ -12,7 +12,7 @@
     width: 25%;
     height: 500px;
     /* background-color: red; */
-    border: 1px solid black;
+    border: 1px solid #C4C4C4;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,7 +23,7 @@
     height: 40px;
     display: flex;
     color: #fff;
-    background-color: #858585;
+    background: #2C98F0;
     justify-content: center;
     align-items: center;
 }
@@ -51,4 +51,25 @@
 .title-share {
     padding-bottom: 24px;
     margin: 0;
+}
+
+.obs-title {
+    margin-bottom: 1.5rem;
+}
+
+.desc-summary {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.class-model-desc {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28A745;
+    margin: 0 0.5rem;
+}
+
+.lime-model {
+    background: rgba(119, 73, 248, 0.15);
+    color: #7749F8;
+    margin: 0 0.5rem;
 }

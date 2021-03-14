@@ -6,6 +6,7 @@ import './TableBody.css'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Form from 'react-bootstrap/Form'
+import Badge from 'react-bootstrap/Badge'
 
 export default function TableBody(props) {
     const data = props.data;
@@ -69,13 +70,15 @@ export default function TableBody(props) {
         { name: 'No', value: '0' },
     ];
 
+    console.log("data: ", data);
+
     return (
         // <div>
         <tr>
             <td>
                 <div>
                     {/* image */}
-                    <div class="image-wrapper">
+                    <div className="image-wrapper">
                         <div id="image-container" ref={ imageRef }></div>
                     </div>
                     {/* image name */}
@@ -84,17 +87,19 @@ export default function TableBody(props) {
             </td>
             <td>
                 {/* Put lime picture here */}
-                <div className="exp-container" ref={ expRef }></div>
+                <div className="exp-wrapper">
+                    <div className="exp-container" ref={ expRef }></div>
+                </div>  
             </td>
             <td>
                 <div className="labelName">
                     <p>Label</p>
-                    {/* Put result of label here */}
-                    <p>{ data.label }</p>
+                    {/* <p>{ data.label }</p> */}
+                    <h5><Badge className="class-result">{ data.label }</Badge></h5>
                 </div>
                 <div className="agreeLabel">
                     <p>Is the explanation easy to understand?</p>
-                    <ButtonGroup toggle>
+                    <ButtonGroup className="yesNo" toggle>
                         {radios.map((radio, idx) => (
                             <ToggleButton
                                 key={idx}
@@ -104,6 +109,7 @@ export default function TableBody(props) {
                                 value={radio.value}
                                 checked={ expAgree == radio.value }
                                 onChange={(e) => setExpAgree(e.currentTarget.value)}
+                                className="expRadioBtn"
                             >
                                 {radio.name}
                             </ToggleButton>
@@ -112,7 +118,9 @@ export default function TableBody(props) {
                 </div>
                 <div>
                     <Form.Group controlId="explanationTextArea">
-                        <Form.Label>Is the Explanation Sufficient to Trust the model prediction?</Form.Label>
+                        <Form.Label className="expLabel">
+                            <p>Is the Explanation Sufficient to Trust the model prediction?</p>
+                        </Form.Label>
                         {/* whenever it changes, update the globaldata in master upload */}
                         <Form.Control as="textarea" value={ explanation } rows={3} onChange={ updateExplanation } />
                     </Form.Group>

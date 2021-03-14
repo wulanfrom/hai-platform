@@ -21,6 +21,7 @@ export default function LabelCard(props) {
         agreeExp: 0,
         explanation: "",
         LIMEPic: null,
+        label: dataLabel,
     }
 
 
@@ -60,6 +61,9 @@ export default function LabelCard(props) {
         loadImage(data);
     }, []);
 
+    console.log("labelCard: ", dataLabel);
+    // console.log("dataLabel: ",)
+
     return (
         <div className="card-wrapper">
             <Card className="card-container">
@@ -72,7 +76,7 @@ export default function LabelCard(props) {
                                 <h5><Badge className="class-result">Airplane</Badge></h5>
                             </div>
                             {/* <div id="separator"></div> */}
-                            <p className="class-badge">Classification Model</p>
+                            <p className="class-badge-result">Classification Model</p>
                             <h5><Badge pill className="class-model">InceptionV3</Badge></h5>
                         </div>
                         <hr></hr>

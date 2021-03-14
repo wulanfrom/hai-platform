@@ -142,12 +142,6 @@ export default function MasterUpload() {
                 <Button id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>
             )
         }
-        // else if (currentStep == 4) {
-        //     // on the 4th step, you can
-        //     return (
-        //         <Button id="nextBtn" className="btn btn-secondary" type="button" onClick={ updateImprovementTab }>Next</Button>
-        //     )
-        // }
         else {
             return (
                 <Button disabled id="nextBtn" className="btn btn-secondary" type="button" onClick={ handleNext }>Next</Button>
@@ -217,13 +211,12 @@ export default function MasterUpload() {
         updateUploadedImages();
     }, [currentStep]);
 
-    // console.log("all data");
-    // console.log(allData);
+    console.log("all data", allData);
 
     // console.log("uploadImages");
     // console.log(uploadImages);
 
-    // console.log("improvement");
+    // console.log("improvement");6
     // console.log(improvement);
 
     console.log("improvementList masterupload: ", improvementList);
