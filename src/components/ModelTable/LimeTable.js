@@ -30,13 +30,13 @@ export default function LimeTable(props) {
 
     //apply lime model
     const applyLimeModel = (data) => {
-        console.log("applied model");
+        // console.log("applied model");
         const updatedList = allData.map(eachCard => {
             // if they have the same id
             if (eachCard.id == data.id) {
                 // apply the assigne LIME picture to the item.LIMEPic
                 let item = eachCard;
-                console.log(data);
+                // console.log(data);
                 item.LIMEPic = data.LIMEPic;
             }
 
@@ -54,7 +54,7 @@ export default function LimeTable(props) {
 
     return (
         <div>
-            <Table striped bordered hover className="lime-table">
+            <Table bordered className="lime-table">
                 <thead>
                     <tr>
                         <th>Input Image</th>

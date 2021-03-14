@@ -196,6 +196,7 @@ export default function DropZone(props) {
     
     const listItems = validFiles.map((data, i) => <ListItem data={data} key={i} fileSize={fileSize(data.size)} fileType={fileType(data.name)} errorMessage={errorMessage} openImageModal={openImageModal} removeFile={removeFile}/>)
 
+    console.log("valid files: ", validFiles);
     return (
         <div>
             <Container fluid>
@@ -225,14 +226,14 @@ export default function DropZone(props) {
                         </div>
                     </div>
                     <div className="file-display-container">
-                    {/* {
+                    {
                         validFiles.map((data, i) => 
                             <div>
                                 <ListItem data={data} key={i} fileSize={fileSize(data.size)} fileType={fileType(data.name)} errorMessage={errorMessage} openImageModal={openImageModal} removeFile={removeFile}/>
                             </div>
                         )
-                    } */}
-                    {listItems}
+                    }
+                    {/* {listItems} */}
                     </div>
                 </div>
                 {/* </div> */}

@@ -54,7 +54,7 @@ export default function GiveExplanation(props) {
                 <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/>
             )
         }
-        else if (selectedModel == "lime" && showTable) {
+        else if (selectedModel == "shap" && showTable) {
             return (
                 <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/>
             )
@@ -68,9 +68,10 @@ export default function GiveExplanation(props) {
 
     return (
         <Container fluid>
+            <h3 className="exp-title"><b>Images and Their Explanations</b></h3>
             <Form>
                 <Row>
-                    <Col xs lg="9">
+                    <Col xs lg="6">
                         <Form.Group controlId="explainabilityModelSelect">
                             <Form.Label>Choose an Explainability Model</Form.Label>
                             <Form.Control as="select" value={ dropdownVal } onChange={ getDropdownVal } >
@@ -79,7 +80,7 @@ export default function GiveExplanation(props) {
                             </Form.Control>
                         </Form.Group>
                     </Col>
-                    <Col xs lg="3" className="apply-model">
+                    <Col xs lg="2" className="apply-model">
                         <Button variant="primary" onClick = { changeModel }>Apply Explanation</Button>
                     </Col>
                 </Row>
@@ -89,14 +90,14 @@ export default function GiveExplanation(props) {
                 {/* { selectedModel == "lime" && showTable ? <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/> : <EmptyTable /> }
                 { selectedModel == "shap" && showTable ? <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/> : <EmptyTable /> } */}
             </div>
-            <div>
+            {/* <div>
                 <Form.Group controlId="improvementTextArea" className="improvementTextArea">
                     <Form.Label>What can you do to make the model label images correctly?</Form.Label>
-                    <p className="improvementLabel">What kinds of additional information would you include in your explanation?</p>
+                    <p className="improvementLabel">What kinds of additional information would you include in your explanation?</p> */}
                     {/* whenever it changes, update the globaldata in master upload */}
-                    <Form.Control as="textarea" value={ improvement } rows={3} onChange={ changeImprovement } />
+                    {/* <Form.Control as="textarea" value={ improvement } rows={3} onChange={ changeImprovement } />
                 </Form.Group>
-            </div>
+            </div> */}
         </Container>
     )
 }

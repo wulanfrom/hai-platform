@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './UITabs.css'
 
 // Pages
@@ -14,13 +14,20 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 export default function UITabs(props) {
-    // list of all tabs
-    const [tabList, setTabList] = useState([
-        {
+    var initialInput = null;
+    if (props.improvementData.length == 0) {
+        initialInput = [{
             key: 0,
-            id: 0
-        }
-    ]);
+            id: 0,
+            improvements: [],
+            figmaLink: "",
+        }];
+    }
+    else {
+        initialInput = props.improvementData;
+    }
+
+    const [tabList, setTabList] = useState(initialInput);
 
     // current opened tab
     const [tabValue, setTabValue] = useState(0);
@@ -68,6 +75,30 @@ export default function UITabs(props) {
         setTabList(tabs);
     }
 
+    // update the info in the tab
+    const updateTabInfo = (sentData) => {
+        const newTabList = tabList.map((item) => {
+            // console.log("sendData id: ", sentData.id);
+            if (item.id == sentData.id) {
+                const updatedItem = {
+                    ...item,
+                    improvements: sentData.improvements,
+                    figmaLink: sentData.figmaLink,
+                }
+                return updatedItem;
+            }
+            return item;
+        });
+        setTabList(newTabList);
+    }
+
+    // give the information to the improve tab
+    useEffect(() => {
+        props.sendToImprove(tabList);
+    }, [tabList]);
+
+    // console.log("tablist: ", tabList);
+
     return (
         <div>
             <Container fluid className="tabWrapper">
@@ -77,7 +108,7 @@ export default function UITabs(props) {
                             {tabList.map(tab => (
                                 <Tab key={tab.key.toString()} eventKey={tab.key.toString()} 
                                 title={<span>UI_{tab.id} <X onClick={deleteTab} id={tab.id}/> </span>} className="uiTab">
-                                    <ImproveTab allData={ props.allData } />
+                                    <ImproveTab updateTab={updateTabInfo} tabInfo={tabList[tab.id]} id={tab.id} allData={ props.allData } />
                                 </Tab>
                             ))}
                         </Tabs>

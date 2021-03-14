@@ -3,9 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { useHistory } from "react-router-dom"; 
 import './Progress.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -22,27 +19,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Upload Pictures', 'Get Label', 'Get Explanation', 'Summary', 'Improvements', 'Share your UI'];
+  return ['Upload Pictures', 'Get Label', 'Get Explanation', 'Summary', 'Improvements', 'Finalize your Ideas'];
 }
-
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return 'Upload pictures to apply the model on';
-//     case 1:
-//       return 'Label model to pictures';
-//     case 2:
-//       return 'Does the explanation make sense?';
-//     case 3:
-//       return 'What did you learn?';
-//     case 4:
-//       return 'How would you Improve the explanation model?'
-//     case 5:
-//       return 'Share your Findings with Others.'
-//       default:
-//       return 'Unknown step';
-//   }
-// }
 
 export default function Progress(props) {
   const classes = useStyles();

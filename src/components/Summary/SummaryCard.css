@@ -24,22 +24,22 @@
 
 .indicator {
     /* float: right; */
-    position: absolute;
-    z-index: 10;
+    /* position: absolute; */
+    /* z-index: 10; */
     display: flex;
     height: 16px;
     width: 40px;
 }
 
-.label-indicator {
-    height: 100%;
-    width: 50%;
+.label-indicator, .exp-indicator {
+    height: 10px;
+    width: 10px;
 }
-
+/* 
 .exp-indicator {
     height: 100%;
     width: 50%;
-}
+} */
 
 /* Modal overlay */
 .modal-backdrop { 
@@ -57,4 +57,32 @@
     background-size: 100% 100%;
     position: relative;
     background-color: grey;
+}
+
+.summary-card .card-text {
+    padding: 0 1rem;
+}
+
+.summary-card .label-summary {
+    display: flex;
+}
+
+.summary-card .label-summary p:nth-child(2) {
+    margin-left: 0.5rem;
+}
+
+.summary-class-result {
+    background-color: #2C98F0;
+    color: #fff;
+    font-weight: 700;
+    margin-left: 0.25rem;
+}
+
+.label-side, .exp-side {
+    display: flex;
+}
+
+.wrong-tag, .right-tag {
+    height: 20px;
+    width: 20px;
 }

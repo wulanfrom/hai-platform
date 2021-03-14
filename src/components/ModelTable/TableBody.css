@@ -1,19 +1,51 @@
-#image-container, .exp-container {
-    position: relative;
-    background-color: grey;
+.image-wrapper {
+    width: 150px;
+}
+
+#image-container {
     width: 100%;
-    height: 152px;
-    background: no-repeat center center; 
-    /* background-size: 100% 100%; */
-    /* height: 152px; */
+    height: 0;
+    padding-top: 50%;
+    background: gray;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.exp-wrapper {
+    width: 400px;
+}
+
+.exp-container {
+    width: 100%;
+    height: 100%;
+    padding-top: 50%;
+    background: gray;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat; 
 }
 
 .labelName {
     display: flex;
+    align-items: center;
+}
+
+.labelName p {
+    margin: 0;
+}
+
+.labelName h5 {
+    margin: 0;
 }
 
 .agreeLabel {
     display: flex;
+    align-items: center;
+}
+
+.agreeLabel p {
+    margin: 0;
 }
 
 /* input image */
@@ -39,4 +71,29 @@ tr td:nth-child(3) {
     width: 40%;
 }
 
+/* label result */
+.class-badge {
+    font-weight: 700;
+    margin: 0;
+}
 
+.yesNo {
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.class-result {
+    margin-left: 0.5rem;
+}
+
+.expRadioBtn {
+    padding: 4px 8px!important;
+}
+
+.expLabel p {
+    margin-bottom: 0;
+}
+
+.table td, .table th {
+    padding: 1rem 0.75rem;
+}

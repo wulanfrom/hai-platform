@@ -16,6 +16,7 @@ export default function LabelPage(props) {
             if (eachCard.id == data.id) {
                 let item = eachCard;
                 item.agreeLabel = data.agreeLabel;
+                item.label = data.label;
             }
             return eachCard
         });
@@ -31,7 +32,7 @@ export default function LabelPage(props) {
 
     // Apply ML here
     const getLabel = () => {
-
+        return "Airplane";
     }
 
     return (
@@ -39,7 +40,7 @@ export default function LabelPage(props) {
             <div className="label-cards-wrappers">
                 { allData.map((item) => 
                     <div key={item.id}>
-                        <LabelCard name = {item.id} data = {item.data} label="" agreeValue = {item.agreeLabel} sendChangedData = { sendChangedData } />
+                        <LabelCard name = {item.id} data = {item.data} label={getLabel()} agreeValue = {item.agreeLabel} sendChangedData = { sendChangedData } />
                     </div>
                 )}
             </div>

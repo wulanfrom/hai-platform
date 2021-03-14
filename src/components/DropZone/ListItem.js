@@ -16,8 +16,8 @@ export default function ListItem(props) {
     const openImageModal = props.openImageModal;
 
     const loadImage = (file) => {
-        console.log("filename");
-        console.log(file.name);
+        // console.log("filename");
+        // console.log(file.name);
         const reader = new FileReader();
         // modalRef.current.style.display = "block";
         reader.readAsDataURL(file);
@@ -35,7 +35,7 @@ export default function ListItem(props) {
     // on mount
     useEffect(() => {
         loadImage(data);
-    }, []);
+    }, [data]);
 
     return (
         <div>
