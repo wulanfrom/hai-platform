@@ -18,8 +18,9 @@ export default function GiveExplanation(props) {
     const [selectedModel, updateModel] = useState("lime");
     const [dropdownVal, changeDropdownVal] = useState("lime");
     const [showTable, changeShow] = useState(false);
-    const [allData, updateData] = useState(props.data);
-    const [improvement, updateImprovement] = useState(props.improvement);
+    const allData = props.data;
+    // const [improvement, updateImprovement] = useState(props.improvement);
+    const improvement = props.improvement;
 
     //update the value of the selection depending on the dropdown
     const changeModel = () => {
@@ -39,9 +40,9 @@ export default function GiveExplanation(props) {
     }
 
     
-    const changeImprovement = (e) => {
-        updateImprovement(e.target.value);
-    }
+    // const changeImprovement = (e) => {
+    //     updateImprovement(e.target.value);
+    // }
 
     // update the improvement whenever it changes the text area
     useEffect(() => {
@@ -49,12 +50,12 @@ export default function GiveExplanation(props) {
     }, [improvement]);
 
     const getTable = (selectedModel) => {
-        if (selectedModel == "lime" && showTable) {
+        if (selectedModel === "lime" && showTable) {
             return (
                 <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/>
             )
         }
-        else if (selectedModel == "shap" && showTable) {
+        else if (selectedModel === "shap" && showTable) {
             return (
                 <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/>
             )

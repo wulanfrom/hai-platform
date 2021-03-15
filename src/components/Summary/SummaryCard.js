@@ -45,7 +45,7 @@ export default function SummaryCard(props) {
     const wrong = 
     <div className="wrong-tag">
         {/* <object data="../../images/bx-x.svg" type="image/svg+xml"> */}
-            <img src="../../images/bx-x.svg" />
+            <img src="../../images/bx-x.svg" alt="wrong-icon"/>
         {/* </object>  */}
     </div>
             
@@ -53,7 +53,7 @@ export default function SummaryCard(props) {
     const right = 
     <div className="right-tag" >
         {/* <object data="../../images/bx-check.svg" type="image/svg+xml"> */}
-            <img src="../../images/bx-check.svg" />
+            <img src="../../images/bx-check.svg" alt="right-icon"/>
         {/* </object> */}
     </div>
 
@@ -84,9 +84,9 @@ export default function SummaryCard(props) {
         loadImage(data, imageRef);
         // loadImage(data, orgImgRef);
     }, []);
-    console.log(data);
-    console.log(agreeExp);
-    console.log(agreeLabel);
+    // console.log(data);
+    // console.log(agreeExp);
+    // console.log(agreeLabel);
 
     return (
         <div>
@@ -101,12 +101,12 @@ export default function SummaryCard(props) {
                     </div>
                     <Card.Body>
                         {/* <Card.Title>Card Title</Card.Title> */}
-                        <Card.Text className="label-summary">
+                        <div className="label-summary">
                             <p><b>Label</b></p>
                             <h5><Badge className="summary-class-result">{ labelName }</Badge></h5>
                             {/* <p>{ labelName }</p> */}
-                        </Card.Text>
-                        <Card.Text>
+                        </div>
+                        <div>
                             <div className="indicator">
                                 <div className="label-side">
                                     <div className="label-indicator">{agreeLabel ? right : wrong}</div>
@@ -118,7 +118,7 @@ export default function SummaryCard(props) {
                                     <p>Explanation</p>
                                 </div>
                             </div>
-                        </Card.Text>
+                        </div>
                     </Card.Body>
                 </Card>
             </div>
@@ -132,9 +132,9 @@ export default function SummaryCard(props) {
                     <Modal.Body>
                         <div>
                             <h5>Original Image</h5>
-                            <img className="modalImage" ref={ orgImgRef } />
+                            <img className="modalImage" alt="original-ref" ref={ orgImgRef } />
                             <h5>Image Through Explainability Model</h5>
-                            <img className="modalImage" ref={ modelImgRef } />
+                            <img className="modalImage" alt="modal-ref" ref={ modelImgRef } />
                         </div>
                         <div className="card-label">
                             <h5>Label</h5>

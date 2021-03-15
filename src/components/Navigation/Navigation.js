@@ -1,19 +1,8 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import {
-    BrowserRouter as Router,
-    Switch, 
-    Link,
-    Route
-} from 'react-router-dom';
 import './Navigation.css'
 
-
-// Pages
-import GetStarted from '../GetStarted/GetStarted'
-import Upload from '../ApplyModels/Upload'
-import Explore from '../Explore/Explore'
 
 
 export default class Navigation extends Component {

@@ -8,7 +8,6 @@ import ImproveTab from '../ImproveTab/ImproveTab'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import {X} from 'react-bootstrap-icons'
-import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -36,10 +35,10 @@ export default function UITabs(props) {
     }
 
     // add tabs
-    const addTab = () => {
-        let id = tabList[tabList.length - 1].id + 1;
-        setTabList([...tabList, {key: id, id: id}]);
-    }
+    // const addTab = () => {
+    //     let id = tabList[tabList.length - 1].id + 1;
+    //     setTabList([...tabList, {key: id, id: id}]);
+    // }
 
     //delete tabs
     const deleteTab = e => {

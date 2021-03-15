@@ -4,14 +4,12 @@ import Navigation from './components/Navigation/Navigation'
 import {
   BrowserRouter as Router,
   Switch, 
-  Link,
   Route,
   Redirect
 } from 'react-router-dom';
 
 // Pages
 import GetStarted from './components/GetStarted/GetStarted';
-import Upload from './components/ApplyModels/Upload'
 import Explore from './components/Explore/Explore'
 import MasterUpload from './components/MasterUpload/MasterUpload'
 

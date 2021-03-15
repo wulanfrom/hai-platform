@@ -8,7 +8,7 @@
 .allImagesContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: flex-start;
     max-height: calc(100vh - 210px);
     overflow-y: auto;
 }

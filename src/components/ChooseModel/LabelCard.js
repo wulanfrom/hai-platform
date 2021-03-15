@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState }from 'react'
 
 // // React components
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Card from 'react-bootstrap/Card'
@@ -72,7 +72,7 @@ export default function LabelCard(props) {
                     <div className="info-body">
                         <div>
                             <div className="label-result">
-                            <p className="card-label">Label</p>
+                                <p className="card-label">Label</p>
                                 <h5><Badge className="class-result">Airplane</Badge></h5>
                             </div>
                             {/* <div id="separator"></div> */}
@@ -90,7 +90,7 @@ export default function LabelCard(props) {
                                         variant="secondary"
                                         name="radio"
                                         value={radio.value}
-                                        checked={ agreeValue == radio.value }
+                                        checked={ agreeValue === radio.value }
                                         onChange={(e) => setAgreeValue(e.currentTarget.value)}
                                     >
                                         {radio.name}

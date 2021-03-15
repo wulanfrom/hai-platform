@@ -1,11 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './MasterUpload.css'
 
 // bootstrap component
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 // Pages
 import Progress from '../Banner/Progress'
@@ -26,7 +24,7 @@ export default function MasterUpload() {
 
     // check when to make next button appear
     const handleNext = (step) => {
-        const nextStep = currentStep + 1;
+        // const nextStep = currentStep + 1;
         //So it doesnt go beyond bounds
         if (currentStep >= 5) {
             setCurrentStep(5);
@@ -39,7 +37,7 @@ export default function MasterUpload() {
       
     // check when to make previous button appear
     const handleBack = () => {
-        const nextStep = currentStep - 1;
+        // const nextStep = currentStep - 1;
         //So it doesnt go beyond bounds
         if (currentStep === 0) {
             setCurrentStep(0);
@@ -51,19 +49,19 @@ export default function MasterUpload() {
 
     // received changed data from Card whenever the agree value is changed
     // assign it to the editAgreeId
-    const sendChangedData = (data) => {
-        const updatedList = allData.map(eachCard => {
-            // if they have the same id
-            if (eachCard.id === data.id) {
-                let item = eachCard;
-                item.agreeLabel = data.agreeLabel;
-            }
-            return eachCard
-        });
-        setAllData(updatedList);
-        // console.log("all cards");
-        // console.log(allData);
-    }
+    // const sendChangedData = (data) => {
+    //     const updatedList = allData.map(eachCard => {
+    //         // if they have the same id
+    //         if (eachCard.id === data.id) {
+    //             let item = eachCard;
+    //             item.agreeLabel = data.agreeLabel;
+    //         }
+    //         return eachCard
+    //     });
+    //     setAllData(updatedList);
+    //     // console.log("all cards");
+    //     // console.log(allData);
+    // }
 
     const updateAllData = (updatedList) => {
         setAllData(updatedList);
@@ -211,7 +209,7 @@ export default function MasterUpload() {
         updateUploadedImages();
     }, [currentStep]);
 
-    console.log("all data", allData);
+    // console.log("all data", allData);
 
     // console.log("uploadImages");
     // console.log(uploadImages);
@@ -219,7 +217,7 @@ export default function MasterUpload() {
     // console.log("improvement");6
     // console.log(improvement);
 
-    console.log("improvementList masterupload: ", improvementList);
+    // console.log("improvementList masterupload: ", improvementList);
 
     return (
         <div>

@@ -20,7 +20,7 @@ export default function ImproveTab(props) {
     // console.log(props.improvementInfo.figmaLink);
     const [embedLink, setEmbedLink] = useState(figmaURL);
     var initialValue = props.tabInfo.improvements;
-    if (initialValue.length == 0) {
+    if (initialValue.length === 0) {
         initialValue = [{
             id: generateKey("point"),
             improvement: "",
@@ -36,9 +36,9 @@ export default function ImproveTab(props) {
     }
 
     // embed the link to the figma iframe
-    const updateEmbedLink = () => {
-        setEmbedLink(figmaURL);
-    }
+    // const updateEmbedLink = () => {
+    //     setEmbedLink(figmaURL);
+    // }
 
     const addImprovement = (e) => {
         var newItem = {
@@ -67,7 +67,7 @@ export default function ImproveTab(props) {
     const sendDataToTab = (sentData) => {
         const newList = improvementList.map((item) => {
             console.log("sendData id: ", sentData.id);
-            if (item.id == sentData.id) {
+            if (item.id === sentData.id) {
                 const updatedItem = {
                     ...item,
                     explanation: sentData.explanation,

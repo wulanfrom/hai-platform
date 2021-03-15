@@ -1,7 +1,7 @@
 // reference code
 // https://codesandbox.io/s/react-async-dialog-forked-5rzbi?file=/src/getValue/index.js
-import React, { useState, useRef, useEffect } from 'react'
-import ReactDOM from "react-dom";
+import React, { useState, useEffect } from 'react'
+// import ReactDOM from "react-dom";
 import MDEditor, { commands, ICommand, TextState, TextApi } from '@uiw/react-md-editor';
 // import { selectWord } from '../utils/markdownUtils';
 import './ImprovementPoint.css'
@@ -16,7 +16,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 // pages
-import ModelPicture from '../ModelPicture/ModelPicture'
+// import ModelPicture from '../ModelPicture/ModelPicture'
 
 // function import
 import getImages from '../ModelPicture/ModelPicture'
@@ -42,31 +42,31 @@ export default function ImprovementPoint(props) {
         })
     }, [value, improvementPoint]);
 
-    const handleUpload = (file) => {
-        const uploadTask = storage.ref(`images/${file.name}`).put(file);
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                // console.log(progress);
-                setProgress(progress);
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage.ref("images")
-                .child(file.name)
-                .getDownloadURL()
-                .then(url => {
-                    // console.log(url);
-                    return url;
-                });
-            }
-        )
-    }
+    // const handleUpload = (file) => {
+    //     const uploadTask = storage.ref(`images/${file.name}`).put(file);
+    //     uploadTask.on(
+    //         "state_changed",
+    //         snapshot => {
+    //             const progress = Math.round(
+    //                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //             );
+    //             // console.log(progress);
+    //             setProgress(progress);
+    //         },
+    //         error => {
+    //             console.log(error);
+    //         },
+    //         () => {
+    //             storage.ref("images")
+    //             .child(file.name)
+    //             .getDownloadURL()
+    //             .then(url => {
+    //                 // console.log(url);
+    //                 return url;
+    //             });
+    //         }
+    //     )
+    // }
 
     // update the improvement point
     const handlePointChange = (e) => {

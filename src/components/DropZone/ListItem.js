@@ -9,7 +9,7 @@ export default function ListItem(props) {
     const data = props.data;
     const i = props.key;
     const fileSize = props.fileSize;
-    const fileType = props.fileType;
+    // const fileType = props.fileType;
     const errorMessage = props.errorMessage;
     const imageIcon = useRef();
     const removeFile = props.removeFile;
@@ -27,6 +27,7 @@ export default function ListItem(props) {
                 imageIcon.current.style.backgroundImage = `url(${e.target.result})`;
             }
             else{
+                console.log("it's still on load");
                 // imageIcon.current.style.background = `url(../../images/file.svg) no-repeat center center`;
             }
         }
