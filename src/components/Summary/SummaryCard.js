@@ -53,28 +53,9 @@ export default function SummaryCard(props) {
     const right = 
     <div className="right-tag" >
         {/* <object data="../../images/bx-check.svg" type="image/svg+xml"> */}
-            <img src="../images/bx-check.svg" />
+            <img src="../../images/bx-check.svg" />
         {/* </object> */}
     </div>
-
-    // function symbol(res) {
-    //     switch (res) {
-    //         case "wrong":
-    //             return (
-    //                 <div>
-    //                     <object type="image/svg+xml">
-    //                         <img src="../../images/bx-x.svg" />
-    //                     </object>
-    //                 </div>
-    //             )
-    //         case "right":
-    //             return (
-    //                 <object type="image/svg+xml">
-    //                     <img src="../../images/bx-check.svg" />
-    //                 </object>
-    //             )
-    //     }
-    // }
 
     // openModal
     const openModal = () => {
@@ -131,6 +112,7 @@ export default function SummaryCard(props) {
                                     <div className="label-indicator">{agreeLabel ? right : wrong}</div>
                                     <p>Label</p>
                                 </div>
+                                <p className="divider">|</p>
                                 <div className="exp-side">
                                     <div className="exp-indicator">{agreeExp ? right : wrong}</div>
                                     <p>Explanation</p>

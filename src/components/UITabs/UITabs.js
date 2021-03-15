@@ -15,7 +15,7 @@ import Col from 'react-bootstrap/Col'
 
 export default function UITabs(props) {
     var initialInput = null;
-    if (props.improvementData.length == 0) {
+    if (props.improvementData.length === 0) {
         initialInput = [{
             key: 0,
             id: 0,
@@ -55,7 +55,7 @@ export default function UITabs(props) {
 
         //delete the selected one
         let tabs = tabList.filter((value, index) => {
-            if (value.id == tabId) {
+            if (value.id === tabId) {
                 tabIDIndex = index;
             }
             return value.id !== tabId;
@@ -79,7 +79,7 @@ export default function UITabs(props) {
     const updateTabInfo = (sentData) => {
         const newTabList = tabList.map((item) => {
             // console.log("sendData id: ", sentData.id);
-            if (item.id == sentData.id) {
+            if (item.id === sentData.id) {
                 const updatedItem = {
                     ...item,
                     improvements: sentData.improvements,
@@ -102,8 +102,10 @@ export default function UITabs(props) {
     return (
         <div>
             <Container fluid className="tabWrapper">
+                <h3 className="improve-title">Improve the Model with Your Design</h3>
+                <p>Embed your design and point out the improvements you made.</p>
                 <Row>
-                    <Col xs={11}>
+                    <Col xs={12}>
                         <Tabs defaultActiveKey={tabValue} onChange={handleTabChange}>
                             {tabList.map(tab => (
                                 <Tab key={tab.key.toString()} eventKey={tab.key.toString()} 
@@ -113,9 +115,9 @@ export default function UITabs(props) {
                             ))}
                         </Tabs>
                     </Col>
-                    <Col xs={1}>
+                    {/* <Col xs={1}>
                         <Button variant="outline-secondary" onClick={addTab}>+</Button>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
         </div>

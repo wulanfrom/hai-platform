@@ -14,7 +14,7 @@ export default function ShapTable(props) {
     const sendChangedExplanation = (data) => {
         const updatedList = allData.map(eachCard => {
             // if they have the same id
-            if (eachCard.id == data.id) {
+            if (eachCard.id === data.id) {
                 let item = eachCard;
                 item.explanation = data.explanation;
                 item.agreeExp = data.agreeExp;

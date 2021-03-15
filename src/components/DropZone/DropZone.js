@@ -188,14 +188,9 @@ export default function DropZone(props) {
         modalImageRef.current.style.backgroundImage = 'none';
     }
 
-    const uploadFiles = () => {
-    }
-
     // console.log("valid Files");
     // console.log(validFiles);
     
-    const listItems = validFiles.map((data, i) => <ListItem data={data} key={i} fileSize={fileSize(data.size)} fileType={fileType(data.name)} errorMessage={errorMessage} openImageModal={openImageModal} removeFile={removeFile}/>)
-
     console.log("valid files: ", validFiles);
     return (
         <div>

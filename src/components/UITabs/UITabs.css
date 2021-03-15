@@ -3,3 +3,12 @@
     /* padding-right: 0; */
     position: relative;
 }
+
+.improve-title {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.tabWrapper p:nth-child(1) {
+    margin-bottom: 1rem;
+}

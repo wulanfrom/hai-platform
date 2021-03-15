@@ -14,7 +14,7 @@ export default function Improve(props) {
         props.updateImprovementTab(allData);
     }, [allData]);
 
-    console.log("allData in Improve: ", allData);
+    // console.log("allData in Improve: ", allData);
 
     return (
         <div>

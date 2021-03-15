@@ -13,7 +13,7 @@ export default function LabelPage(props) {
     const sendChangedData = (data) => {
         const updatedList = allData.map(eachCard => {
             // if they have the same id
-            if (eachCard.id == data.id) {
+            if (eachCard.id === data.id) {
                 let item = eachCard;
                 item.agreeLabel = data.agreeLabel;
                 item.label = data.label;

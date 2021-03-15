@@ -27,11 +27,11 @@ export default function ImprovementPoint(props) {
         explanation: props.data.improvement,
     }
     const [value, setValue] = useState(initialValue.value);
-    const [modalShow, setModalShow] = useState(false); //modal show state
-    const [selectedImage, updateSelectedImage] = useState([]); // hold the selected images from the modal
+    // const [modalShow, setModalShow] = useState(false); //modal show state
+    // const [selectedImage, updateSelectedImage] = useState([]); // hold the selected images from the modal
     const [progress, setProgress] = useState(0); //upload progress
     const [improvementPoint, changePoint] = useState(initialValue.explanation);
-    const modalRef = useRef();
+    // const modalRef = useRef();
 
     // send data to improve tab if the value and improvementPoint state changes
     useEffect(() => {
@@ -78,7 +78,7 @@ export default function ImprovementPoint(props) {
         keyCommand: "getUploadedImages",
         buttonProps: {"aria-label": "Use Uploaded Images"},
         icon: (
-            <svg className="uploadImage" width="8" height="8" viewBox="0 0 8 8">
+            <svg className="uploadImage" width="16" height="16" viewBox="0 0 40 40">
             </svg>
           ),
         execute: (state: TextState, api: TextApi) => {
@@ -141,29 +141,66 @@ export default function ImprovementPoint(props) {
     }
 
     // console.log("improvementPoint, ", improvementPoint);
-    // console.log("value, ", value);
+    console.log("value, ", value);
 
     return (
         <div>
-            <Form>
-                <Form.Group as={Row} controlId="formPassword">
-                    <Form.Label xs="auto">{props.idx}</Form.Label>
-                    <Col xs={11}>
-                        <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Important Point here" />
-                    </Col>
-                    <Col>
-                        <Button onClick={props.deleteItem} type="submit" variant="danger" className="deleteBtn">-</Button>
-                    </Col>
-                </Form.Group>
-            </Form>  
-            <div className="container">
+            <div className="point-wrapper">
+                <Form>
+                    <Form.Group as={Row} controlId="formPassword">
+                        <Form.Label column sm={1}>
+                            {props.idx}
+                        </Form.Label>
+                        <Col sm={10}>
+                            <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Improvement Point here" />
+                        </Col>
+                        <Col sm={1}>
+                            <Button onClick={props.deleteItem} type="submit" className="deleteBtn">X</Button>
+                        </Col>
+                    </Form.Group>
+
+                    {/* <Form.Group as={Row} controlId="formPassword"> */}
+                        {/* <Form.Label xs="auto">{props.idx}</Form.Label>
+                        <Col xs={11} className="point-wrapper">
+                            <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Important Point here" />
+                            <Button onClick={props.deleteItem} type="submit" variant="danger" className="deleteBtn">X</Button>
+                        </Col> */}
+                        {/* <Col> */}
+                            {/* <Button onClick={props.deleteItem} type="submit" variant="danger" className="deleteBtn">X</Button> */}
+                        {/* </Col> */}
+                    {/* </Form.Group> */}
+                </Form> 
+            </div> 
+            <div id="md-container">
+                
                 <MDEditor
                     value={value}
                     onChange={setValue}
                     commands={[
+                        commands.bold,
+                        commands.italic,
+                        commands.strikethrough,
+                        commands.hr,
+                        commands.group([commands.title1, commands.title2, commands.title3, commands.title4, commands.title5, commands.title6], {
+                            name: 'title',
+                            groupName: 'title',
+                            buttonProps: { 'aria-label': 'Insert title'}
+                        }),
+                        commands.divider,
+                        commands.link,
+                        commands.quote,
+                        commands.code,
+                        commands.image,
                         useModelImage,
                         commands.divider,
-                        commands.image
+                        commands.unorderedListCommand,
+                        commands.orderedListCommand,
+                        commands.checkedListCommand,
+                        commands.divider,
+                        commands.codePreview,
+                        commands.codeEdit,
+                        commands.codeLive,
+                        commands.fullscreen,
                     ]}
                 />
             </div>
