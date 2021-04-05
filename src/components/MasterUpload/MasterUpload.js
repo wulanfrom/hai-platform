@@ -1,11 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './MasterUpload.css'
 
 // bootstrap component
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 // Pages
 import Progress from '../Banner/Progress'
@@ -26,7 +24,7 @@ export default function MasterUpload() {
 
     // check when to make next button appear
     const handleNext = (step) => {
-        const nextStep = currentStep + 1;
+        // const nextStep = currentStep + 1;
         //So it doesnt go beyond bounds
         if (currentStep >= 5) {
             setCurrentStep(5);
@@ -39,9 +37,9 @@ export default function MasterUpload() {
       
     // check when to make previous button appear
     const handleBack = () => {
-        const nextStep = currentStep - 1;
+        // const nextStep = currentStep - 1;
         //So it doesnt go beyond bounds
-        if (currentStep == 0) {
+        if (currentStep === 0) {
             setCurrentStep(0);
         }
         else {
@@ -51,19 +49,19 @@ export default function MasterUpload() {
 
     // received changed data from Card whenever the agree value is changed
     // assign it to the editAgreeId
-    const sendChangedData = (data) => {
-        const updatedList = allData.map(eachCard => {
-            // if they have the same id
-            if (eachCard.id == data.id) {
-                let item = eachCard;
-                item.agreeLabel = data.agreeLabel;
-            }
-            return eachCard
-        });
-        setAllData(updatedList);
-        // console.log("all cards");
-        // console.log(allData);
-    }
+    // const sendChangedData = (data) => {
+    //     const updatedList = allData.map(eachCard => {
+    //         // if they have the same id
+    //         if (eachCard.id === data.id) {
+    //             let item = eachCard;
+    //             item.agreeLabel = data.agreeLabel;
+    //         }
+    //         return eachCard
+    //     });
+    //     setAllData(updatedList);
+    //     // console.log("all cards");
+    //     // console.log(allData);
+    // }
 
     const updateAllData = (updatedList) => {
         setAllData(updatedList);
@@ -122,17 +120,17 @@ export default function MasterUpload() {
 
     // render next button
     const getNextButton = (currentStep) => {
-        if (currentStep == 5) {
+        if (currentStep === 5) {
             return (
                 ""
             )
         }
-        else if (!validNext && currentStep == 0) {
+        else if (!validNext && currentStep === 0) {
             return (
                 <Button disabled id="nextBtn" className="btn btn-secondary first-next" type="button" onClick={ handleNext }>Next</Button>
             )
         }
-        else if (validNext && currentStep == 0) {
+        else if (validNext && currentStep === 0) {
             return (
                 <Button id="nextBtn" className="btn btn-secondary first-next" type="button" onClick={ handleNext }>Next</Button>
             )
@@ -161,32 +159,32 @@ export default function MasterUpload() {
     }
 
     const getStepDesc = (currentStep) => {
-        if (currentStep == 0) {
+        if (currentStep === 0) {
             return (
                 <p>Upload pictures you want to label.</p>
             )
         }
-        else if (currentStep == 1) {
+        else if (currentStep === 1) {
             return (
                 <p>Label Whether you agree with the label created by the model or not.</p>
             )
         }
-        else if (currentStep == 2) {
+        else if (currentStep === 2) {
             return (
                 <p>Apply an explanation model to the picture.</p>
             )
         }
-        else if (currentStep == 3) {
+        else if (currentStep === 3) {
             return (
                 <p>Summarization of your inputs.</p>
             )
         }
-        else if (currentStep == 4) {
+        else if (currentStep === 4) {
             return (
                 <p>How would you Improve the explanation model?</p>
             )
         }
-        else if (currentStep == 5) {
+        else if (currentStep === 5) {
             return (
                 <p>Share your Findings with Others.</p>
             )
@@ -211,7 +209,7 @@ export default function MasterUpload() {
         updateUploadedImages();
     }, [currentStep]);
 
-    console.log("all data", allData);
+    // console.log("all data", allData);
 
     // console.log("uploadImages");
     // console.log(uploadImages);
@@ -219,7 +217,7 @@ export default function MasterUpload() {
     // console.log("improvement");6
     // console.log(improvement);
 
-    console.log("improvementList masterupload: ", improvementList);
+    // console.log("improvementList masterupload: ", improvementList);
 
     return (
         <div>
@@ -239,12 +237,12 @@ export default function MasterUpload() {
             <Container>
                 <div>
                     {/* getImages = {getImages} */}
-                    { currentStep == 0 ? <DropZone addData = { addData } checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem } currentData={ uploadImages } /> : ""}
-                    { currentStep == 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
-                    { currentStep == 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
-                    { currentStep == 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}
-                    { currentStep == 4 ? <Improve updateImprovementTab={updateImprovementTab} currentImprovement={improvementList} allData={allData} /> : ""}
-                    { currentStep == 5 ? <Finalize changeCurStep={changeCurStep} /> : ""}
+                    { currentStep === 0 ? <DropZone addData = { addData } checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem } currentData={ uploadImages } /> : ""}
+                    { currentStep === 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
+                    { currentStep === 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
+                    { currentStep === 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}
+                    { currentStep === 4 ? <Improve updateImprovementTab={updateImprovementTab} currentImprovement={improvementList} allData={allData} /> : ""}
+                    { currentStep === 5 ? <Finalize changeCurStep={changeCurStep} /> : ""}
                 </div>
             </Container>
         </div>

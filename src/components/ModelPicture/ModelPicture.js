@@ -35,7 +35,7 @@ function ImageItem(props) {
 function ModelPicture({resolve, initialValue = [], show, data, progress}) {
   const [selectedItem, updateSelectedItem] = useState(initialValue);
   const [modalShow, changeShow] = useState(show);
-  const now = progress;
+  // const now = progress;
   // const [allItems, updateItems] = useState([]);
 
   const uploadImages = () => {
@@ -59,8 +59,8 @@ function ModelPicture({resolve, initialValue = [], show, data, progress}) {
       const newList = [...selectedItem];
       // check if the list has the file
       //if no, update the list
-      const itemIndex = newList.findIndex(e => e.id == file.id)
-      if (itemIndex == -1) {
+      const itemIndex = newList.findIndex(e => e.id === file.id)
+      if (itemIndex === -1) {
         //update list
         updateSelectedItem(oldArray => [...oldArray, file]);
         //update styling
@@ -122,10 +122,10 @@ function ModelPicture({resolve, initialValue = [], show, data, progress}) {
 
 // the function that will return the value retrieved from the modal
 export default function getImages(initialValue) {
-  console.log("intiial Value");
-  console.log(initialValue);
+  // console.log("intiial Value");
+  // console.log(initialValue);
   return new Promise((resolve, reject) => {
-    addDialog(initialValue.initialValue, initialValue.allData, initialValue.modalShow, initialValue. progress, resolve);
+    addDialog(initialValue.initialValue, initialValue.allData, initialValue.modalShow, initialValue.progress, resolve)
   });
 }
 

@@ -7,14 +7,23 @@
 }
 
 .embed-button {
+    /* font-weight: 700; */
     margin: 0;
     width: 100%;
-    /* padding: 0; */
+    background-color:#2C98F0;
+    border: none;
 }
 
-.figma-wrapper {
+#figma-wrapper {
     display: flex;
     align-items: center;
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+#figma-wrapper iframe {
+    width: 100%;
+    height: 800px;
 }
 
 ol {
@@ -38,4 +47,22 @@ ol>li:before {
     font-weight:bold;
     text-align:right;
     content:counter(item) ".";
+}
+
+.link-title, .improvements-title {
+    margin: 1.5rem 0 0.75rem 0;
+    font-weight: 700;
+}
+
+#linkDesc {
+    color: #DC3545!important;
+}
+
+.add-improvement {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    background-color:#2C98F0;
+    margin: 1.5rem auto;
+    border: none;
 }

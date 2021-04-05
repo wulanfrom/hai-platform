@@ -5,17 +5,17 @@ import './Summary.css'
 import SummaryCard from '../Summary/SummaryCard'
 
 // bootstrap components
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Badge from 'react-bootstrap/Badge'
 
 export default function Summary(props) {
     const allData = props.totalData;
     // filter data according to the data
-    const tab1Data = allData.filter(data => data.agreeLabel == 1 && data.agreeExp == 1);
-    const tab2Data = allData.filter(data => data.agreeLabel == 1 && data.agreeExp == 0);
-    const tab3Data = allData.filter(data => data.agreeLabel == 0 && data.agreeExp == 1);
-    const tab4Data = allData.filter(data => data.agreeLabel == 0 && data.agreeExp == 0);
+    const tab1Data = allData.filter(data => data.agreeLabel === 1 && data.agreeExp === 1);
+    const tab2Data = allData.filter(data => data.agreeLabel === 1 && data.agreeExp === 0);
+    const tab3Data = allData.filter(data => data.agreeLabel === 0 && data.agreeExp === 1);
+    const tab4Data = allData.filter(data => data.agreeLabel === 0 && data.agreeExp === 0);
 
     return (
         <div>

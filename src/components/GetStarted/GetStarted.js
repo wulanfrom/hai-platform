@@ -1,13 +1,16 @@
 import React from 'react'
-import Banner from '../Banner/Banner'
+// import Banner from '../Banner/Banner'
+
+// redux
 
 // Bootstrap components
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 
-export default function GetStarted() {
+function GetStarted() {
     return (
         <div>
-            <Banner />
+            <h1>Time to get started;v</h1> 
+            {/* <Banner />
             
             <div className="proceed-wrapper p-4">
                 <h2>What Should I Do?</h2>
@@ -38,7 +41,9 @@ export default function GetStarted() {
                 <p>Explore the observations done by other users and compare it to yours.</p>
                 <Button href="/hai-platform/explore" className="explore-btn">Explore</Button>
 
-            </div>
+            </div> */}
         </div>
     )
 }
+
+export default GetStarted;

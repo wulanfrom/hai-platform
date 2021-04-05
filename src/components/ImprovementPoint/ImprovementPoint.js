@@ -1,7 +1,7 @@
 // reference code
 // https://codesandbox.io/s/react-async-dialog-forked-5rzbi?file=/src/getValue/index.js
-import React, { useState, useRef, useEffect } from 'react'
-import ReactDOM from "react-dom";
+import React, { useState, useEffect } from 'react'
+// import ReactDOM from "react-dom";
 import MDEditor, { commands, ICommand, TextState, TextApi } from '@uiw/react-md-editor';
 // import { selectWord } from '../utils/markdownUtils';
 import './ImprovementPoint.css'
@@ -16,7 +16,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 // pages
-import ModelPicture from '../ModelPicture/ModelPicture'
+// import ModelPicture from '../ModelPicture/ModelPicture'
 
 // function import
 import getImages from '../ModelPicture/ModelPicture'
@@ -27,11 +27,9 @@ export default function ImprovementPoint(props) {
         explanation: props.data.improvement,
     }
     const [value, setValue] = useState(initialValue.value);
-    const [modalShow, setModalShow] = useState(false); //modal show state
-    const [selectedImage, updateSelectedImage] = useState([]); // hold the selected images from the modal
     const [progress, setProgress] = useState(0); //upload progress
     const [improvementPoint, changePoint] = useState(initialValue.explanation);
-    const modalRef = useRef();
+    // const modalRef = useRef();
 
     // send data to improve tab if the value and improvementPoint state changes
     useEffect(() => {
@@ -41,32 +39,6 @@ export default function ImprovementPoint(props) {
             improvement: improvementPoint
         })
     }, [value, improvementPoint]);
-
-    const handleUpload = (file) => {
-        const uploadTask = storage.ref(`images/${file.name}`).put(file);
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                // console.log(progress);
-                setProgress(progress);
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage.ref("images")
-                .child(file.name)
-                .getDownloadURL()
-                .then(url => {
-                    // console.log(url);
-                    return url;
-                });
-            }
-        )
-    }
 
     // update the improvement point
     const handlePointChange = (e) => {
@@ -78,21 +50,12 @@ export default function ImprovementPoint(props) {
         keyCommand: "getUploadedImages",
         buttonProps: {"aria-label": "Use Uploaded Images"},
         icon: (
-            <svg className="uploadImage" width="8" height="8" viewBox="0 0 8 8">
+            <svg className="uploadImage" width="16" height="16" viewBox="0 0 40 40">
             </svg>
           ),
         execute: (state: TextState, api: TextApi) => {
             // open the dialog and update the selected image field
             getSelectedImages().then(response => {
-                // console.log("inside API");
-                // console.log(response);
-
-                // // Select everything
-                // console.log("state");
-                // console.log(state);
-
-                // Replaces the current selection with the image
-                
                 // if length of response.selectedItems > 0
                 const selectedImages = response.selectedImages;
                 if (selectedImages.length > 0) {
@@ -121,7 +84,7 @@ export default function ImprovementPoint(props) {
                                 .child(item.data.name)
                                 .getDownloadURL()
                                 .then(url => {
-                                    console.log(url);
+                                    // console.log(url);
                                     let modifyText = `![](${url})\n`;
                                     api.replaceSelection(modifyText);
                                 });
@@ -145,25 +108,51 @@ export default function ImprovementPoint(props) {
 
     return (
         <div>
-            <Form>
-                <Form.Group as={Row} controlId="formPassword">
-                    <Form.Label xs="auto">{props.idx}</Form.Label>
-                    <Col xs={11}>
-                        <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Important Point here" />
-                    </Col>
-                    <Col>
-                        <Button onClick={props.deleteItem} type="submit" variant="danger" className="deleteBtn">-</Button>
-                    </Col>
-                </Form.Group>
-            </Form>  
-            <div className="container">
+            <div className="point-wrapper">
+                <Form>
+                    <Form.Group as={Row} controlId="formPassword">
+                        <Form.Label column sm={1}>
+                            {props.idx}
+                        </Form.Label>
+                        <Col sm={10}>
+                            <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Improvement Point here" />
+                        </Col>
+                        <Col sm={1}>
+                            <Button onClick={props.deleteItem} type="submit" className="deleteBtn">X</Button>
+                        </Col>
+                    </Form.Group>
+                </Form> 
+            </div> 
+            <div id="md-container">
+                
                 <MDEditor
                     value={value}
                     onChange={setValue}
                     commands={[
+                        commands.bold,
+                        commands.italic,
+                        commands.strikethrough,
+                        commands.hr,
+                        commands.group([commands.title1, commands.title2, commands.title3, commands.title4, commands.title5, commands.title6], {
+                            name: 'title',
+                            groupName: 'title',
+                            buttonProps: { 'aria-label': 'Insert title'}
+                        }),
+                        commands.divider,
+                        commands.link,
+                        commands.quote,
+                        commands.code,
+                        commands.image,
                         useModelImage,
                         commands.divider,
-                        commands.image
+                        commands.unorderedListCommand,
+                        commands.orderedListCommand,
+                        commands.checkedListCommand,
+                        commands.divider,
+                        commands.codePreview,
+                        commands.codeEdit,
+                        commands.codeLive,
+                        commands.fullscreen,
                     ]}
                 />
             </div>

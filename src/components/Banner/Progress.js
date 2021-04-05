@@ -25,7 +25,7 @@ function getSteps() {
 export default function Progress(props) {
   const classes = useStyles();
   // const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
+  // const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
   const activeStep = props.currentStep;
 

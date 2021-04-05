@@ -33,7 +33,7 @@ export default function Finalize(props) {
                         <Form.Control as="select" value={currentStep} onChange={handleChange} custom>
                             {
                                 options.map((option, idx) => (
-                                    <option value={idx}>{option}</option>
+                                    <option key={idx} value={idx}>{option}</option>
                                 ))
                             }
                         </Form.Control>

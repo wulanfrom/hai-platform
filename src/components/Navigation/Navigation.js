@@ -1,34 +1,41 @@
-import React, { Component } from 'react'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import {
-    BrowserRouter as Router,
-    Switch, 
-    Link,
-    Route
-} from 'react-router-dom';
+import React from 'react'
 import './Navigation.css'
 
+// redux
+import { connect } from 'react-redux'
 
-// Pages
-import GetStarted from '../GetStarted/GetStarted'
-import Upload from '../ApplyModels/Upload'
-import Explore from '../Explore/Explore'
+// bootstrap components
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
-
-export default class Navigation extends Component {
-    render() {
-        return (
-            <div>
-                <Navbar collapseOnSelect className="navbar">
-                    <Navbar.Brand href="/hai-platform/getStarted"><b>XAIPlatform</b></Navbar.Brand>
+function Navigation(props) {
+    return (
+        <div>
+             { props.isAuthenticated ? 
+                (<Navbar collapseOnSelect className="navbar">
+                    <Navbar.Brand href="/hai-platform/getStarted"><b>Assignment 2</b></Navbar.Brand>
                     <Nav className="ml-auto">
                         <Nav.Link href="/hai-platform/getStarted">Get Started</Nav.Link>
                         <Nav.Link href="/hai-platform/upload">Apply Models</Nav.Link>
-                        <Nav.Link href="/hai-platform/explore">Explore</Nav.Link>
+                        <Nav.Link href="/hai-platform/logout">Logout</Nav.Link>
                     </Nav>
-                </Navbar>
-            </div>
-        )
+                </Navbar>)
+                : 
+                (<Navbar collapseOnSelect className="navbar">
+                    <Navbar.Brand><b>Assignment 2</b></Navbar.Brand>
+                    <Nav className="ml-auto">
+                        <Nav.Link href="/hai-platform/login">Login</Nav.Link>
+                    </Nav>
+                </Navbar>)
+            }
+        </div>
+    )
+}
+
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.token !== null,
     }
 }
+
+export default connect(mapStateToProps)(Navigation);

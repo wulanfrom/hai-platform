@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './ImproveTab.css'
 import FigmaEmbed from 'react-figma-embed';
+import axios from 'axios';
 
 // pages
 import ImprovementPoint from '../ImprovementPoint/ImprovementPoint'
@@ -10,17 +11,16 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 
 export default function ImproveTab(props) {
     const generateKey = (pre) => {
         return `${ pre }_${ new Date().getTime() }`;
     }
-
-    const [figmaURL, setFigmaURL] = useState(props.tabInfo.figmaLink);
     // console.log(props.improvementInfo.figmaLink);
     const [embedLink, setEmbedLink] = useState(figmaURL);
     var initialValue = props.tabInfo.improvements;
-    if (initialValue.length == 0) {
+    if (initialValue.length === 0) {
         initialValue = [{
             id: generateKey("point"),
             improvement: "",
@@ -28,6 +28,37 @@ export default function ImproveTab(props) {
         }]
     }
     const [improvementList, updateImprovement] = useState(initialValue);
+    const [linkDesc, changeLinkDesc] = useState(false);
+    const [figmaURL, setFigmaURL] = useState(props.tabInfo.figmaLink);
+    // for figma iframe loading
+    const [loading, setLoading] = useState(true);
+    let spinner = null;
+    if (!loading) {
+        spinner = (
+            <Spinner animation="grow" variant="primary" />
+        )
+    }
+
+    // check if figma link is valid
+    const validFigmaURL = (link) => {
+        var REGEX = /https:\/\/([w.-]+\.)?figma.com\/(file|proto)\/([0-9a-zA-Z]{22,128})(?:\/.*)?$/;
+        return REGEX.test(link);
+    }
+
+    // if the figma url is not 
+    if (validFigmaURL(figmaURL)) {
+        axios.get(figmaURL).then(response => {
+            console.log("RESPONSE: ",response);
+            setLoading(false);
+        }).catch(error => {
+            console.log("ERROR: ", error);
+        })
+    }
+
+    // hide the spinner when loading finishes
+    const hideSpinner = () => {
+        setLoading(false);
+    }
 
     // constantly gets updated with the text input
     const updateFigmaURL = (e) => {
@@ -35,9 +66,9 @@ export default function ImproveTab(props) {
     }
 
     // embed the link to the figma iframe
-    const updateEmbedLink = () => {
-        setEmbedLink(figmaURL);
-    }
+    // const updateEmbedLink = () => {
+    //     setEmbedLink(figmaURL);
+    // }
 
     const addImprovement = (e) => {
         var newItem = {
@@ -65,8 +96,8 @@ export default function ImproveTab(props) {
     // update the improvement listt from the improvementPoint
     const sendDataToTab = (sentData) => {
         const newList = improvementList.map((item) => {
-            console.log("sendData id: ", sentData.id);
-            if (item.id == sentData.id) {
+            // console.log("sendData id: ", sentData.id);
+            if (item.id === sentData.id) {
                 const updatedItem = {
                     ...item,
                     explanation: sentData.explanation,
@@ -89,53 +120,82 @@ export default function ImproveTab(props) {
     }, [improvementList, embedLink]);
 
     //update the explanation point
-    const sendChangedExplanation = (data) => {
-        const updatedList = improvementList.map(item => {
-            // if they have the same id
-            if (item.id == data.id) {
-                let point = item;
-                point.explanation = data.explanation;
-                point.improvement = data.improvement;
-            }
-            return item
-        });
+    // const sendChangedExplanation = (data) => {
+    //     const updatedList = improvementList.map(item => {
+    //         // if they have the same id
+    //         if (item.id == data.id) {
+    //             let point = item;
+    //             point.explanation = data.explanation;
+    //             point.improvement = data.improvement;
+    //         }
+    //         return item
+    //     });
 
-        //send the data to the Give Explanation
-        // props.sendExpToGive(updatedList);
-    }
+    //     //send the data to the Give Explanation
+    //     // props.sendExpToGive(updatedList);
+    // }
 
 
     // console.log("improvementLInfo: ", props.improvementInfo);
 
+    // check whether the link is valid and embed the right link
+    const figmaEmbed = (link) => {
+        // const link = e.target.value;
+        // if valid, embed
+        if (validFigmaURL(link)) {
+            // console.log("the figma link is valid");
+            changeLinkDesc(false);
+            setEmbedLink(figmaURL);
+        }
+
+        // if not, make text description appear
+        else {
+            // console.log("the figma link is NOT valid");
+            // make description appear
+            changeLinkDesc(true);
+        }
+    }
+
+    // on mount
+    // useEffect(() => {
+    //     if (!validFigmaURL(figmaURL)) {
+    //         setEmbedLink("https://www.figma.com/proto/STFB2ZhftOHIgCrW4TEaA3/XAIPLatformPlaceholder?node-id=1%3A2&scaling=scale-down");
+    //     }
+    // }, [])
+
     return (
         <div className="improvement-wrapper">
             <div>
-                <h3>Link with Figma</h3>
-                <p>Embed your design so others can see.</p>
+                <h4 className="link-title">Link with Figma</h4>
                 <Form>
                     <Form.Group>
                         <Form.Label>Insert Figma URL Here</Form.Label>
                         <Row>
                             <Col xs={10}>
                                 <Form.Control type="text" placeholder="Figma Prototype Link" value={figmaURL} onChange={updateFigmaURL} />
+                                {linkDesc ? <Form.Text id="linkDesc" muted>
+                                    Your link must be a valid figma link
+                                </Form.Text> : ""}
                             </Col>
                             <Col xs={2}>
-                                <Button variant="primary" className="embed-button" onClick={updateEmbedLink}>Embed Design</Button>
+                                <Button variant="primary" className="embed-button" onClick={() => figmaEmbed(figmaURL)}>Embed Design</Button>
                             </Col>
                         </Row>
                     </Form.Group>
                 </Form>
-                <div className="figma-wrapper">
-                    <FigmaEmbed url={embedLink} />
+                <div id="figma-wrapper"> 
+                    {/* <FigmaEmbed url={embedLink} /> */}
+                    {loading ? spinner : <iframe width="800" height="450" src={figmaURL} allowFullScreen></iframe>}
+                    
                 </div>
             </div>
             <div>
-                <h3>Improvements</h3>
+                <h4 className="improvements-title">Improvements</h4>
                 <p>List a few representative questions your UI can answer.</p>
                 <div>
                     { improvementList.map((item, idx) => <ImprovementPoint allData={ props.allData } idx={idx + 1} deleteItem = {deleteImprovement} key={item.id} data={item} sendDataToTab={sendDataToTab} />) }
                 </div>
-                <Button variant="primary" onClick={addImprovement}>+ Add Improvement</Button>
+                <Button className="add-improvement" onClick={addImprovement}>+ Add Improvement Point</Button>
             </div>
         </div>
     )

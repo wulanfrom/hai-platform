@@ -48,9 +48,9 @@ export default function TableBody(props) {
     }
 
     // apply lime model
-    const getLimePic = () => {
+    // const getLimePic = () => {
 
-    }
+    // }
 
     // send data to LimeTable whenever the expAgree and explanation changes.
     useEffect(() => {
@@ -107,7 +107,7 @@ export default function TableBody(props) {
                                 variant="secondary"
                                 name="radio"
                                 value={radio.value}
-                                checked={ expAgree == radio.value }
+                                checked={ expAgree === radio.value }
                                 onChange={(e) => setExpAgree(e.currentTarget.value)}
                                 className="expRadioBtn"
                             >

@@ -12,9 +12,10 @@ export default function ShapTable(props) {
     // received changed data from Card whenever the agree value is changed
     // assign it to the editAgreeId
     const sendChangedExplanation = (data) => {
-        const updatedList = allData.map(eachCard => {
+        const copyData = [...allData];
+        const updatedList = copyData.map(eachCard => {
             // if they have the same id
-            if (eachCard.id == data.id) {
+            if (eachCard.id === data.id) {
                 let item = eachCard;
                 item.explanation = data.explanation;
                 item.agreeExp = data.agreeExp;
@@ -22,7 +23,11 @@ export default function ShapTable(props) {
             return eachCard
         });
 
+        //update allData
+        updateData(updatedList);
+        
         //send the data to the Give Explanation
+        // props.sendExpToGive(updatedList);
         props.sendExpToGive(updatedList);
     }
 

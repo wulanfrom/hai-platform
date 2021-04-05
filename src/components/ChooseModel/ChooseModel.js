@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import LabelCard from './LabelCard'
 
 export default function ChooseModel(props) {
@@ -9,7 +9,10 @@ export default function ChooseModel(props) {
     // Sending data to parent
     const sendDataToParent = (data) => {
         // Make or replace value in the cardList
-        cardList[data.dataName] = data;
+        // cardList[data.dataName] = data;
+        let newList = [...cardList];
+        newList[data.dataName] = data;
+        setCardList(newList);
         // console.log(cardList);
     }
 
@@ -25,10 +28,10 @@ export default function ChooseModel(props) {
     // }, [imageList]);
 
     // Send the cardList to the masterUpload
-    const getLabelResult = () => {
-        // console.log(cardList);
-        props.getLabelResult(cardList);
-    }
+    // const getLabelResult = () => {
+    //     // console.log(cardList);
+    //     props.getLabelResult(cardList);
+    // }
 
     // card list
     // console.log("cardList");

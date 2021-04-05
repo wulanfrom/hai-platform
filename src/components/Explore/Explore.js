@@ -1,5 +1,5 @@
 import React from 'react'
-import Progress from '../Banner/Progress'
+// import Progress from '../Banner/Progress'
 
 export default function Explore() {
     return (
