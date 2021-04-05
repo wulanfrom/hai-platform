@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './ImproveTab.css'
 import FigmaEmbed from 'react-figma-embed';
+import axios from 'axios';
 
 // pages
 import ImprovementPoint from '../ImprovementPoint/ImprovementPoint'
@@ -10,13 +11,12 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 
 export default function ImproveTab(props) {
     const generateKey = (pre) => {
         return `${ pre }_${ new Date().getTime() }`;
     }
-
-    const [figmaURL, setFigmaURL] = useState(props.tabInfo.figmaLink);
     // console.log(props.improvementInfo.figmaLink);
     const [embedLink, setEmbedLink] = useState(figmaURL);
     var initialValue = props.tabInfo.improvements;
@@ -29,6 +29,36 @@ export default function ImproveTab(props) {
     }
     const [improvementList, updateImprovement] = useState(initialValue);
     const [linkDesc, changeLinkDesc] = useState(false);
+    const [figmaURL, setFigmaURL] = useState(props.tabInfo.figmaLink);
+    // for figma iframe loading
+    const [loading, setLoading] = useState(true);
+    let spinner = null;
+    if (!loading) {
+        spinner = (
+            <Spinner animation="grow" variant="primary" />
+        )
+    }
+
+    // check if figma link is valid
+    const validFigmaURL = (link) => {
+        var REGEX = /https:\/\/([w.-]+\.)?figma.com\/(file|proto)\/([0-9a-zA-Z]{22,128})(?:\/.*)?$/;
+        return REGEX.test(link);
+    }
+
+    // if the figma url is not 
+    if (validFigmaURL(figmaURL)) {
+        axios.get(figmaURL).then(response => {
+            console.log("RESPONSE: ",response);
+            setLoading(false);
+        }).catch(error => {
+            console.log("ERROR: ", error);
+        })
+    }
+
+    // hide the spinner when loading finishes
+    const hideSpinner = () => {
+        setLoading(false);
+    }
 
     // constantly gets updated with the text input
     const updateFigmaURL = (e) => {
@@ -66,7 +96,7 @@ export default function ImproveTab(props) {
     // update the improvement listt from the improvementPoint
     const sendDataToTab = (sentData) => {
         const newList = improvementList.map((item) => {
-            console.log("sendData id: ", sentData.id);
+            // console.log("sendData id: ", sentData.id);
             if (item.id === sentData.id) {
                 const updatedItem = {
                     ...item,
@@ -113,31 +143,25 @@ export default function ImproveTab(props) {
         // const link = e.target.value;
         // if valid, embed
         if (validFigmaURL(link)) {
-            console.log("the figma link is valid");
+            // console.log("the figma link is valid");
             changeLinkDesc(false);
             setEmbedLink(figmaURL);
         }
 
         // if not, make text description appear
         else {
-            console.log("the figma link is NOT valid");
+            // console.log("the figma link is NOT valid");
             // make description appear
             changeLinkDesc(true);
         }
     }
 
-    // check if figma link is valid
-    const validFigmaURL = (link) => {
-        var REGEX = /https:\/\/([w.-]+\.)?figma.com\/(file|proto)\/([0-9a-zA-Z]{22,128})(?:\/.*)?$/;
-        return REGEX.test(link);
-    }
-
     // on mount
-    useEffect(() => {
-        if (!validFigmaURL(figmaURL)) {
-            setEmbedLink("https://www.figma.com/proto/STFB2ZhftOHIgCrW4TEaA3/XAIPLatformPlaceholder?node-id=1%3A2&scaling=scale-down");
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!validFigmaURL(figmaURL)) {
+    //         setEmbedLink("https://www.figma.com/proto/STFB2ZhftOHIgCrW4TEaA3/XAIPLatformPlaceholder?node-id=1%3A2&scaling=scale-down");
+    //     }
+    // }, [])
 
     return (
         <div className="improvement-wrapper">
@@ -160,7 +184,9 @@ export default function ImproveTab(props) {
                     </Form.Group>
                 </Form>
                 <div id="figma-wrapper"> 
-                    <FigmaEmbed url={embedLink} />
+                    {/* <FigmaEmbed url={embedLink} /> */}
+                    {loading ? spinner : <iframe width="800" height="450" src={figmaURL} allowFullScreen></iframe>}
+                    
                 </div>
             </div>
             <div>

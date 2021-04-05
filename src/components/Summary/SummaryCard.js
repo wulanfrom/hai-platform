@@ -11,8 +11,8 @@ export default function SummaryCard(props) {
     const data = props.data.data;
     const labelName = props.data.label;
     const explanation = props.data.explanation;
-    const agreeLabel = props.data.agreeLabel;
-    const agreeExp = props.data.agreeExp;
+    // const agreeLabel = props.data.agreeLabel;
+    // const agreeExp = props.data.agreeExp;
     const imageRef = useRef(); //for the card image
     const orgImgRef = useRef(); //for the original image
     const modelImgRef = useRef(); //for the explanation image
@@ -42,20 +42,20 @@ export default function SummaryCard(props) {
     //     )
     // }
 
-    const wrong = 
-    <div className="wrong-tag">
-        {/* <object data="../../images/bx-x.svg" type="image/svg+xml"> */}
-            <img src="../../images/bx-x.svg" alt="wrong-icon"/>
-        {/* </object>  */}
-    </div>
+    // const wrong = 
+    // <div className="wrong-tag">
+    //     {/* <object data="../../images/bx-x.svg" type="image/svg+xml"> */}
+    //         <img src="../../images/bx-x.svg" alt="wrong-icon"/>
+    //     {/* </object>  */}
+    // </div>
             
     
-    const right = 
-    <div className="right-tag" >
-        {/* <object data="../../images/bx-check.svg" type="image/svg+xml"> */}
-            <img src="../../images/bx-check.svg" alt="right-icon"/>
-        {/* </object> */}
-    </div>
+    // const right = 
+    // <div className="right-tag" >
+    //     {/* <object data="../../images/bx-check.svg" type="image/svg+xml"> */}
+    //         <img src="../../images/bx-check.svg" alt="right-icon"/>
+    //     {/* </object> */}
+    // </div>
 
     // openModal
     const openModal = () => {
@@ -101,23 +101,28 @@ export default function SummaryCard(props) {
                     </div>
                     <Card.Body>
                         {/* <Card.Title>Card Title</Card.Title> */}
-                        <div className="label-summary">
-                            <p><b>Label</b></p>
-                            <h5><Badge className="summary-class-result">{ labelName }</Badge></h5>
-                            {/* <p>{ labelName }</p> */}
-                        </div>
-                        <div>
-                            <div className="indicator">
-                                <div className="label-side">
-                                    <div className="label-indicator">{agreeLabel ? right : wrong}</div>
-                                    <p>Label</p>
-                                </div>
-                                <p className="divider">|</p>
-                                <div className="exp-side">
-                                    <div className="exp-indicator">{agreeExp ? right : wrong}</div>
-                                    <p>Explanation</p>
-                                </div>
+                        <div className="sum-card-body">
+                            <div className="label-summary">
+                                <p><b>Label</b></p>
+                                <h5><Badge className="summary-class-result">{ labelName }</Badge></h5>
+                                {/* <p>{ labelName }</p> */}
                             </div>
+                            <div>
+                                
+                            </div>
+                            {/* <div>
+                                <div className="indicator">
+                                    <div className="label-side">
+                                        <div className="label-indicator">{agreeLabel ? right : wrong}</div>
+                                        <p>Label</p>
+                                    </div>
+                                    <p className="divider">|</p>
+                                    <div className="exp-side">
+                                        <div className="exp-indicator">{agreeExp ? right : wrong}</div>
+                                        <p>Explanation</p>
+                                    </div>
+                                </div>
+                            </div> */}
                         </div>
                     </Card.Body>
                 </Card>

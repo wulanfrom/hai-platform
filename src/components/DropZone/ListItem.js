@@ -23,7 +23,7 @@ export default function ListItem(props) {
         reader.readAsDataURL(file);
         // console.log(reader.readAsDataURL(file));
         reader.onload = function(e) {
-            if (!data.invalid){
+            if (!data.invalid && imageIcon){
                 imageIcon.current.style.backgroundImage = `url(${e.target.result})`;
             }
             else{

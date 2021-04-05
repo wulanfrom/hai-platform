@@ -1,0 +1,12 @@
+.loginContainer {
+    margin-top: 5rem;
+}
+
+.login-title {
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.error-msg {
+    color: red;
+}

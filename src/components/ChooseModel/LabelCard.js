@@ -30,7 +30,12 @@ export default function LabelCard(props) {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function(e) {
-            imageRef.current.style.backgroundImage = `url(${e.target.result})`;
+            if (imageRef) {
+                imageRef.current.style.backgroundImage = `url(${e.target.result})`;
+            }
+            else {
+                console.log("image hasnt loaded yet");
+            }
         }
     }
 
@@ -61,7 +66,7 @@ export default function LabelCard(props) {
         loadImage(data);
     }, []);
 
-    console.log("labelCard: ", dataLabel);
+    // console.log("labelCard: ", dataLabel);
     // console.log("dataLabel: ",)
 
     return (

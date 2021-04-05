@@ -95,3 +95,7 @@
 .divider {
     margin: 0 0.5rem;
 }
+
+.sum-card-body {
+    padding: 0.5rem 1rem;
+}

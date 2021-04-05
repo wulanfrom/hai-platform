@@ -27,8 +27,6 @@ export default function ImprovementPoint(props) {
         explanation: props.data.improvement,
     }
     const [value, setValue] = useState(initialValue.value);
-    // const [modalShow, setModalShow] = useState(false); //modal show state
-    // const [selectedImage, updateSelectedImage] = useState([]); // hold the selected images from the modal
     const [progress, setProgress] = useState(0); //upload progress
     const [improvementPoint, changePoint] = useState(initialValue.explanation);
     // const modalRef = useRef();
@@ -41,32 +39,6 @@ export default function ImprovementPoint(props) {
             improvement: improvementPoint
         })
     }, [value, improvementPoint]);
-
-    // const handleUpload = (file) => {
-    //     const uploadTask = storage.ref(`images/${file.name}`).put(file);
-    //     uploadTask.on(
-    //         "state_changed",
-    //         snapshot => {
-    //             const progress = Math.round(
-    //                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //             );
-    //             // console.log(progress);
-    //             setProgress(progress);
-    //         },
-    //         error => {
-    //             console.log(error);
-    //         },
-    //         () => {
-    //             storage.ref("images")
-    //             .child(file.name)
-    //             .getDownloadURL()
-    //             .then(url => {
-    //                 // console.log(url);
-    //                 return url;
-    //             });
-    //         }
-    //     )
-    // }
 
     // update the improvement point
     const handlePointChange = (e) => {
@@ -84,15 +56,6 @@ export default function ImprovementPoint(props) {
         execute: (state: TextState, api: TextApi) => {
             // open the dialog and update the selected image field
             getSelectedImages().then(response => {
-                // console.log("inside API");
-                // console.log(response);
-
-                // // Select everything
-                // console.log("state");
-                // console.log(state);
-
-                // Replaces the current selection with the image
-                
                 // if length of response.selectedItems > 0
                 const selectedImages = response.selectedImages;
                 if (selectedImages.length > 0) {
@@ -121,7 +84,7 @@ export default function ImprovementPoint(props) {
                                 .child(item.data.name)
                                 .getDownloadURL()
                                 .then(url => {
-                                    console.log(url);
+                                    // console.log(url);
                                     let modifyText = `![](${url})\n`;
                                     api.replaceSelection(modifyText);
                                 });
@@ -141,7 +104,7 @@ export default function ImprovementPoint(props) {
     }
 
     // console.log("improvementPoint, ", improvementPoint);
-    console.log("value, ", value);
+    // console.log("value, ", value);
 
     return (
         <div>
@@ -158,17 +121,6 @@ export default function ImprovementPoint(props) {
                             <Button onClick={props.deleteItem} type="submit" className="deleteBtn">X</Button>
                         </Col>
                     </Form.Group>
-
-                    {/* <Form.Group as={Row} controlId="formPassword"> */}
-                        {/* <Form.Label xs="auto">{props.idx}</Form.Label>
-                        <Col xs={11} className="point-wrapper">
-                            <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Important Point here" />
-                            <Button onClick={props.deleteItem} type="submit" variant="danger" className="deleteBtn">X</Button>
-                        </Col> */}
-                        {/* <Col> */}
-                            {/* <Button onClick={props.deleteItem} type="submit" variant="danger" className="deleteBtn">X</Button> */}
-                        {/* </Col> */}
-                    {/* </Form.Group> */}
                 </Form> 
             </div> 
             <div id="md-container">
