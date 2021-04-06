@@ -14,6 +14,7 @@ export default function LabelCard(props) {
     const dataName = props.name;
     // const dataLabel = props.label;
     const imageRef = useRef();
+    const [imageID, setImageID] = useState(-1); //set the do you agree with the lab to false
     const [dataLabel, setDataLabel] = useState(props.label); //set the do you agree with the lab to false
     const [agreeValue, setAgreeValue] = useState(props.agreeValue); //set the do you agree with the lab to false
     var values = {
@@ -24,6 +25,7 @@ export default function LabelCard(props) {
         explanation: "",
         LIMEPic: null,
         label: dataLabel,
+        imageID: -1
     }
 
 
@@ -100,10 +102,10 @@ export default function LabelCard(props) {
             console.log(res)
 
             var imageID = res.data.id;
-            var imageURL = res.data.image;
 
             getImageLabel(imageID).then(res => {
                 setDataLabel(res.data[0].label)
+                setImageID(imageID)
             })
             .catch(err => {
                 console.log(err)
@@ -116,10 +118,9 @@ export default function LabelCard(props) {
 
     // send data everytime the photo is updated
     useEffect(() => {
-        console.log('2');
-
         values = {
             id: dataName,
+            imageID: imageID,
             // data: data,
             agreeLabel: agreeValue,
             label: dataLabel,
@@ -130,7 +131,7 @@ export default function LabelCard(props) {
         // send changed data to parent
         props.sendChangedData(values);
         // console.log("radio button changed");
-    }, [agreeValue, dataLabel]);
+    }, [agreeValue, dataLabel, imageID]);
 
     const radios = [
         { name: 'Yes', value: '1' },

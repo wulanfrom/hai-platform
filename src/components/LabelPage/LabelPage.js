@@ -17,26 +17,22 @@ export default function LabelPage(props) {
                 let item = eachCard;
                 item.agreeLabel = data.agreeLabel;
                 item.label = data.label;
+                item.imageID = data.imageID;
 
                 console.log(item)
             }
             return eachCard
         });
-        setAllData(JSON.parse(JSON.stringify(updatedList)));
+        setAllData(updatedList);
     }
 
     // send data everytime the allData list is updated
     useEffect(() => {
+        console.log(allData);
+
         props.updateAllData(allData);
         // console.log("radio button changed");
     }, [allData]);
-
-
-    // Apply ML here
-    const getLabel = (item) => {
-        console.log(item);
-        return "Airplane";
-    }
 
     return (
         <Container fluid>

@@ -39,7 +39,6 @@ export default function GiveExplanation(props) {
         props.sendExpToMasterUpload(updatedList);
     }
 
-    
     // const changeImprovement = (e) => {
     //     updateImprovement(e.target.value);
     // }

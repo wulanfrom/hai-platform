@@ -7,6 +7,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Form from 'react-bootstrap/Form'
 import Badge from 'react-bootstrap/Badge'
+import axios from 'axios'
 
 export default function TableBody(props) {
     const data = props.data;
@@ -30,15 +31,77 @@ export default function TableBody(props) {
         }
     }
 
+    function getImageObject(url) {
+        return new Promise((resolve, reject) => {
+            async function createFile(url){
+                let response = await fetch(url);
+                let data = await response.blob();
+                let metadata = {
+                  type: 'image/jpeg'
+                };
+                let file = new File([data], "test.jpg", metadata);
+                // ... do something with the file or return it
+
+                resolve(file)
+              }
+
+              createFile(url)
+        })
+    }
+
+
+    function getLimeResult(imageID) {
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/get_image_explanation/'; //for signing in
+
+            const data = {
+                image_id: imageID,
+            }
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json', 
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                data: data,
+                url: url,
+            };
+
+            axios(options)
+                .then(response => {
+                    resolve(response)
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        })
+    }
+
     // Similar to componentDidMount and componentDidUpdate:
      useEffect(() => {
         // Update the document title using the browser API
         loadImage(data.data, imageRef);
-        loadImage(data.data, expRef);
-        props.applyLimeModel({
-            id: data.id,
-            LIMEPic: data.data,
-        });
+//        loadImage(data.data, expRef);
+
+        console.log(data);
+
+        getLimeResult(data.imageID).then( res => {
+            console.log(res);
+
+            getImageObject(res.data.explanation_url).then ( res => {
+                console.log(res);
+
+                loadImage(res, expRef);
+            })
+            /*
+            props.applyLimeModel({
+                id: data.id,
+                LIMEPic: data.data,
+            });
+            */
+        })
     }, []);
 
 

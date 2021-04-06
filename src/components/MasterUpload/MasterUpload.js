@@ -64,6 +64,7 @@ export default function MasterUpload() {
     // }
 
     const updateAllData = (updatedList) => {
+        console.log(updatedList);
         setAllData(updatedList);
     }
 
