@@ -45,7 +45,7 @@ function App(props) {
           <Route path="/getStarted" component={GetStarted} /> 
           <Route path="/upload" component={MasterUpload} />
           <Route path="/logout" component={Logout} />
-          {/* <Redirect to="/getStarted" /> */}
+          <Redirect to="/getStarted" />
         </Switch>
       </Router>
     )

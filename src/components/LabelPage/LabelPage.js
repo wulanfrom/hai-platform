@@ -17,10 +17,12 @@ export default function LabelPage(props) {
                 let item = eachCard;
                 item.agreeLabel = data.agreeLabel;
                 item.label = data.label;
+
+                console.log(item)
             }
             return eachCard
         });
-        setAllData(updatedList);
+        setAllData(JSON.parse(JSON.stringify(updatedList)));
     }
 
     // send data everytime the allData list is updated
@@ -31,7 +33,8 @@ export default function LabelPage(props) {
 
 
     // Apply ML here
-    const getLabel = () => {
+    const getLabel = (item) => {
+        console.log(item);
         return "Airplane";
     }
 
@@ -40,7 +43,7 @@ export default function LabelPage(props) {
             <div className="label-cards-wrappers">
                 { allData.map((item) => 
                     <div key={item.id}>
-                        <LabelCard name = {item.id} data = {item.data} label={getLabel()} agreeValue = {item.agreeLabel} sendChangedData = { sendChangedData } />
+                        <LabelCard name = {item.id} data = {item.data} label={item.label} agreeValue = {item.agreeLabel} sendChangedData = { sendChangedData } />
                     </div>
                 )}
             </div>

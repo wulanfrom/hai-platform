@@ -33,19 +33,30 @@ export const logout = () => {
 
 export const auth = (email, password) => {
     return dispatch => {
-        const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDiefgZsnOARI8Pby5prhdal4xpdRYcZWg'; //for signing in
+        const url = 'http://server.hyungyu.com:1289/poll/login/'; //for signing in
         const authData = {
-            email: email,
+            username: email,
             password: password,
-            returnSecureToken: true,
         }
+
+        const options = {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            data: { ...authData },
+            url: url,
+          };
+
         // authenticate user
         dispatch(authStart());
-        axios.post(url, authData)
+
+        axios(options)
             .then(response => {
                 console.log(response);
-                localStorage.setItem('token', response.data.idToken);
-                localStorage.setItem('userId', response.data.localId);
+                localStorage.setItem('token', response.data.token);
+
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
             })
             .catch(err => {
