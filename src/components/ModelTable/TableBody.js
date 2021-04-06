@@ -83,24 +83,17 @@ export default function TableBody(props) {
      useEffect(() => {
         // Update the document title using the browser API
         loadImage(data.data, imageRef);
-//        loadImage(data.data, expRef);
-
-        console.log(data);
 
         getLimeResult(data.imageID).then( res => {
-            console.log(res);
-
             getImageObject(res.data.explanation_url).then ( res => {
-                console.log(res);
-
                 loadImage(res, expRef);
+
+                props.applyLimeModel({
+                    id: data.id,
+                    LIMEPic: res,
+                });
             })
-            /*
-            props.applyLimeModel({
-                id: data.id,
-                LIMEPic: data.data,
-            });
-            */
+
         })
     }, []);
 

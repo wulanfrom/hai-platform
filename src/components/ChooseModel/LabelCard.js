@@ -15,6 +15,7 @@ export default function LabelCard(props) {
     // const dataLabel = props.label;
     const imageRef = useRef();
     const [imageID, setImageID] = useState(-1); //set the do you agree with the lab to false
+    const [imageURL, setImageURL] = useState(''); //set the do you agree with the lab to false
     const [dataLabel, setDataLabel] = useState(props.label); //set the do you agree with the lab to false
     const [agreeValue, setAgreeValue] = useState(props.agreeValue); //set the do you agree with the lab to false
     var values = {
@@ -25,7 +26,8 @@ export default function LabelCard(props) {
         explanation: "",
         LIMEPic: null,
         label: dataLabel,
-        imageID: -1
+        imageID: -1,
+        imageURL: ''
     }
 
 
@@ -102,6 +104,7 @@ export default function LabelCard(props) {
             console.log(res)
 
             var imageID = res.data.id;
+            setImageURL("http://server.hyungyu.com:1289/static" + res.data.image);
 
             getImageLabel(imageID).then(res => {
                 setDataLabel(res.data[0].label)
@@ -127,11 +130,12 @@ export default function LabelCard(props) {
             // agreeExp: 0,
             // explanation: "",
             // LIMEPic: null,
+            imageURL: imageURL
         }
         // send changed data to parent
         props.sendChangedData(values);
         // console.log("radio button changed");
-    }, [agreeValue, dataLabel, imageID]);
+    }, [agreeValue, dataLabel, imageID, imageURL]);
 
     const radios = [
         { name: 'Yes', value: '1' },

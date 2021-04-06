@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react'
 import './ImproveTab.css'
 import FigmaEmbed from 'react-figma-embed';
 import axios from 'axios';
+import useInterval from 'react-useinterval'
 
 // pages
 import ImprovementPoint from '../ImprovementPoint/ImprovementPoint'
@@ -19,6 +20,7 @@ export default function ImproveTab(props) {
     }
     // console.log(props.improvementInfo.figmaLink);
     const [embedLink, setEmbedLink] = useState(figmaURL);
+    /*
     var initialValue = props.tabInfo.improvements;
     if (initialValue.length === 0) {
         initialValue = [{
@@ -27,9 +29,11 @@ export default function ImproveTab(props) {
             explanation: "", 
         }]
     }
-    const [improvementList, updateImprovement] = useState(initialValue);
+    */
+    const [latestImprovementList, setLatestImprovementList] = useState([]);
+    const [improvementList, updateImprovement] = useState([]);
     const [linkDesc, changeLinkDesc] = useState(false);
-    const [figmaURL, setFigmaURL] = useState(props.tabInfo.figmaLink);
+    const [figmaURL, setFigmaURL] = useState('');
     // for figma iframe loading
     const [loading, setLoading] = useState(true);
     let spinner = null;
@@ -39,6 +43,71 @@ export default function ImproveTab(props) {
         )
     }
 
+
+    function checkUpdate() {
+        // removal check
+
+        if (latestImprovementList.length != improvementList.length) {
+            alert("CRITICAL ERROR");
+            console.log(latestImprovementList);
+            console.log(improvementList);
+        }
+
+        var flag = false;
+
+        /*
+        console.log(latestImprovementList);
+        console.log(improvementList);
+        */
+
+        for (var i = 0; i < latestImprovementList.length; i++) {
+            for (var j = 0; j < improvementList.length; j++) {
+                if (latestImprovementList[i].id == improvementList[j].id) {
+                    if (latestImprovementList[i].explanation != improvementList[j].explanation ||
+                        latestImprovementList[i].improvement != improvementList[j].improvement) {
+                        update_Improvement(improvementList[j].id, improvementList[j].improvement, improvementList[j].explanation);
+                        flag = true;
+                    }
+                }
+            }
+        }
+
+        if (flag)
+            setLatestImprovementList([...improvementList]);
+    }
+
+
+    useInterval(() => { checkUpdate() }, 5000);
+
+    useEffect( () => {
+
+        getFigmaLink().then(res => {
+            console.log(res);
+
+            setFigmaURL(res.data.figmaURL);
+        });
+
+        get_Improvement().then(res => {
+            console.log(res);
+
+            var myList = [];
+
+            for(var i=0;i<res.data.length;i++)  {
+                var item = res.data[i];
+                var elem = {};
+
+                elem.id = item.id;
+                elem.improvement = item.improvement_title;
+                elem.explanation = item.improvement_content;
+
+                myList.push(elem);
+            }
+
+            setLatestImprovementList(myList);
+            updateImprovement(myList);
+        })
+    }, [])
+
     // check if figma link is valid
     const validFigmaURL = (link) => {
         var REGEX = /https:\/\/([w.-]+\.)?figma.com\/(file|proto)\/([0-9a-zA-Z]{22,128})(?:\/.*)?$/;
@@ -47,12 +116,14 @@ export default function ImproveTab(props) {
 
     // if the figma url is not 
     if (validFigmaURL(figmaURL)) {
+        // setLoading(false);
+        /*
         axios.get(figmaURL).then(response => {
             console.log("RESPONSE: ",response);
-            setLoading(false);
         }).catch(error => {
             console.log("ERROR: ", error);
         })
+        */
     }
 
     // hide the spinner when loading finishes
@@ -71,32 +142,46 @@ export default function ImproveTab(props) {
     // }
 
     const addImprovement = (e) => {
-        var newItem = {
-            id: generateKey("point"),
-            improvement: "",
-            explanation: "",
-        }
-        updateImprovement(prevArray => [...prevArray, newItem]);
-        // console.log(improvementList);
+        add_Improvement("", "").then(res => {
+            var newItem = {
+                id: res.data.id,
+                improvement: "",
+                explanation: "",
+            }
 
-        e.preventDefault();
+            updateImprovement(prevArray => [...prevArray, newItem]);
+            setLatestImprovementList([...improvementList, newItem]);
+            // console.log(improvementList);
+
+            e.preventDefault();
+        })
     }
 
     const deleteImprovement = (e) => {
         const deletedItemIndex = improvementList.findIndex(item => e.id === item.key);
-        if (improvementList.length > 1) {
-            improvementList.splice(deletedItemIndex, 1);
-            // update unsupportedFiles array
-            updateImprovement([...improvementList]);
-        }
-        // console.log(improvementList);
-        e.preventDefault();
+
+        /*
+        console.log(deletedItemIndex);
+        console.log(improvementList[deletedItemIndex].id);
+        */
+
+        remove_Improvement(improvementList[deletedItemIndex].id).then(res => {
+            if (improvementList.length > 1) {
+                improvementList.splice(deletedItemIndex, 1);
+                // update unsupportedFiles array
+                updateImprovement([...improvementList]);
+                setLatestImprovementList([...improvementList]);
+            }
+            // console.log(improvementList);
+            e.preventDefault();
+        });
     }
 
     // update the improvement listt from the improvementPoint
     const sendDataToTab = (sentData) => {
         const newList = improvementList.map((item) => {
-            // console.log("sendData id: ", sentData.id);
+            console.log("sendData id: ", sentData.id);
+
             if (item.id === sentData.id) {
                 const updatedItem = {
                     ...item,
@@ -107,9 +192,19 @@ export default function ImproveTab(props) {
             }
             return item;
         });
+        console.log(newList);
+
         updateImprovement(newList);
     }
 
+    useEffect(() => {
+        if (validFigmaURL(figmaURL)) {
+            setLoading(false);
+        }
+        else {
+            setLoading(true)
+        }
+    }, [figmaURL])
     // update UITab info everytime the improvementList Changes
     useEffect(() => {
         props.updateTab({
@@ -138,14 +233,189 @@ export default function ImproveTab(props) {
 
     // console.log("improvementLInfo: ", props.improvementInfo);
 
+    function remove_Improvement(improvementID) {
+        console.log("REMOVE IMPROVEMENT CALLED");
+
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/remove_improvement/'; //for signing in
+
+            const data = {
+                id: improvementID
+            }
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json', 
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                data: data,
+                url: url,
+            };
+
+            axios(options)
+                .then(response => {
+                    resolve(response)
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        })
+    }
+
+    function update_Improvement(improvementID, title, content) {
+        console.log("UPDATE IMPROVEMENT CALLED");
+
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/update_improvement/'; //for signing in
+
+            const data = {
+                id: improvementID,
+                improvement_title: title,
+                improvement_content: content
+            }
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json', 
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                data: data,
+                url: url,
+            };
+
+            axios(options)
+                .then(response => {
+                    resolve(response)
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        })
+    }
+    function add_Improvement(title, content) {
+        console.log("ADD IMPROVEMENT CALLED");
+
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/add_improvement/'; //for signing in
+
+            const data = {
+                improvement_title: title,
+                improvement_content: content
+            }
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json', 
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                data: data,
+                url: url,
+            };
+
+            axios(options)
+                .then(response => {
+                    resolve(response)
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        })
+    }
+
+    function setFigmaLink(figmaURL) {
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/set_figma_link/'; //for signing in
+
+            const data = {
+                figmaURL: figmaURL,
+            }
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json', 
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                data: data,
+                url: url,
+            };
+
+            axios(options)
+                .then(response => {
+                    resolve(response)
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        })
+    }
+
+    function get_Improvement() {
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/get_improvement/'; //for signing in
+
+            const options = {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json', 
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                url: url,
+            };
+
+            axios(options)
+                .then(response => {
+                    resolve(response)
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        })
+    }
+
+    function getFigmaLink() {
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/get_figma_link/'; //for signing in
+
+            const options = {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json', 
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                url: url,
+            };
+
+            axios(options)
+                .then(response => {
+                    resolve(response)
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        })
+    }
+
     // check whether the link is valid and embed the right link
     const figmaEmbed = (link) => {
         // const link = e.target.value;
         // if valid, embed
         if (validFigmaURL(link)) {
             // console.log("the figma link is valid");
-            changeLinkDesc(false);
-            setEmbedLink(figmaURL);
+            
+            setFigmaLink(link).then( () => {
+                changeLinkDesc(false);
+                setEmbedLink(link);
+            })
         }
 
         // if not, make text description appear

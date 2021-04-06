@@ -18,6 +18,7 @@ export default function LabelPage(props) {
                 item.agreeLabel = data.agreeLabel;
                 item.label = data.label;
                 item.imageID = data.imageID;
+                item.imageURL = data.imageURL;
 
                 console.log(item)
             }

@@ -3,6 +3,10 @@
     height: 100px;
     background-color: red;
     margin: 0.25rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: grey;
 }
 
 .allImagesContainer {

@@ -12,10 +12,18 @@ import Badge from 'react-bootstrap/Badge'
 export default function Summary(props) {
     const allData = props.totalData;
     // filter data according to the data
-    const tab1Data = allData.filter(data => data.agreeLabel === 1 && data.agreeExp === 1);
-    const tab2Data = allData.filter(data => data.agreeLabel === 1 && data.agreeExp === 0);
-    const tab3Data = allData.filter(data => data.agreeLabel === 0 && data.agreeExp === 1);
-    const tab4Data = allData.filter(data => data.agreeLabel === 0 && data.agreeExp === 0);
+
+    console.log(allData);
+
+    const tab1Data = allData.filter(data => data.agreeLabel === "1" && data.agreeExp === "1");
+    const tab2Data = allData.filter(data => data.agreeLabel === "1" && data.agreeExp === "0");
+    const tab3Data = allData.filter(data => data.agreeLabel === "0" && data.agreeExp === "1");
+    const tab4Data = allData.filter(data => data.agreeLabel === "0" && data.agreeExp === "0");
+
+    console.log(tab1Data);
+    console.log(tab2Data);
+    console.log(tab3Data);
+    console.log(tab4Data);
 
     return (
         <div>

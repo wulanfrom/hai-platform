@@ -9,6 +9,7 @@ import Badge from 'react-bootstrap/Badge'
 
 export default function SummaryCard(props) {
     const data = props.data.data;
+    const expImg = props.data.LIMEPic;
     const labelName = props.data.label;
     const explanation = props.data.explanation;
     // const agreeLabel = props.data.agreeLabel;
@@ -61,7 +62,7 @@ export default function SummaryCard(props) {
     const openModal = () => {
         updateModal(true);
         loadImage(data, orgImgRef);
-        loadImage(data, modelImgRef);
+        loadImage(expImg, modelImgRef);
     }
 
     // closeModal
@@ -137,9 +138,9 @@ export default function SummaryCard(props) {
                     <Modal.Body>
                         <div>
                             <h5>Original Image</h5>
-                            <img className="modalImage" alt="original-ref" ref={ orgImgRef } />
+                            <div className="modalImage" alt="original-ref" ref={ orgImgRef } />
                             <h5>Image Through Explainability Model</h5>
-                            <img className="modalImage" alt="modal-ref" ref={ modelImgRef } />
+                            <div className="modalImage" alt="modal-ref" ref={ modelImgRef } />
                         </div>
                         <div className="card-label">
                             <h5>Label</h5>

@@ -23,9 +23,12 @@ import getImages from '../ModelPicture/ModelPicture'
 
 export default function ImprovementPoint(props) {
     var initialValue = {
+        id: props.data.id,
         value: props.data.explanation,
         explanation: props.data.improvement,
     }
+
+    const [improvementID, setImprovementID] = useState(initialValue.id)
     const [value, setValue] = useState(initialValue.value);
     const [progress, setProgress] = useState(0); //upload progress
     const [improvementPoint, changePoint] = useState(initialValue.explanation);
@@ -61,6 +64,7 @@ export default function ImprovementPoint(props) {
                 if (selectedImages.length > 0) {
                     // console.log("some items were selected");
                     // for each file
+                    /*
                     selectedImages.forEach((item) => {
                         // get a firebase url
                         // console.log("item");
@@ -91,6 +95,14 @@ export default function ImprovementPoint(props) {
                             }
                         )
                     });
+                    */
+                   
+                    // We already know the image URL
+
+                    for(var i=0;i<selectedImages.length;i++) {
+                        let modifyText = `<img src='${selectedImages[i].imageURL}' width='200px' />\n`;
+                        api.replaceSelection(modifyText);
+                    }
                 }
             });
         }
