@@ -7,6 +7,9 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Form from 'react-bootstrap/Form'
 import Badge from 'react-bootstrap/Badge'
+import Spinner from 'react-bootstrap/Spinner'
+import ProgressBar from 'react-bootstrap/ProgressBar'
+
 import axios from 'axios'
 
 export default function TableBody(props) {
@@ -15,6 +18,9 @@ export default function TableBody(props) {
     const expRef = useRef();
     const [expAgree, setExpAgree] = useState(data.agreeExp); //set the do you agree with the lab to false
     const [explanation, setExplanation] = useState(data.explanation);
+    const [loading, setLoading] = useState(true);
+    const [percentage, setPercentage] = useState(0)
+    let percent = 0;
     var values = {
         id: data.id,
         agreeExp: expAgree,
@@ -28,6 +34,9 @@ export default function TableBody(props) {
         reader.readAsDataURL(file);
         reader.onload = function(e) {
             imageRef.current.style.backgroundImage = `url(${e.target.result})`;
+            // console.log(imageRef.current.style.display);
+            imageRef.current.style.display = "block";
+            console.log(imageRef.current.style.display);
         }
     }
 
@@ -58,6 +67,13 @@ export default function TableBody(props) {
                 image_id: imageID,
             }
 
+            // const config = {
+            //     onUploadProgress: function(progressEvent) {
+            //       var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            //       setPercentage(percentCompleted);
+            //     }
+            //   }
+
             const options = {
                 method: 'POST',
                 headers: {
@@ -67,11 +83,24 @@ export default function TableBody(props) {
                 },
                 data: data,
                 url: url,
+                // onUploadProgress: function(progressEvent) {
+                //     var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                //     setPercentage(percentCompleted);
+                //   }
             };
 
             axios(options)
                 .then(response => {
-                    resolve(response)
+                    setLoading(false);
+                    // for loading
+                    // setPercentage(percent);
+                    // // () => {
+                    // setTimeout(() => {
+                    //     setPercentage(0)
+                    //     }, 1000);
+                        
+                    // }
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err)
@@ -102,11 +131,6 @@ export default function TableBody(props) {
     const updateExplanation = (e) => {
         setExplanation(e.target.value);
     }
-
-    // apply lime model
-    // const getLimePic = () => {
-
-    // }
 
     // send data to LimeTable whenever the expAgree and explanation changes.
     useEffect(() => {
@@ -144,6 +168,8 @@ export default function TableBody(props) {
             <td>
                 {/* Put lime picture here */}
                 <div className="exp-wrapper">
+                    {/* { percentage && <ProgressBar now={percentage} label={`${percentage}%`} /> } */}
+                    { loading ? <Spinner animation="grow" variant="primary" /> : null }
                     <div className="exp-container" ref={ expRef }></div>
                 </div>  
             </td>

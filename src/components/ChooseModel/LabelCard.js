@@ -6,6 +6,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Card from 'react-bootstrap/Card'
 import Badge from 'react-bootstrap/Badge'
+import Spinner from 'react-bootstrap/Spinner'
+
 import './LabelCard.css'
 import axios from 'axios'
 
@@ -18,6 +20,7 @@ export default function LabelCard(props) {
     const [imageURL, setImageURL] = useState(''); //set the do you agree with the lab to false
     const [dataLabel, setDataLabel] = useState(props.label); //set the do you agree with the lab to false
     const [agreeValue, setAgreeValue] = useState(props.agreeValue); //set the do you agree with the lab to false
+    const [loading, setLoading] = useState(true);
     var values = {
         id: dataName,
         data: data,
@@ -107,7 +110,11 @@ export default function LabelCard(props) {
             setImageURL("http://server.hyungyu.com:1289/static" + res.data.image);
 
             getImageLabel(imageID).then(res => {
+                // loading label
+                setLoading(false);
                 setDataLabel(res.data[0].label)
+                document.querySelectorAll(".class-result").forEach(a=>a.style.display = "block");
+
                 setImageID(imageID)
             })
             .catch(err => {
@@ -160,6 +167,7 @@ export default function LabelCard(props) {
                         <div>
                             <div className="label-result">
                                 <p className="card-label">Label</p>
+                                {loading ? <Spinner animation="grow" variant="primary" /> : null}
                                 <h5><Badge className="class-result">{ dataLabel }</Badge></h5>
                             </div>
                             {/* <div id="separator"></div> */}

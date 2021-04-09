@@ -32,7 +32,7 @@ export default function Progress(props) {
   return (
     // <div className={classes.root}>
     <div className={'progressWrapper ' + classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper nonLinear activeStep={activeStep} alternativeLabel>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
