@@ -1,4 +1,6 @@
 import React from 'react'
+import './GetStarted.css'
+
 // import Banner from '../Banner/Banner'
 
 // redux
@@ -9,7 +11,22 @@ import React from 'react'
 function GetStarted() {
     return (
         <div>
-            <h1>Time to get started;v</h1> 
+            <h1>(( Description here ))</h1> 
+
+            <ol>
+                <li>Go to jupyter notebook and finish the LIME implemtnation </li>
+
+                <li>Move to the next stage </li>
+
+                <ol>
+                    <li className='indented'>Upload images </li>
+                    <li className='indented'>   Get the labels from the model inception v3 </li>
+                    <li className='indented'> Get the explanation that your implementation gives. </li>
+                    <li className='indented'> Analyze when the explanation is not helpful</li>
+                    <li className='indented'>Create prototype with Figma</li>
+                </ol>
+            </ol>
+            
             {/* <Banner />
             
             <div className="proceed-wrapper p-4">

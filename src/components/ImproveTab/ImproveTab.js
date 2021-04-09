@@ -110,6 +110,9 @@ export default function ImproveTab(props) {
 
     // check if figma link is valid
     const validFigmaURL = (link) => {
+        return true;
+
+
         var REGEX = /https:\/\/([w.-]+\.)?figma.com\/(file|proto)\/([0-9a-zA-Z]{22,128})(?:\/.*)?$/;
         return REGEX.test(link);
     }
@@ -180,7 +183,7 @@ export default function ImproveTab(props) {
     // update the improvement listt from the improvementPoint
     const sendDataToTab = (sentData) => {
         const newList = improvementList.map((item) => {
-            console.log("sendData id: ", sentData.id);
+            // console.log("sendData id: ", sentData.id);
 
             if (item.id === sentData.id) {
                 const updatedItem = {
@@ -192,7 +195,7 @@ export default function ImproveTab(props) {
             }
             return item;
         });
-        console.log(newList);
+        // console.log(newList);
 
         updateImprovement(newList);
     }
