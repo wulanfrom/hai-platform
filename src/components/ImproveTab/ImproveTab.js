@@ -15,9 +15,9 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 
 export default function ImproveTab(props) {
-    const generateKey = (pre) => {
-        return `${ pre }_${ new Date().getTime() }`;
-    }
+    // const generateKey = (pre) => {
+    //     return `${ pre }_${ new Date().getTime() }`;
+    // }
     // console.log(props.improvementInfo.figmaLink);
     const [embedLink, setEmbedLink] = useState(figmaURL);
     /*
@@ -47,7 +47,7 @@ export default function ImproveTab(props) {
     function checkUpdate() {
         // removal check
 
-        if (latestImprovementList.length != improvementList.length) {
+        if (latestImprovementList.length !== improvementList.length) {
             alert("CRITICAL ERROR");
             console.log(latestImprovementList);
             console.log(improvementList);
@@ -62,9 +62,9 @@ export default function ImproveTab(props) {
 
         for (var i = 0; i < latestImprovementList.length; i++) {
             for (var j = 0; j < improvementList.length; j++) {
-                if (latestImprovementList[i].id == improvementList[j].id) {
-                    if (latestImprovementList[i].explanation != improvementList[j].explanation ||
-                        latestImprovementList[i].improvement != improvementList[j].improvement) {
+                if (latestImprovementList[i].id === improvementList[j].id) {
+                    if (latestImprovementList[i].explanation !== improvementList[j].explanation ||
+                        latestImprovementList[i].improvement !== improvementList[j].improvement) {
                         update_Improvement(improvementList[j].id, improvementList[j].improvement, improvementList[j].explanation);
                         flag = true;
                     }
@@ -130,9 +130,9 @@ export default function ImproveTab(props) {
     }
 
     // hide the spinner when loading finishes
-    const hideSpinner = () => {
-        setLoading(false);
-    }
+    // const hideSpinner = () => {
+    //     setLoading(false);
+    // }
 
     // constantly gets updated with the text input
     const updateFigmaURL = (e) => {
@@ -457,8 +457,8 @@ export default function ImproveTab(props) {
                     </Form.Group>
                 </Form>
                 <div id="figma-wrapper"> 
-                    {/* <FigmaEmbed url={embedLink} /> */}
-                    {loading ? spinner : <iframe width="800" height="450" src={figmaURL} allowFullScreen></iframe>}
+                    <FigmaEmbed url={embedLink} />
+                    {/* {loading ? spinner : <iframe width="800" height="450" src={figmaURL} allowFullScreen></iframe>} */}
                     
                 </div>
             </div>

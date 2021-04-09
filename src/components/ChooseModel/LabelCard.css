@@ -44,6 +44,7 @@
 }
 
 .class-result {
+    display: none;
     background-color: #2C98F0;
     color: #fff;
     font-weight: 700;

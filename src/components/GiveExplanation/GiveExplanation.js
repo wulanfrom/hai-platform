@@ -2,36 +2,36 @@ import React, { useState, useEffect } from 'react'
 import './GiveExplanation.css'
 
 // Bootstrap components
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+// import Form from 'react-bootstrap/Form'
+// import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
 
 // Pages 
 import LimeTable from '../ModelTable/LimeTable'
-import ShapTable from '../ModelTable/ShapTable'
-import EmptyTable from './EmptyTable'
+// import ShapTable from '../ModelTable/ShapTable'
+// import EmptyTable from './EmptyTable'
 
 
 export default function GiveExplanation(props) {
-    const [selectedModel, updateModel] = useState("lime");
+    // const [selectedModel, updateModel] = useState("lime");
     const [dropdownVal, changeDropdownVal] = useState("lime");
-    const [showTable, changeShow] = useState(false);
+    // const [showTable, changeShow] = useState(false);
     const allData = props.data;
     // const [improvement, updateImprovement] = useState(props.improvement);
     const improvement = props.improvement;
 
     //update the value of the selection depending on the dropdown
-    const changeModel = () => {
-        updateModel(dropdownVal);
-        changeShow(true);
-    }
+    // const changeModel = () => {
+    //     updateModel(dropdownVal);
+    //     changeShow(true);
+    // }
 
     // get value of selected model
-    const getDropdownVal = (e) => {
-        changeDropdownVal(e.target.value);
-    }
+    // const getDropdownVal = (e) => {
+    //     changeDropdownVal(e.target.value);
+    // }
 
     // receives data from limeTable/ShapTable and sends it to master upload page
     const sendExpToGive = (updatedList) => {
@@ -48,28 +48,28 @@ export default function GiveExplanation(props) {
         props.sendImprovement(improvement);
     }, [improvement]);
 
-    const getTable = (selectedModel) => {
-        if (selectedModel === "lime" && showTable) {
-            return (
-                <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/>
-            )
-        }
-        else if (selectedModel === "shap" && showTable) {
-            return (
-                <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/>
-            )
-        }
-        else {
-            return (
-                <EmptyTable />
-            )
-        }
-    }
+    // const getTable = (selectedModel) => {
+    //     if (selectedModel === "lime" && showTable) {
+    //         return (
+    //             <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/>
+    //         )
+    //     }
+    //     else if (selectedModel === "shap" && showTable) {
+    //         return (
+    //             <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/>
+    //         )
+    //     }
+    //     else {
+    //         return (
+    //             <EmptyTable />
+    //         )
+    //     }
+    // }
 
     return (
         <Container fluid>
             <h3 className="exp-title"><b>Images and Their Explanations</b></h3>
-            <Form>
+            {/* <Form>
                 <Row>
                     <Col xs lg="6">
                         <Form.Group controlId="explainabilityModelSelect">
@@ -84,9 +84,10 @@ export default function GiveExplanation(props) {
                         <Button variant="primary" onClick = { changeModel }>Apply Explanation</Button>
                     </Col>
                 </Row>
-            </Form>
+            </Form> */}
             <div>
-                { getTable(selectedModel) }
+                {/* { getTable(selectedModel) } */}
+                <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/>
                 {/* { selectedModel == "lime" && showTable ? <LimeTable data={ allData } sendExpToGive = { sendExpToGive }/> : <EmptyTable /> }
                 { selectedModel == "shap" && showTable ? <ShapTable data={ allData } sendExpToGive = { sendExpToGive }/> : <EmptyTable /> } */}
             </div>
