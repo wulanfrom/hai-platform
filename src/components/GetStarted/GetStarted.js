@@ -14,7 +14,7 @@ function GetStarted() {
             <h1>(( Description here ))</h1> 
 
             <ol>
-                <li>Go to jupyter notebook and finish the LIME implemtnation </li>
+                <li>Go to <a href='http://server.hyungyu.com:8899'>jupyter notebook</a> and finish the LIME implemtnation </li>
 
                 <li>Move to the next stage </li>
 
