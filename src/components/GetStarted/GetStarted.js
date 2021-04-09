@@ -1,14 +1,20 @@
 import React from 'react'
-import './GetStarted.css'
+import {Redirect, Link} from 'react-router-dom'
+// import './GetStarted.css'
 
 // import Banner from '../Banner/Banner'
 
 // redux
 
 // Bootstrap components
-// import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button'
 
 function GetStarted() {
+    const goToModels = () => {
+        return (
+            <Redirect to="/upload" />
+        )
+    }
     return (
         <div>
             <h1>(( Description here ))</h1> 
@@ -24,6 +30,8 @@ function GetStarted() {
                     <li className='indented'> Get the explanation that your implementation gives. </li>
                     <li className='indented'> Analyze when the explanation is not helpful</li>
                     <li className='indented'>Create prototype with Figma</li>
+                    {/* <Button variant="primary" onClick={goToModels}>Start Assignment</Button> */}
+                    <Link to="/upload" className="btn btn-primary">Start Assignment</Link>
                 </ol>
             </ol>
             
