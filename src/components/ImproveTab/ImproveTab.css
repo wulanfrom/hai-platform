@@ -45,3 +45,27 @@
     margin: 1.5rem auto;
     border: none;
 }
+
+.presentBtnImg {
+    background-image: url(../../images/presentBtn.png);
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background-position: 50% 50%;
+    background-size: contain;
+    background-position: center center;
+    position: relative;
+    background-repeat: no-repeat; 
+}
+
+.sharePrototypeBtnImg{
+    background-image: url(../../images/sharePrototypeBtn.png);
+    width: 150px;
+    height: 30px;
+    display: inline-block;
+    background-position: 50% 50%;
+    background-size: contain;
+    background-position: center center;
+    position: relative;
+    background-repeat: no-repeat; 
+}

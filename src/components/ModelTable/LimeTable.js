@@ -78,9 +78,9 @@ export default function LimeTable(props) {
             <Table bordered className="lime-table">
                 <thead>
                     <tr>
-                        <th>Image</th>
-                        <th>Explanation from your implementation</th>
-                        <th>Label</th>
+                        <th style={{textAlign: "center"}}>Image</th>
+                        <th style={{textAlign: "center"}}>Explanation from your implementation</th>
+                        <th style={{textAlign: "center"}}>Questions</th>
                     </tr>
                 </thead>
                 <tbody>

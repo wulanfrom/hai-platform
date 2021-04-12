@@ -163,7 +163,7 @@ export default function SummaryCard(props) {
 
                         <br />
                         <div>
-                            <h5>Explanation</h5>
+                            <h5>Your response on useful additional information</h5>
                             <p>{ explanation }</p>
                         </div>
                     </Modal.Body>

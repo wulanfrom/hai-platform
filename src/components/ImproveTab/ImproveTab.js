@@ -467,7 +467,14 @@ export default function ImproveTab(props) {
                 <h4 className="link-title">Interactive UI prototype</h4>
                 <Form>
                     <Form.Group>
-                        <Form.Label>Insert your Figma URL Here. Please refer to the following instructions for getting a sharable link for your Figma prototype. </Form.Label>
+                        <Form.Label>Please insert your Figma URL below. Make sure that your UI should be interactive, meaning your prototype should contain a set of actions that users can perform presented as below. Please refer to the following instructions for getting a sharable link for your Figma prototype. </Form.Label>
+                        <ol>
+                            <li> Click "present" button <div className='presentBtnImg'></div> at the top right of your canvas.  </li>
+                            <li> Click "Share prototype" button <div className='sharePrototypeBtnImg'></div> at the top right of your presentation. </li>
+                            <li> Click "Get embed code" </li>
+                            <li> Copy "src" property of the tag, which starts with "https://..." </li>
+                            <li> Paste the URL below and click "Embed Design". Then you can see your presentation below. </li>
+                        </ol>
                         <Row>
                             <Col xs={10}>
                                 <Form.Control type="text" placeholder="Figma Prototype Link" value={figmaURL} onChange={updateFigmaURL} />
