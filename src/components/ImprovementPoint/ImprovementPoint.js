@@ -100,7 +100,8 @@ export default function ImprovementPoint(props) {
                     // We already know the image URL
 
                     for(var i=0;i<selectedImages.length;i++) {
-                        let modifyText = `<img src='${selectedImages[i].imageURL}' width='200px' />\n`;
+                        let modifyText = `<img src='${"http://server.hyungyu.com:1289/static" + selectedImages[i].imageURL}' width='200px' />\n` + 
+                                        `<img src='${selectedImages[i].LIMEURL}' width='200px' />\n`;
                         api.replaceSelection(modifyText);
                     }
                 }
@@ -127,11 +128,13 @@ export default function ImprovementPoint(props) {
             <div className="point-wrapper">
                 <Form>
                     <Form.Group as={Row} controlId="formPassword">
-                        <Form.Label column sm={1}>
-                            {props.idx}
+                        <Form.Label column sm={1}> 
+                            <h5>{"Limitation " + props.idx + "."} </h5>
                         </Form.Label>
                         <Col sm={10}>
+                            {/*
                             <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Improvement Point here" />
+                            */}
                         </Col>
                         <Col sm={1}>
                             <Button onClick={handleDeleteItem} className="deleteBtn">X</Button>
@@ -158,7 +161,6 @@ export default function ImprovementPoint(props) {
                         commands.link,
                         commands.quote,
                         commands.code,
-                        commands.image,
                         useModelImage,
                         commands.divider,
                         commands.unorderedListCommand,

@@ -440,14 +440,20 @@ export default function ImproveTab(props) {
                 that you have tried as a convincing evidence, and (3) your ideas on how to overcome
                 the limitations in a UI. </p>
                 
-                <p> Clicking <b> this icon </b> allows you to browse and select images with explanations 
+                <p> Clicking <svg className="uploadImage" width="20" height="20" viewBox="0 0 40 40"></svg> icon allows you to browse and select images with explanations 
+
                 that you have uploaded. To resize the markdown editor, drag "..." icon on the bottom right of each editor. Click "this icon" to have a full-screen of a editor.</p>
+
+                <hr />
 
                 <div>
                     { improvementList.map((item, idx) => <ImprovementPoint allData={ props.allData } idx={idx + 1} deleteItem = {deleteImprovement} key={item.id} data={item} sendDataToTab={sendDataToTab} />) }
                 </div>
                 <Button className="add-improvement" onClick={addImprovement}>+ Add A Limitation</Button>
             </div>
+
+            <hr />
+
             <div>
                 <h4 className="link-title">Interactive UI prototype</h4>
                 <Form>

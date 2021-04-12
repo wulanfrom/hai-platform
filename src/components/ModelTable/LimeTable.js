@@ -42,6 +42,7 @@ export default function LimeTable(props) {
                 let item = eachCard;
                 // console.log(data);
                 item.LIMEPic = data.LIMEPic;
+                item.LIMEURL = data.LIMEURL;
 
                 if(item.errorStages.includes(2)) {
                     const index = item.errorStages.indexOf(2);

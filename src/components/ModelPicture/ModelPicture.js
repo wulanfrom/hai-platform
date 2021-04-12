@@ -12,7 +12,7 @@ function ImageItem(props) {
   
     //on mount
     useEffect(() => {
-      loadImage(props.data.data)
+      loadImage(props.data)
     }, []);
   
     const loadImage = (file) => {
@@ -26,9 +26,14 @@ function ImageItem(props) {
     }
 
     return (
-      <div>
-        <div onClick={ props.selectItem } className="imageContainer" ref={image}></div>
-      </div>
+      <table className='modalTable'>
+        <tr className='modalTr'>
+          <td className='imageContainer' ref={image}> </td>
+        </tr>
+        <tr className='modalTr'>
+          <td className='imageContainerLabel'> {props.label} </td>
+        </tr>
+        </table>
     )
   }
 
@@ -56,15 +61,28 @@ function ModelPicture({resolve, initialValue = [], show, data, progress}) {
 
   // add item to selectedItem if selected and remove if selected again
     const selectItem = (e, file) => {
+      console.log(e);
+      console.log(file);
+
+      var cur = e.target;
+
+      for(var i=0;i<100;i++) {
+        console.log(cur);
+
+        if(cur.classList.contains("singleItemOnModal")) break;
+        else cur = cur.parentNode;
+      }
+
       const newList = [...selectedItem];
       // check if the list has the file
       //if no, update the list
-      const itemIndex = newList.findIndex(e => e.id === file.id)
+      const itemIndex = newList.findIndex(elem => elem.id === file.id)
+      
       if (itemIndex === -1) {
         //update list
         updateSelectedItem(oldArray => [...oldArray, file]);
         //update styling
-        e.target.classList.add("selected");
+        cur.classList.add("selected");
       }
       //if it's in it, deselect
       else {
@@ -73,7 +91,7 @@ function ModelPicture({resolve, initialValue = [], show, data, progress}) {
         updateSelectedItem(newList);
 
         //remove class
-        e.target.classList.remove("selected")
+        cur.classList.remove("selected")
       }
     }
     return (
@@ -102,7 +120,12 @@ function ModelPicture({resolve, initialValue = [], show, data, progress}) {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-              {data.map((item, key) => <ImageItem selectItem={(e) => selectItem(e, item)} data={ item } key={ key } /> )} 
+              {data.map((item, key) => 
+                <div className='singleItemOnModal' onClick={e => selectItem(e, item)}>
+                  <ImageItem data={item.data} key={key} label="image" />
+                  <ImageItem data={item.LIMEPic} key={key} label="explanation" />
+                </div>
+              )} 
               {/* <div>
                 <Button onClick={closeDialog}>Close</Button>
                 <Button onClick={uploadImages}>Upload</Button>

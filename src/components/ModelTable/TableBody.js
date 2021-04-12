@@ -118,12 +118,13 @@ export default function TableBody(props) {
              loadImage(data.data, imageRef);
 
              getLimeResult(data.imageID).then(res => {
-                 getImageObject(res.data.explanation_url).then(res => {
-                     loadImage(res, expRef);
+                 getImageObject(res.data.explanation_url).then(res2 => {
+                     loadImage(res2, expRef);
 
                      props.applyLimeModel({
                          id: data.id,
-                         LIMEPic: res,
+                         LIMEPic: res2,
+                         LIMEURL: res.data.explanation_url
                      });
                  })
              })

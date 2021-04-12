@@ -259,13 +259,22 @@ export default function DropZone(props) {
     const removeFile = (name) => {
         // find the index of the item
         // remove the item from array
+
         const validFileIndex = validFiles.findIndex(e => e.name === name);
         validFiles.splice(validFileIndex, 1);
 
         // update validFiles array
         setValidFiles([...validFiles]);
+
         const selectedFileIndex = selectedFiles.findIndex(e => e.name === name);
+
+        console.log(selectedFileIndex);
+
+        const item = selectedFiles[selectedFileIndex];
+
         selectedFiles.splice(selectedFileIndex, 1);
+
+        console.log(item);
 
         // update selectedFiles array
         setSelectedFiles([...selectedFiles]);

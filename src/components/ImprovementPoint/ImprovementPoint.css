@@ -1,10 +1,17 @@
 .uploadImage {
-    background-image: url(../../images/bxs-network-chart.svg);
+    background-image: url(../../images/icon-image.svg);
     /* display: block;
     margin: auto; */
     /* height: 8px;
     width: 8px; */
+    
+    background-position: 50% 50%;
+    background-size: contain;
+    background-position: center center;
+    position: relative;
+    background-repeat: no-repeat; 
 }
+
 
 .point-wrapper {
     /* display: flex; */

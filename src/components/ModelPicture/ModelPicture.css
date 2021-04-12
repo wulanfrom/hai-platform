@@ -1,12 +1,18 @@
 .imageContainer {
-    width: 180px;
-    height: 100px;
-    background-color: red;
+    width: 100% !important;
+    height: 100% !important; 
     margin: 0.25rem;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-    background-color: grey;
+    float: left;
+    margin: 7px;
+}
+
+.modalTable {
+    height: 100%;
+    width: 49%;
+    float: left;
 }
 
 .allImagesContainer {
@@ -17,8 +23,17 @@
     overflow-y: auto;
 }
 
+.modalTr {
+    width: 100%;
+    height: 80%;
+    text-align: center;
+}
+
+.imageContainerLabel {
+    text-align: center;
+}
 .selected {
-    border: 4px solid red;
+    border: 4px solid red !important;
 }
 
 #getImages-container {
@@ -30,4 +45,13 @@ ol li {
     list-style-position: inside;
     text-indent: -1.5em;
     padding-left: 1.5em;
+}
+
+.singleItemOnModal {
+    border: 1px solid black;
+    height: 150px;
+    width: 400px;
+    margin: 20px;
+    float: left;
+    border: 1px solid lightgrey;
 }
