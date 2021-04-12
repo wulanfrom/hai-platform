@@ -25,3 +25,9 @@
     padding: 1rem;
     border: 1px solid black;
 }
+
+ol li {
+    list-style-position: inside;
+    text-indent: -1.5em;
+    padding-left: 1.5em;
+}

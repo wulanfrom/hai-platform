@@ -4,7 +4,7 @@ import './DropZone.css'
 // Bootstrap components
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
-
+import axios from "axios"
 // pages
 import ListItem from './ListItem'
 
@@ -13,6 +13,8 @@ export default function DropZone(props) {
     const [errorMessage, setErrorMessage] = useState(''); 
     const [validFiles, setValidFiles] = useState(props.currentData); // all the non duplicated files
     const [unsupportedFiles, setUnsupportedFiles] = useState([]); // displays invalid files
+
+    const myRefs = useRef([]);
 
     // For adding input by clicking
     const fileInputRef = useRef();
@@ -32,9 +34,99 @@ export default function DropZone(props) {
     const modalImageRef = useRef();
     const modalRef = useRef();
 
+    function getImageObject(url) {
+        return new Promise((resolve, reject) => {
+            async function createFile(url){
+                let response = await fetch(url);
+                let data = await response.blob();
+                let metadata = {
+                  type: 'image/jpeg'
+                };
+                let file = new File([data], "test.jpg", metadata);
+                // ... do something with the file or return it
+
+                resolve(file)
+              }
+
+              createFile(url)
+        })
+    }
+
+    function getUploadedImages() {
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/get_uploaded_image/'; //for signing in
+
+            // const config = {
+            //     onUploadProgress: function(progressEvent) {
+            //       var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            //       setPercentage(percentCompleted);
+            //     }
+            //   }
+
+            const options = {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                url: url,
+                // onUploadProgress: function(progressEvent) {
+                //     var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                //     setPercentage(percentCompleted);
+                //   }
+            };
+
+            axios(options)
+                .then(response => {
+                    // setLoading(false);
+                    // for loading
+                    // setPercentage(percent);
+                    // // () => {
+                    // setTimeout(() => {
+                    //     setPercentage(0)
+                    //     }, 1000);
+
+                    // }
+                    resolve(response);
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        })
+    }
+
     // on mount
     useEffect(() => {
-        
+        getUploadedImages().then( async res => {
+            var files = [];
+
+            for (var i = 0; i < res.data.length; i++) {
+                var elem = {
+                    id: res.data[i].id,
+                    imageID: res.data[i].id,
+                    imageURL: res.data[i].imgURL,
+                    data: files[i],
+                    agreeLabel: -1,
+                    agreeExp: -1,
+                    explanation: "",
+                    LIMEPic: null,
+                    label: res.data[i].label != null ? res.data[i].label : "",
+                    errorStages: [],
+                    isUploaded: true 
+                };
+
+                files.push(await getImageObject("http://server.hyungyu.com:1289/static" + res.data[i].imgURL));
+
+                elem.data = files[files.length-1]
+
+                console.log(JSON.parse(JSON.stringify(elem)));
+
+                props.addData(elem);
+            }
+
+            setValidFiles([... files]);
+        })
     }, []);
 
     // Remove duplicate files
@@ -104,11 +196,15 @@ export default function DropZone(props) {
                 props.addData({
                     id: files[i].name,
                     data: files[i],
-                    agreeLabel: 0,
-                    agreeExp: 0,
+                    agreeLabel: -1,
+                    agreeExp: -1,
                     explanation: "",
                     LIMEPic: null,
                     label: "",
+                    errorStages: [],
+                    isUploaded: false,
+                    imageID: -1,
+                    imageURL: ''
                 })
             } else {
                 // add a new property called invalid
@@ -191,7 +287,8 @@ export default function DropZone(props) {
     // console.log("valid Files");
     // console.log(validFiles);
     
-    // console.log("valid files: ", validFiles);
+    console.log("valid files: ", validFiles);
+
     return (
         <div>
             <Container fluid>

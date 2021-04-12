@@ -68,7 +68,7 @@ export default function GiveExplanation(props) {
 
     return (
         <Container fluid>
-            <h3 className="exp-title"><b>Images and Their Explanations</b></h3>
+            <h3 className="exp-title"><b>Images and Explanations</b></h3>
             {/* <Form>
                 <Row>
                     <Col xs lg="6">

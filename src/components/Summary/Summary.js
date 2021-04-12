@@ -28,12 +28,16 @@ export default function Summary(props) {
     return (
         <div>
             <Container fluid className="title-container">
-                <h3 className="obs-title"><b>Summary of Your Findings</b></h3>
+                <h3 className="obs-title"><b>Summary of Your Work</b></h3>
                 <div className="desc-summary">
+                    {
+                    /*
                     <p>Your Images were labeled using</p>
                     <h5><Badge pill className="class-model-desc">InceptionV3</Badge></h5>
                     <p>and was explained by</p>
                     <h5><Badge pill className="lime-model">LIME</Badge></h5>
+                    */
+                    }
                 </div>
                 <div className="summary-container">
                     <div className="crcLabelcrcExp">

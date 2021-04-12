@@ -42,6 +42,11 @@ export default function LimeTable(props) {
                 let item = eachCard;
                 // console.log(data);
                 item.LIMEPic = data.LIMEPic;
+
+                if(item.errorStages.includes(2)) {
+                    const index = item.errorStages.indexOf(2);
+                    item.errorStages.splice(index, 1);
+                }
             }
 
             return eachCard;
@@ -53,9 +58,17 @@ export default function LimeTable(props) {
         props.sendExpToGive(updatedList);
     }
 
+    function getErrorFlag(item) {
+        return (item.LIMEPic == null || item.agreeExp == -1) ? true : false;
+    }
+
+    function getLoadingFlag(item) {
+        return item.LIMEPic == null ? true : false;
+    }
+
     const rows = allData.map((data, i) => {
         return (
-            <TableBody data={data} key={i} sendChangedExplanation = { sendChangedExplanation } applyLimeModel = { applyLimeModel } />
+            <TableBody data={data} key={i} errorFlag={getErrorFlag(data)} loading={getLoadingFlag(data)} sendChangedExplanation = { sendChangedExplanation } applyLimeModel = { applyLimeModel } />
         )
     });
 
@@ -64,8 +77,8 @@ export default function LimeTable(props) {
             <Table bordered className="lime-table">
                 <thead>
                     <tr>
-                        <th>Input Image</th>
-                        <th>Explanation</th>
+                        <th>Image</th>
+                        <th>Explanation from your implementation</th>
                         <th>Label</th>
                     </tr>
                 </thead>

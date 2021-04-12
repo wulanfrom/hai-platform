@@ -19,12 +19,19 @@ export default function LabelPage(props) {
                 item.label = data.label;
                 item.imageID = data.imageID;
                 item.imageURL = data.imageURL;
-
-                console.log(item)
+                item.isUploaded = data.isUploaded ;
             }
             return eachCard
         });
         setAllData(updatedList);
+    }
+
+    function getErrorFlag(item) {
+        return (item.errorStages.includes(1) && item.agreeLabel == -1) ? true : false
+    }
+
+    function getLoadingFlag(item) {
+        return item.label == '' ? true : false
     }
 
     // send data everytime the allData list is updated
@@ -40,7 +47,16 @@ export default function LabelPage(props) {
             <div className="label-cards-wrappers">
                 { allData.map((item) => 
                     <div key={item.id}>
-                        <LabelCard name = {item.id} data = {item.data} label={item.label} agreeValue = {item.agreeLabel} sendChangedData = { sendChangedData } />
+                        <LabelCard name = {item.id} 
+                        data = {item.data} 
+                        label={item.label} 
+                        agreeValue = {item.agreeLabel} 
+                        errorFlag = {getErrorFlag(item)} 
+                        loading = {getLoadingFlag(item)} 
+                        isUploaded = {item.isUploaded} 
+                        imageID = {item.imageID}
+                        imageURL = {item.imageURL}
+                        sendChangedData = { sendChangedData } />
                     </div>
                 )}
             </div>

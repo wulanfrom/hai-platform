@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Upload Pictures', 'Get Label', 'Get Explanation', 'Summary', 'Improvements', 'Finalize your Ideas'];
+  return ['Upload Image', 'Get Label', 'Get Explanation', 'Summary', 'Create UI', 'Finish'];
 }
 
 export default function Progress(props) {

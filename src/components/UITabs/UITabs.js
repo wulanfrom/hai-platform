@@ -100,6 +100,8 @@ export default function UITabs(props) {
 
     return (
         <div>
+            {
+                /*
             <Container fluid className="tabWrapper">
                 <h3 className="improve-title">Improve the Model with Your Design</h3>
                 <p>Embed your design and point out the improvements you made.</p>
@@ -114,11 +116,13 @@ export default function UITabs(props) {
                             ))}
                         </Tabs>
                     </Col>
-                    {/* <Col xs={1}>
-                        <Button variant="outline-secondary" onClick={addTab}>+</Button>
-                    </Col> */}
+                  //  { <Col xs={1}>
+                  //      <Button variant="outline-secondary" onClick={addTab}>+</Button>
+                  //  </Col> }
                 </Row>
-            </Container>
+            </Container>*/
+            }
+            <ImproveTab updateTab={updateTabInfo} tabInfo={tabList[0]} id={0} allData={ props.allData } />
         </div>
     )
 }

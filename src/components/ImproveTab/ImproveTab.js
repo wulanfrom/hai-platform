@@ -439,10 +439,25 @@ export default function ImproveTab(props) {
     return (
         <div className="improvement-wrapper">
             <div>
-                <h4 className="link-title">Link with Figma</h4>
+                <h4 className="improvements-title">Limitation of explanation algorithm</h4>
+                <p>List a few limitations with examples of images and explanations that you have explored.</p>
+                <p>For each limitation, please write (1) when the LIME algorithm does not work, (2) images and explanations
+                that you have tried as a convincing evidence, and (3) your ideas on how to overcome
+                the limitations in a UI. </p>
+                
+                <p> Clicking <b> this icon </b> allows you to browse and select images with explanations 
+                that you have uploaded. To resize the markdown editor, drag "..." icon on the bottom right of each editor. Click "this icon" to have a full-screen of a editor.</p>
+
+                <div>
+                    { improvementList.map((item, idx) => <ImprovementPoint allData={ props.allData } idx={idx + 1} deleteItem = {deleteImprovement} key={item.id} data={item} sendDataToTab={sendDataToTab} />) }
+                </div>
+                <Button className="add-improvement" onClick={addImprovement}>+ Add A Limitation</Button>
+            </div>
+            <div>
+                <h4 className="link-title">Interactive UI prototype</h4>
                 <Form>
                     <Form.Group>
-                        <Form.Label>Insert Figma URL Here</Form.Label>
+                        <Form.Label>Insert your Figma URL Here. Please refer to the following instructions for getting a sharable link for your Figma prototype. </Form.Label>
                         <Row>
                             <Col xs={10}>
                                 <Form.Control type="text" placeholder="Figma Prototype Link" value={figmaURL} onChange={updateFigmaURL} />
@@ -461,14 +476,6 @@ export default function ImproveTab(props) {
                     {/* {loading ? spinner : <iframe width="800" height="450" src={figmaURL} allowFullScreen></iframe>} */}
                     
                 </div>
-            </div>
-            <div>
-                <h4 className="improvements-title">Improvements</h4>
-                <p>List a few representative questions your UI can answer.</p>
-                <div>
-                    { improvementList.map((item, idx) => <ImprovementPoint allData={ props.allData } idx={idx + 1} deleteItem = {deleteImprovement} key={item.id} data={item} sendDataToTab={sendDataToTab} />) }
-                </div>
-                <Button className="add-improvement" onClick={addImprovement}>+ Add Improvement Point</Button>
             </div>
         </div>
     )

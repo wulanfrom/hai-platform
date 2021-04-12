@@ -16,10 +16,13 @@ export default function TableBody(props) {
     const data = props.data;
     const imageRef = useRef();
     const expRef = useRef();
+    const loading = props.loading;
+    const errorFlag = props.errorFlag;
+
     const [expAgree, setExpAgree] = useState(data.agreeExp); //set the do you agree with the lab to false
     const [explanation, setExplanation] = useState(data.explanation);
-    const [loading, setLoading] = useState(true);
-    const [percentage, setPercentage] = useState(0)
+    const [percentage, setPercentage] = useState(0);
+
     let percent = 0;
     var values = {
         id: data.id,
@@ -91,7 +94,7 @@ export default function TableBody(props) {
 
             axios(options)
                 .then(response => {
-                    setLoading(false);
+                    // setLoading(false);
                     // for loading
                     // setPercentage(percent);
                     // // () => {
@@ -110,20 +113,24 @@ export default function TableBody(props) {
 
     // Similar to componentDidMount and componentDidUpdate:
      useEffect(() => {
-        // Update the document title using the browser API
-        loadImage(data.data, imageRef);
+         if (data.LIMEPic == null) {
+             // Update the document title using the browser API
+             loadImage(data.data, imageRef);
 
-        getLimeResult(data.imageID).then( res => {
-            getImageObject(res.data.explanation_url).then ( res => {
-                loadImage(res, expRef);
+             getLimeResult(data.imageID).then(res => {
+                 getImageObject(res.data.explanation_url).then(res => {
+                     loadImage(res, expRef);
 
-                props.applyLimeModel({
-                    id: data.id,
-                    LIMEPic: res,
-                });
-            })
-
-        })
+                     props.applyLimeModel({
+                         id: data.id,
+                         LIMEPic: res,
+                     });
+                 })
+             })
+         }
+         else {
+             loadImage(data.LIMEPic, expRef);
+         }
     }, []);
 
 
@@ -150,6 +157,14 @@ export default function TableBody(props) {
         { name: 'No', value: '0' },
     ];
 
+    function checkExpError() {
+        return (data.errorStages.includes(2) && data.LIMEPic == null) ? true : false;
+    }
+
+    function checkLabelError() {
+        return (data.errorStages.includes(2) && data.agreeExp == -1 ) ? true : false;
+    }
+
     console.log("data: ", data);
 
     return (
@@ -169,44 +184,61 @@ export default function TableBody(props) {
                 {/* Put lime picture here */}
                 <div className="exp-wrapper">
                     {/* { percentage && <ProgressBar now={percentage} label={`${percentage}%`} /> } */}
-                    { loading ? <Spinner animation="grow" variant="primary" /> : null }
-                    <div className="exp-container" ref={ expRef }></div>
+                    { loading ? <div> <Spinner animation="grow" variant="primary" /> <br /> We're now generating an explanation in real-time. It may take a minute. </div> :
+                     <div className="exp-container" ref={expRef}></div>
+                    }
+                    {
+                        checkExpError() ? 
+                        <div className='error'> Please wait for the explanation. </div>
+                        :
+                        ''
+                    }
                 </div>  
             </td>
             <td>
-                <div className="labelName">
-                    <p>Label</p>
-                    {/* <p>{ data.label }</p> */}
-                    <h5><Badge className="class-result">{ data.label }</Badge></h5>
-                </div>
-                <div className="agreeLabel">
-                    <p>Is the explanation easy to understand?</p>
-                    <ButtonGroup className="yesNo" toggle>
-                        {radios.map((radio, idx) => (
-                            <ToggleButton
-                                key={idx}
-                                type="radio"
-                                variant="secondary"
-                                name="radio"
-                                value={radio.value}
-                                checked={ expAgree === radio.value }
-                                onChange={(e) => setExpAgree(e.currentTarget.value)}
-                                className="expRadioBtn"
-                            >
-                                {radio.name}
-                            </ToggleButton>
-                        ))}
-                    </ButtonGroup>
-                </div>
-                <div>
-                    <Form.Group controlId="explanationTextArea">
-                        <Form.Label className="expLabel">
-                            <p>Is the Explanation Sufficient to Trust the model prediction?</p>
-                        </Form.Label>
-                        {/* whenever it changes, update the globaldata in master upload */}
-                        <Form.Control as="textarea" value={ explanation } rows={3} onChange={ updateExplanation } />
-                    </Form.Group>
-                </div>
+                {loading ? '' :
+                    <div>
+                        <div className="labelName">
+                            <p>Label</p>
+                            {/* <p>{ data.label }</p> */}
+                            <h5><Badge className="class-result">{data.label}</Badge></h5>
+                        </div>
+                        <div className="agreeLabel" style={{marginTop: "15px"}}>
+                            <p> Is the explanation helpful to understand why the model produces the label?</p>
+                            <ButtonGroup className="yesNo" toggle>
+                                {radios.map((radio, idx) => (
+                                    <ToggleButton
+                                        key={idx}
+                                        type="radio"
+                                        variant="secondary"
+                                        name="radio"
+                                        value={radio.value}
+                                        checked={expAgree === radio.value}
+                                        onChange={(e) => setExpAgree(e.currentTarget.value)}
+                                        className="expRadioBtn"
+                                    >
+                                        {radio.name}
+                                    </ToggleButton>
+                                ))}
+                            </ButtonGroup>
+                        </div>
+                        {
+                            checkLabelError() ?
+                                <div className='error'> Please answer the question above. </div>
+                                :
+                                ''
+                        }
+                        <div style={{marginTop: "15px"}}>
+                            <Form.Group controlId="explanationTextArea">
+                                <Form.Label className="expLabel">
+                                    <p>Please state additional information that might be helpful to understand (or trust) the explanation, if you have any.</p>
+                                </Form.Label>
+                                {/* whenever it changes, update the globaldata in master upload */}
+                                <Form.Control as="textarea" value={explanation} rows={3} onChange={updateExplanation} />
+                            </Form.Group>
+                        </div>
+                    </div>
+                }
             </td>
         </tr>
         // </div>

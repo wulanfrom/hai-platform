@@ -31,9 +31,64 @@ export default function MasterUpload() {
         }
         
         else {
-            setCurrentStep((prevActiveStep) => prevActiveStep + 1);
+            console.log(allData);
+            if (checkValidity(currentStep)) {
+                setCurrentStep((prevActiveStep) => prevActiveStep + 1);
+            }
+            else {
+
+            }
         }
     };
+
+    function checkValidity(step) {
+        console.log(step);
+
+        if(step == 1) {
+            var flag = false;
+
+            for(var i=0;i<allData.length;i++) {
+                if(allData[i].agreeLabel == -1) {
+                    flag = true;
+
+                    if(!allData[i].errorStages.includes(1))
+                        allData[i].errorStages.push(1);
+                }
+                else {
+                    if (allData[i].errorStages.includes(1)) {
+                        const index = allData[i].errorStages.indexOf(1);
+                        allData[i].errorStages.splice(index, 1);
+                    }
+                }
+            }
+        }
+        else if(step == 2) {
+            for(var i=0;i<allData.length;i++) {
+                if(allData[i].LIMEPic == null || 
+                   (allData[i].LIMEPic != null && allData[i].agreeExp == -1)) {
+                    flag = true;
+
+                    if(!allData[i].errorStages.includes(2))
+                        allData[i].errorStages.push(2);
+                }
+                else {
+                    if (allData[i].errorStages.includes(2)) {
+                        const index = allData[i].errorStages.indexOf(2);
+                        allData[i].errorStages.splice(index, 1);
+                    }
+                }
+            }
+        }
+
+        console.log(allData);
+
+        if(flag) {
+            setAllData([... allData]);
+            return false;
+        }
+
+        return true;
+    }
       
     // check when to make previous button appear
     const handleBack = () => {
@@ -43,7 +98,12 @@ export default function MasterUpload() {
             setCurrentStep(0);
         }
         else {
-            setCurrentStep((prevActiveStep) => prevActiveStep - 1);
+            if (checkValidity(currentStep)) {
+                setCurrentStep((prevActiveStep) => prevActiveStep - 1);
+            }
+            else {
+
+            }
         }
     };  
 
@@ -162,32 +222,50 @@ export default function MasterUpload() {
     const getStepDesc = (currentStep) => {
         if (currentStep === 0) {
             return (
-                <p>Upload pictures you want to label.</p>
+                <p>Upload images that you want to get the classification label and explanation.</p>
             )
         }
         else if (currentStep === 1) {
             return (
-                <p>Label Whether you agree with the label created by the model or not.</p>
+                <p>Browse the classification results of <i>Inception v3</i> model and annotate whether the label is correct or not. </p>
             )
         }
         else if (currentStep === 2) {
             return (
-                <p>Apply an explanation model to the picture.</p>
+                <p>Browse the explanations that your implementation provides and annotate whether the explanation helps you understand why the model produced such label. Please state additional information that might be helpful to understand or trust the explanations, if you have any. </p>
             )
         }
         else if (currentStep === 3) {
             return (
-                <p>Summarization of your inputs.</p>
+                <p>Here is the summary of your work, organized by annotations. Please browse the results and try to come up with limitations of the explanation algorithm and how to design a UI that can overcome the limitations. Clicking an item in the summary gives you the original image, explanation, and your response on the question of additional information. </p>
             )
         }
         else if (currentStep === 4) {
             return (
-                <p>How would you Improve the explanation model?</p>
+                <div>
+                    <p>In this page, you are asked to write limitations of the explanation algorithm and your 
+                        ideas of how to overcome the limitations. You can add multiple limitations in 
+                        the following section. For each limitation, you are asked to write a short report 
+                        that includes (1) when the LIME algorithm does not work, (2) images and explanations 
+                        that you have tried as a convincing evidence, and (3) your ideas on how to overcome 
+                        the limitations in a UI. Clicking <b> this icon </b> allows you to browse and select 
+                        images with explanations that you have uploaded. </p>
+
+                    <p style={{ marginTop: "10px" }}>After listing up the limitations, create your own prototype of an interactive explainable
+                    UI [<a href='https://docs.google.com/presentation/d/192xWEs7RSMKyLC-3CPLnqYs7U0__Zpb21QHevkZIdh8/edit#slide=id.p'>examples</a>] to help users better understand the prediction results. 
+                    Use <a href='https://www.figma.com/'>Figma</a> to build a prototype of a web-based UI like Google’s What-If Tool that allows users to
+                    proactively seek satisfying explanations. For example, users may want to query additional
+                    information, request clarifications, edit data points to test a hypothesis,
+                    or give feedback to improve model performance. Your prototype doesn’t need to be
+                    fully interactive with every feature you add, e.g.,”login” button or “upload new
+                    image” button doesn’t need to be interactive. Please focus on the core interactive
+                    and explainable concept you’re introducing.</p>
+                </div>
             )
         }
         else if (currentStep === 5) {
             return (
-                <p>Share your Findings with Others.</p>
+                <p>Now you are all done! Check out the following work that the server stores, which is going to be used in grading. Note that your submission only in the "Create UI" stage (i.e., reports describing the limitations of explanation algorithm and interactive UI design in Figma) is used in the grading. Please let us know if something went wrong. </p>
             )
         }
         else {
@@ -243,7 +321,7 @@ export default function MasterUpload() {
                     { currentStep === 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
                     { currentStep === 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}
                     { currentStep === 4 ? <Improve updateImprovementTab={updateImprovementTab} currentImprovement={improvementList} allData={allData} /> : ""}
-                    { currentStep === 5 ? <Finalize changeCurStep={changeCurStep} /> : ""}
+                    { currentStep === 5 ? /* <Finalize changeCurStep={changeCurStep} /> */ "" : ""}
                 </div>
             </Container>
         </div>

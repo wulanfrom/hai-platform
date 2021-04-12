@@ -104,7 +104,7 @@ export default function SummaryCard(props) {
                         {/* <Card.Title>Card Title</Card.Title> */}
                         <div className="sum-card-body">
                             <div className="label-summary">
-                                <p><b>Label</b></p>
+                                <p><b>Label : </b></p>
                                 <h5><Badge className="summary-class-result">{ labelName }</Badge></h5>
                                 {/* <p>{ labelName }</p> */}
                             </div>

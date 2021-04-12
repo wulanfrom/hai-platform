@@ -12,15 +12,21 @@ import './LabelCard.css'
 import axios from 'axios'
 
 export default function LabelCard(props) {
+    console.log(JSON.parse(JSON.stringify(props)));
+
     const data = props.data;
     const dataName = props.name;
+    const errorFlag = props.errorFlag;
+    const loading = props.loading;
     // const dataLabel = props.label;
+
     const imageRef = useRef();
-    const [imageID, setImageID] = useState(-1); //set the do you agree with the lab to false
-    const [imageURL, setImageURL] = useState(''); //set the do you agree with the lab to false
+    const [imageID, setImageID] = useState(props.imageID); //set the do you agree with the lab to false
+    const [imageURL, setImageURL] = useState(props.imageURL);//set the do you agree with the lab to false
     const [dataLabel, setDataLabel] = useState(props.label); //set the do you agree with the lab to false
     const [agreeValue, setAgreeValue] = useState(props.agreeValue); //set the do you agree with the lab to false
-    const [loading, setLoading] = useState(true);
+    const [isUploaded, setIsUploaded] = useState(props.isUploaded);
+
     var values = {
         id: dataName,
         data: data,
@@ -103,27 +109,45 @@ export default function LabelCard(props) {
     }
 
     useEffect(() => {
-        uploadImage(data).then(res => {
-            console.log(res)
+        if (!isUploaded) {
+            uploadImage(data).then(res => {
+                console.log(res)
 
-            var imageID = res.data.id;
-            setImageURL("http://server.hyungyu.com:1289/static" + res.data.image);
+                var imageID = res.data.id;
+                setImageURL("http://server.hyungyu.com:1289/static" + res.data.image);
 
-            getImageLabel(imageID).then(res => {
-                // loading label
-                setLoading(false);
-                setDataLabel(res.data[0].label)
-                document.querySelectorAll(".class-result").forEach(a=>a.style.display = "block");
+                getImageLabel(imageID).then(res => {
+                    // loading label
+                    setDataLabel(res.data[0].label)
+                    // document.querySelectorAll(".class-result").forEach(a => a.style.display = "block");
 
-                setImageID(imageID)
+                    setImageID(imageID)
+                })
+                    .catch(err => {
+                        console.log(err)
+                    })
             })
-            .catch(err => {
-                console.log(err)
-            })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+        else {
+            if (dataLabel == '') {
+                console.log(JSON.parse(JSON.stringify(props)));
+
+                var imageID = props.imageID;
+                setImageURL(imageURL);
+
+                getImageLabel(imageID).then(res => {
+                    // loading label
+                    setDataLabel(res.data[0].label);
+                    // document.querySelectorAll(".class-result").forEach(a => a.style.display = "block");
+                })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            }
+        }
     }, [])
 
     // send data everytime the photo is updated
@@ -137,12 +161,13 @@ export default function LabelCard(props) {
             // agreeExp: 0,
             // explanation: "",
             // LIMEPic: null,
-            imageURL: imageURL
+            imageURL: imageURL,
+            isUploaded: isUploaded
         }
         // send changed data to parent
         props.sendChangedData(values);
         // console.log("radio button changed");
-    }, [agreeValue, dataLabel, imageID, imageURL]);
+    }, [agreeValue, dataLabel, imageID, imageURL, isUploaded]);
 
     const radios = [
         { name: 'Yes', value: '1' },
@@ -158,6 +183,7 @@ export default function LabelCard(props) {
     // console.log("labelCard: ", dataLabel);
     // console.log("dataLabel: ",)
 
+    console.log(errorFlag);
     return (
         <div className="card-wrapper">
             <Card className="card-container">
@@ -166,17 +192,21 @@ export default function LabelCard(props) {
                     <div className="info-body">
                         <div>
                             <div className="label-result">
-                                <p className="card-label">Label</p>
-                                {loading ? <Spinner animation="grow" variant="primary" /> : null}
-                                <h5><Badge className="class-result">{ dataLabel }</Badge></h5>
+                                <p className="card-label">Label: </p>
+                                {loading ? 
+                                    <Spinner animation="grow" variant="primary" /> :
+                                    <h5><Badge className="class-result">{dataLabel}</Badge></h5>
+                                }
                             </div>
                             {/* <div id="separator"></div> */}
+                            {/*
                             <p className="class-badge-result">Classification Model</p>
                             <h5><Badge pill className="class-model">InceptionV3</Badge></h5>
+                            */}
                         </div>
                         <hr></hr>
                         <div>
-                            <Card.Text>Do you Agree with the Label?</Card.Text>
+                            <Card.Text>Is the label correct?</Card.Text>
                             <ButtonGroup toggle>
                                 {radios.map((radio, idx) => (
                                     <ToggleButton
@@ -192,6 +222,12 @@ export default function LabelCard(props) {
                                     </ToggleButton>
                                 ))}
                             </ButtonGroup>
+                            {
+                                errorFlag ? 
+                                <div className='error'> Please answer the question </div>
+                                :
+                                ''
+                            }
                         </div>
                     </div>
                 </Card.Body>
