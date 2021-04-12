@@ -9,6 +9,8 @@ import axios from "axios"
 import ListItem from './ListItem'
 
 export default function DropZone(props) {
+    const allData = props.data;
+
     const [selectedFiles, setSelectedFiles] = useState(props.currentData); // all files dropped to the zone
     const [errorMessage, setErrorMessage] = useState(''); 
     const [validFiles, setValidFiles] = useState(props.currentData); // all the non duplicated files
@@ -42,7 +44,9 @@ export default function DropZone(props) {
                 let metadata = {
                   type: 'image/jpeg'
                 };
-                let file = new File([data], "test.jpg", metadata);
+                var splitted = url.split('/');
+
+                let file = new File([data], splitted[splitted.length-1], metadata);
                 // ... do something with the file or return it
 
                 resolve(file)
@@ -98,8 +102,13 @@ export default function DropZone(props) {
 
     // on mount
     useEffect(() => {
+        console.log(allData);
+
+        if(allData.length > 0) return;
+
         getUploadedImages().then( async res => {
             var files = [];
+            var myData = [];
 
             for (var i = 0; i < res.data.length; i++) {
                 var elem = {
@@ -107,9 +116,13 @@ export default function DropZone(props) {
                     imageID: res.data[i].id,
                     imageURL: res.data[i].imgURL,
                     data: files[i],
-                    agreeLabel: -1,
-                    agreeExp: -1,
-                    explanation: "",
+                    agreeLabel: res.data[i].user_label_annotation != null ? (
+                                    res.data[i].user_label_annotation ? '1' : '0' )
+                                    : -1,
+                    agreeExp: res.data[i].user_explanation_annotation != null ? (
+                        res.data[i].user_explanation_annotation ? '1' : '0')
+                        : -1,
+                    explanation: res.data[i].user_explanation_note != null ? res.data[i].user_explanation_note : '',
                     LIMEPic: null,
                     label: res.data[i].label != null ? res.data[i].label : "",
                     errorStages: [],
@@ -120,12 +133,11 @@ export default function DropZone(props) {
 
                 elem.data = files[files.length-1]
 
-                console.log(JSON.parse(JSON.stringify(elem)));
-
-                props.addData(elem);
+                myData.push(elem);
             }
 
             setValidFiles([... files]);
+            props.updateAllData([... myData]);
         })
     }, []);
 

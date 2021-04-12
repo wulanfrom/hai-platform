@@ -165,7 +165,36 @@ export default function TableBody(props) {
         return (data.errorStages.includes(2) && data.agreeExp == -1 ) ? true : false;
     }
 
-    console.log("data: ", data);
+    function updateUserExplanationAnnotation(imageID, flag) {
+        const url = 'http://server.hyungyu.com:1289/poll/update_explanation_annotation/'; //for signing in
+        const data = {
+            image_id: imageID,
+            user_annotation: flag
+        }
+
+        const options = {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token'),
+            },
+            data: data,
+            url: url,
+        };
+
+        axios(options)
+            .catch(err => {
+                alert(err)
+            });
+    }
+
+    function handleExpAnnotation(val) {
+        if(val == '1') updateUserExplanationAnnotation(data.imageID, true)
+        else updateUserExplanationAnnotation(data.imageID, false)
+
+        setExpAgree(val)
+    }
 
     return (
         // <div>
@@ -214,7 +243,7 @@ export default function TableBody(props) {
                                         name="radio"
                                         value={radio.value}
                                         checked={expAgree === radio.value}
-                                        onChange={(e) => setExpAgree(e.currentTarget.value)}
+                                        onChange={(e) => handleExpAnnotation(e.currentTarget.value)}
                                         className="expRadioBtn"
                                     >
                                         {radio.name}

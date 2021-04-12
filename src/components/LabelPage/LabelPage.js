@@ -45,7 +45,7 @@ export default function LabelPage(props) {
     return (
         <Container fluid>
             <div className="label-cards-wrappers">
-                { allData.map((item) => 
+                { allData.slice(0).reverse().map((item) => 
                     <div key={item.id}>
                         <LabelCard name = {item.id} 
                         data = {item.data} 

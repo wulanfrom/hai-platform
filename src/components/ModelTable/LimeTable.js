@@ -66,7 +66,7 @@ export default function LimeTable(props) {
         return item.LIMEPic == null ? true : false;
     }
 
-    const rows = allData.map((data, i) => {
+    const rows = allData.slice(0).reverse().map((data, i) => {
         return (
             <TableBody data={data} key={i} errorFlag={getErrorFlag(data)} loading={getLoadingFlag(data)} sendChangedExplanation = { sendChangedExplanation } applyLimeModel = { applyLimeModel } />
         )

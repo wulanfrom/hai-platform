@@ -316,7 +316,7 @@ export default function MasterUpload() {
             <Container>
                 <div>
                     {/* getImages = {getImages} */}
-                    { currentStep === 0 ? <DropZone addData = { addData } checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem } currentData={ uploadImages } /> : ""}
+                    { currentStep === 0 ? <DropZone addData = { addData } checkNext = { checkNext } currentStep = { currentStep } getDeletedItem = { deleteItem } currentData={ uploadImages } data={allData}  updateAllData={updateAllData}/> : ""}
                     { currentStep === 1 ? <LabelPage data={ allData } updateAllData = { updateAllData } /> : ""}
                     { currentStep === 2 ? <GiveExplanation data={allData} sendImprovement={ sendImprovement } sendExpToMasterUpload = { sendExpToMasterUpload } improvement = { improvement }/> : "" }
                     { currentStep === 3 ? <Summary totalData={allData} triggerResetFunction={triggerResetFunction} /> : ""}

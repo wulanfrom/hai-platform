@@ -174,6 +174,41 @@ export default function LabelCard(props) {
         { name: 'No', value: '0' },
     ];
 
+    function handleSetAgreeValue(val) {
+        if(val == '1') {
+            updateUserLabelAnnotation(imageID, true)
+        }
+        else {
+            updateUserLabelAnnotation(imageID, false)
+        }
+        
+        setAgreeValue(val);
+    }
+
+    function updateUserLabelAnnotation(imageID, flag) {
+        const url = 'http://server.hyungyu.com:1289/poll/update_label_annotation/'; //for signing in
+        const data = {
+            image_id: imageID,
+            user_annotation: flag
+        }
+
+        const options = {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token'),
+            },
+            data: data,
+            url: url,
+        };
+
+        axios(options)
+            .catch(err => {
+                alert(err)
+            });
+    }
+
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
         // Update the document title using the browser API
@@ -216,7 +251,7 @@ export default function LabelCard(props) {
                                         name="radio"
                                         value={radio.value}
                                         checked={ agreeValue === radio.value }
-                                        onChange={(e) => setAgreeValue(e.currentTarget.value)}
+                                        onChange={(e) => handleSetAgreeValue(e.currentTarget.value)}
                                     >
                                         {radio.name}
                                     </ToggleButton>
