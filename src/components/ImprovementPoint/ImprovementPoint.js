@@ -128,10 +128,10 @@ export default function ImprovementPoint(props) {
             <div className="point-wrapper">
                 <Form>
                     <Form.Group as={Row} controlId="formPassword">
-                        <Form.Label column sm={1}> 
+                        <Form.Label column sm={3}> 
                             <h5>{"Limitation " + props.idx + "."} </h5>
                         </Form.Label>
-                        <Col sm={10}>
+                        <Col sm={8}>
                             {/*
                             <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Improvement Point here" />
                             */}

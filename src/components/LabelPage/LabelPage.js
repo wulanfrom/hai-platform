@@ -44,6 +44,7 @@ export default function LabelPage(props) {
 
     return (
         <Container fluid>
+            <h3 className='exp-title'><b> Images and Predicted Labels </b></h3>
             <div className="label-cards-wrappers">
                 { allData.slice(0).reverse().map((item) => 
                     <div key={item.id}>

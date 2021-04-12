@@ -253,13 +253,29 @@ export default function MasterUpload() {
 
                     <p style={{ marginTop: "10px" }}>After listing up the limitations, create your own prototype of an interactive explainable
                     UI [<a href='https://docs.google.com/presentation/d/192xWEs7RSMKyLC-3CPLnqYs7U0__Zpb21QHevkZIdh8/edit#slide=id.p'>examples</a>] to help users better understand the prediction results. 
-                    Use <a href='https://www.figma.com/'>Figma</a> to build a prototype of a web-based UI like Google’s What-If Tool that allows users to
-                    proactively seek satisfying explanations. For example, users may want to query additional
-                    information, request clarifications, edit data points to test a hypothesis,
-                    or give feedback to improve model performance. Your prototype doesn’t need to be
-                    fully interactive with every feature you add, e.g.,”login” button or “upload new
-                    image” button doesn’t need to be interactive. Please focus on the core interactive
-                    and explainable concept you’re introducing.</p>
+                    Follow the steps below: </p>
+
+                    <ol>
+                        <li className='listUIPlane'> Prepare an example where the prediction result and LIME explanation
+                        is hard to understand, e.g., “I cannot judge if referring to the shape
+                        of the ears would lead to a correct prediction, so I need to see more
+                            examples for comparison.” </li>
+                        <li className='listUIPlane'>Come up with dimensions and functionalities that you think would be
+                        helpful to provide a better explanation in the case you identified
+                        in Step a, e.g., data points’ feature editor, feature statistics visualization,
+                                ROC curve visualization, a chatbot for explanations, etc. </li>
+                        <li className='listUIPlane'>Use <a href='https://www.figma.com/'>Figma</a> to build a prototype of a web-based UI like Google’s What-If Tool that allows users to
+                        proactively seek satisfying explanations. For example, users may want to query additional
+                        information, request clarifications, edit data points to test a hypothesis,
+                        or give feedback to improve model performance. Your prototype doesn’t need to be
+                        fully interactive with every feature you add, e.g.,”login” button or “upload new
+                        image” button doesn’t need to be interactive. Please focus on the core interactive
+                        and explainable concept you’re introducing.
+                                </li>
+                    </ol>
+
+
+
                 </div>
             )
         }
@@ -304,14 +320,16 @@ export default function MasterUpload() {
                 <div>
                     <Progress className="progress" currentStep = { currentStep } />
                 </div>
-                <div>
-                    <h6><b>Step { currentStep + 1 }</b></h6>
-                    { getStepDesc(currentStep) }
-                </div>
                 <div className="step-button progress-button">
                     { getPrevButton(currentStep) }
                     { getNextButton(currentStep) }
                 </div>
+                <br />
+                <div>
+                    <h6><b>Step { currentStep + 1 }</b></h6>
+                    { getStepDesc(currentStep) }
+                </div>
+                <hr />
             </Container>
             <Container>
                 <div>

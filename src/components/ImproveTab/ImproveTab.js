@@ -15,6 +15,8 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 
 export default function ImproveTab(props) {
+    const DEFAULT_FIGMA_URL='https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FvFiXZq2n30GVFKjD4KGMj8%2FCS492-Human-AI-Interaction-Assignment-2-Interactive-UI-Example%3Fnode-id%3D4%253A13%26scaling%3Dscale-down%26page-id%3D0%253A1';
+
     // const generateKey = (pre) => {
     //     return `${ pre }_${ new Date().getTime() }`;
     // }
@@ -84,7 +86,14 @@ export default function ImproveTab(props) {
         getFigmaLink().then(res => {
             console.log(res);
 
-            setFigmaURL(res.data.figmaURL);
+            if(res.data.figmaURL == ''){
+                setFigmaURL(DEFAULT_FIGMA_URL)
+                setEmbedLink(DEFAULT_FIGMA_URL);
+            }
+            else{
+                setFigmaURL(res.data.figmaURL);
+                setEmbedLink(res.data.figmaURL);
+            }
         });
 
         get_Improvement().then(res => {

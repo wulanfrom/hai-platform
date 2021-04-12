@@ -1,5 +1,6 @@
 .stepsWrapper {
     /* background-color: #eff3fb; */
+    padding-bottom: 0px !important;
 }
 
 .container-fluid {
@@ -36,4 +37,13 @@
 
 .first-next {
     margin-left: 0!important;
+}
+
+.listUIPlane {
+    margin-left: 20px !important;
+    text-indent: -1.0em !important;
+}
+
+.container {
+    margin: 0px !important;
 }

@@ -68,9 +68,10 @@ function GetStarted() {
                 <li seq="5"> Answer questions in <a href=''> Discussion Stage 2 and 3</a>. </li>
             </ol>
 
-            Please make sure that you finish your implementation before proceeding.  <br /> <br />
+            <hr />
 
             <div style={{ margin: "auto", textAlign: "center" }}>
+                Please make sure that you finish your implementation before proceeding.  <br /> <br />
                 <Link to="/upload" className="btn btn-primary">Start Activity</Link>
             </div>
 
