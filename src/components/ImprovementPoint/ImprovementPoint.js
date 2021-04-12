@@ -118,6 +118,10 @@ export default function ImprovementPoint(props) {
     // console.log("improvementPoint, ", improvementPoint);
     // console.log("value, ", value);
 
+    function handleDeleteItem() {
+        props.deleteItem(props.data.id)
+    }
+
     return (
         <div>
             <div className="point-wrapper">
@@ -130,7 +134,7 @@ export default function ImprovementPoint(props) {
                             <Form.Control onChange={ handlePointChange } value={improvementPoint} type="text" placeholder="Insert Improvement Point here" />
                         </Col>
                         <Col sm={1}>
-                            <Button onClick={props.deleteItem} type="submit" className="deleteBtn">X</Button>
+                            <Button onClick={handleDeleteItem} className="deleteBtn">X</Button>
                         </Col>
                     </Form.Group>
                 </Form> 

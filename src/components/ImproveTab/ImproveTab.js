@@ -161,12 +161,7 @@ export default function ImproveTab(props) {
     }
 
     const deleteImprovement = (e) => {
-        const deletedItemIndex = improvementList.findIndex(item => e.id === item.key);
-
-        /*
-        console.log(deletedItemIndex);
-        console.log(improvementList[deletedItemIndex].id);
-        */
+        const deletedItemIndex = improvementList.findIndex(item => e === item.id);
 
         remove_Improvement(improvementList[deletedItemIndex].id).then(res => {
             if (improvementList.length > 1) {
@@ -176,8 +171,8 @@ export default function ImproveTab(props) {
                 setLatestImprovementList([...improvementList]);
             }
             // console.log(improvementList);
-            e.preventDefault();
         });
+        
     }
 
     // update the improvement listt from the improvementPoint

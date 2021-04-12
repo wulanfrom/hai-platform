@@ -329,6 +329,8 @@ export default function DropZone(props) {
                             Drag & Drop files here or <Button className="upload-btn">Browse</Button>
                         </div>
                     </div>
+                    <hr />
+                    <h3 className="dropzone-title"><b>Your images</b></h3>
                     <div className="file-display-container">
                     {
                         validFiles.map((data, i) => 
