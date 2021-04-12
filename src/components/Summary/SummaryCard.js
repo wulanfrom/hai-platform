@@ -132,20 +132,36 @@ export default function SummaryCard(props) {
             <div className="modal fade" id="myModal">
                 <Modal className="itemModal" dialogClassName="modal-90w" show={ modalOpen } onHide={closeModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Inputted Explanation</Modal.Title>
+                        <Modal.Title>Detailed Information</Modal.Title>
                     </Modal.Header>
                     {/* <div className="summary-card-body"> */}
                     <Modal.Body>
+                        <h5>Image and Explanation</h5> 
                         <div>
-                            <h5>Original Image</h5>
-                            <div className="modalImage" alt="original-ref" ref={ orgImgRef } />
-                            <h5>Image Through Explainability Model</h5>
-                            <div className="modalImage" alt="modal-ref" ref={ modelImgRef } />
+                            <table style={{height: "400px", width: "100%"}}>
+                                <tr>
+                                    <td className='summaryTableTd'>  
+                                        <div className="modalImage" alt="original-ref" ref={orgImgRef} />
+                                    </td>
+                                    <td className='summaryTableTd'>
+                                        <div className="modalImage" alt="modal-ref" ref={modelImgRef} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className='summaryModalLabel'>Original image</td> 
+                                    <td className='summaryModalLabel'>Explanation</td> 
+                                </tr>
+                            </table>
                         </div>
+
+                        <hr />
+
                         <div className="card-label">
-                            <h5>Label</h5>
-                            <p>{ labelName }</p>
+                            <h5>Predicted Label </h5>
+                            <Badge className="class-result">{labelName}</Badge>
                         </div>
+
+                        <br />
                         <div>
                             <h5>Explanation</h5>
                             <p>{ explanation }</p>
