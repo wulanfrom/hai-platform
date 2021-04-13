@@ -115,6 +115,8 @@ export default function TableBody(props) {
      useEffect(() => {
          if (data.LIMEPic == null) {
              // Update the document title using the browser API
+             console.log(data.data);
+
              loadImage(data.data, imageRef);
 
              getLimeResult(data.imageID).then(res => {
@@ -131,6 +133,7 @@ export default function TableBody(props) {
          }
          else {
              loadImage(data.LIMEPic, expRef);
+             loadImage(data.data, imageRef);
          }
     }, []);
 
