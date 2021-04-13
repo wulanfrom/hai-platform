@@ -100,6 +100,55 @@ export default function DropZone(props) {
         })
     }
 
+    function removeImageOnDB(imageID) {
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/remove_single_image/'; //for signing in
+
+            const data = {
+                image_id: imageID,
+            }
+
+            // const config = {
+            //     onUploadProgress: function(progressEvent) {
+            //       var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            //       setPercentage(percentCompleted);
+            //     }
+            //   }
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json', 
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                data: data,
+                url: url,
+                // onUploadProgress: function(progressEvent) {
+                //     var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                //     setPercentage(percentCompleted);
+                //   }
+            };
+
+            axios(options)
+                .then(response => {
+                    // setLoading(false);
+                    // for loading
+                    // setPercentage(percent);
+                    // // () => {
+                    // setTimeout(() => {
+                    //     setPercentage(0)
+                    //     }, 1000);
+                        
+                    // }
+                    resolve(response);
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        })
+    }
+
     // on mount
     useEffect(() => {
         console.log(allData);
@@ -137,6 +186,8 @@ export default function DropZone(props) {
             }
 
             setValidFiles([... files]);
+            setSelectedFiles([... files]);
+
             props.updateAllData([... myData]);
         })
     }, []);
@@ -255,29 +306,49 @@ export default function DropZone(props) {
         return fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length) || fileName;
     }
 
+    console.log(validFiles);
+    console.log(selectedFiles);
+
     // Remove selected file
     const removeFile = (name) => {
         // find the index of the item
         // remove the item from array
 
         const validFileIndex = validFiles.findIndex(e => e.name === name);
-        validFiles.splice(validFileIndex, 1);
 
-        // update validFiles array
-        setValidFiles([...validFiles]);
+        if (validFileIndex > 0) {
+            validFiles.splice(validFileIndex, 1);
 
+            console.log([...validFiles]);
+            // update validFiles array
+            setValidFiles([...validFiles]);
+        }
         const selectedFileIndex = selectedFiles.findIndex(e => e.name === name);
 
-        console.log(selectedFileIndex);
+        if (selectedFileIndex > 0) {
 
-        const item = selectedFiles[selectedFileIndex];
+            const item = selectedFiles[selectedFileIndex];
 
-        selectedFiles.splice(selectedFileIndex, 1);
+            selectedFiles.splice(selectedFileIndex, 1);
 
-        console.log(item);
+            console.log(item);
 
-        // update selectedFiles array
-        setSelectedFiles([...selectedFiles]);
+            // update selectedFiles array
+            setSelectedFiles([...selectedFiles]);
+        }
+
+        const allDataIndex = allData.findIndex(e => e.data.name === name);
+
+        if (allDataIndex > 0) {
+            var dataItem = allData[allDataIndex];
+
+            console.log(dataItem);
+
+            removeImageOnDB(dataItem.imageID).then(() => {
+                allData.splice(allDataIndex, 1);
+                props.updateAllData([...allData]);
+            })
+        }
 
         // delete from unsupported files
         const unsupportedFileIndex = unsupportedFiles.findIndex(e => e.name === name);

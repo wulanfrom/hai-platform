@@ -17,7 +17,7 @@ export default function ListItem(props) {
 
     console.log(props);
 
-    const loadImage = (file) => {
+    const loadImage = (file, imageRef) => {
         // console.log("filename");
         // console.log(file.name);
         const reader = new FileReader();
@@ -25,10 +25,10 @@ export default function ListItem(props) {
         reader.readAsDataURL(file);
         // console.log(reader.readAsDataURL(file));
         reader.onload = function(e) {
-            console.log(imageIcon);
+            console.log(imageRef);
 
-            if (!data.invalid && imageIcon){
-                imageIcon.current.style.backgroundImage = `url(${e.target.result})`;
+            if (!data.invalid && imageRef.current){
+                imageRef.current.style.backgroundImage = `url(${e.target.result})`;
             }
             else{
                 console.log("it's still on load");
@@ -39,8 +39,12 @@ export default function ListItem(props) {
 
     // on mount
     useEffect(() => {
-        loadImage(data);
+        console.log(data);
+
+        loadImage(data, imageIcon);
     }, [data]);
+
+    console.log(data);
 
     return (
         <div>
