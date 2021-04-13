@@ -43,7 +43,7 @@ function GetStarted() {
                 explanations to images and organize the results so that you can focus more on 
                 analyzing the algorithm. After finishing your implementation task, the platform runs
                 your code with images that you uploaded in the platform. Also, the platform suggests you 
-                categories of images that you have not explored to encourage more diverse exploration. (( Why is it encouraged? ))</p>
+                categories of images that you have not explored to encourage more diverse exploration.</p>
 
             <h3> <b> Instructions </b> </h3>
 
