@@ -12,7 +12,7 @@ function Logout(props) {
 
     return (
         <div>
-            <Redirect to="/login" />
+            <Redirect to="/" />
         </div>
     )
 }

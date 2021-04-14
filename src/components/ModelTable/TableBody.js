@@ -10,6 +10,7 @@ import Badge from 'react-bootstrap/Badge'
 import Spinner from 'react-bootstrap/Spinner'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 
+import useInterval from 'react-useinterval'
 import axios from 'axios'
 
 export default function TableBody(props) {
@@ -22,6 +23,7 @@ export default function TableBody(props) {
     const [expAgree, setExpAgree] = useState(data.agreeExp); //set the do you agree with the lab to false
     const [explanation, setExplanation] = useState(data.explanation);
     const [percentage, setPercentage] = useState(0);
+    const [latestExplanation, setLatestExplanation] = useState('');
 
     let percent = 0;
     var values = {
@@ -111,6 +113,19 @@ export default function TableBody(props) {
         })
     }
 
+    useInterval(() => { checkUpdate() }, 2000);
+
+    function checkUpdate() {
+        // removal check
+
+        if(latestExplanation != explanation) {
+            updateUserNote(data.imageID, explanation).then(res => {
+                setLatestExplanation(explanation);
+            }).catch(err => {
+                alert("Error! Please contact admin");
+            })
+        }
+    }
     // Similar to componentDidMount and componentDidUpdate:
      useEffect(() => {
          if (data.LIMEPic == null) {
@@ -128,13 +143,29 @@ export default function TableBody(props) {
                          LIMEPic: res2,
                          LIMEURL: res.data.explanation_url
                      });
+                 }).catch(res => {
+                     alert("Error! Please contact admin");
                  })
+             }).catch(res => {
+                 alert("Error! Please contact admin");
              })
          }
          else {
              loadImage(data.LIMEPic, expRef);
              loadImage(data.data, imageRef);
          }
+
+         getUserNote(data.imageID).then( res => {
+             console.log(res);
+             console.log(res.data);
+
+             if(res.data.user_note != null) {
+                setExplanation(res.data.user_note);
+                setLatestExplanation(res.data.user_note);
+             }
+         }).catch(res => {
+             alert("Error! Please contact admin");
+         })
     }, []);
 
 
@@ -167,6 +198,61 @@ export default function TableBody(props) {
 
     function checkLabelError() {
         return (data.errorStages.includes(2) && data.agreeExp == -1 ) ? true : false;
+    }
+
+    function getUserNote(imageID) {
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/get_user_explanation_note/'; //for signing in
+            const data = {
+                image_id: imageID,
+            }
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                data: data,
+                url: url,
+            };
+
+            axios(options).then(res => {
+                resolve(res)
+            })
+                .catch(err => {
+                    reject(err)
+                });
+        });
+    }
+
+    function updateUserNote(imageID, user_note) {
+        return new Promise((resolve, reject) => {
+            const url = 'http://server.hyungyu.com:1289/poll/set_user_explanation_note/'; //for signing in
+            const data = {
+                image_id: imageID,
+                user_note: user_note
+            }
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                },
+                data: data,
+                url: url,
+            };
+
+            axios(options).then(res => {
+                resolve(res)
+            })
+                .catch(err => {
+                    reject(err)
+                });
+        });
     }
 
     function updateUserExplanationAnnotation(imageID, flag) {
@@ -218,7 +304,7 @@ export default function TableBody(props) {
                 {/* Put lime picture here */}
                 <div className="exp-wrapper">
                     {/* { percentage && <ProgressBar now={percentage} label={`${percentage}%`} /> } */}
-                    { loading ? <div> <Spinner animation="grow" variant="primary" /> <br /> We're now generating an explanation in real-time. It may take a minute. </div> :
+                    { loading ? <div> <Spinner animation="grow" variant="primary" /> <br /> We're now generating an explanation in real-time. It may take several minutes. </div> :
                      <div className="exp-container" ref={expRef}></div>
                     }
                     {

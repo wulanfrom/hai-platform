@@ -32,7 +32,7 @@ export default function MasterUpload() {
         
         else {
             console.log(allData);
-            if (checkValidity(currentStep)) {
+            if (checkValidity(currentStep, true)) {
                 setCurrentStep((prevActiveStep) => prevActiveStep + 1);
             }
             else {
@@ -41,8 +41,8 @@ export default function MasterUpload() {
         }
     };
 
-    function checkValidity(step) {
-        console.log(step);
+    function checkValidity(step, prevNextFlag) {
+        if(!prevNextFlag) return true;
 
         if(step == 1) {
             var flag = false;
@@ -79,8 +79,13 @@ export default function MasterUpload() {
                 }
             }
         }
+        else if(step == 3) {
+            if(allData.length < 5) {
+                alert("You must try at least five images to proceed. Please go back to the first stage and upload more images.");
 
-        console.log(allData);
+                return false;
+            }
+        }
 
         if(flag) {
             setAllData([... allData]);
@@ -98,7 +103,7 @@ export default function MasterUpload() {
             setCurrentStep(0);
         }
         else {
-            if (checkValidity(currentStep)) {
+            if (checkValidity(currentStep, false)) {
                 setCurrentStep((prevActiveStep) => prevActiveStep - 1);
             }
             else {
@@ -222,7 +227,7 @@ export default function MasterUpload() {
     const getStepDesc = (currentStep) => {
         if (currentStep === 0) {
             return (
-                <p>Upload images that you want to get the classification label and explanation.</p>
+                <p>Upload images that you want to get the classification label and explanation. You can upload up to 3 images at a time. As a starting point, you may want to download example images [<a href='https://raw.githubusercontent.com/yougatup/figures/main/dog.jpg'>image1</a>, <a href='https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg'>image2</a>, <a href='https://media.kasperskydaily.com/wp-content/uploads/sites/92/2015/12/06023356/train-hack-featured-1.jpg'>image3</a>], upload these, and proceed the steps.</p>
             )
         }
         else if (currentStep === 1) {
@@ -248,7 +253,7 @@ export default function MasterUpload() {
                         the following section. For each limitation, you are asked to write a short report 
                         that includes (1) when the LIME algorithm does not work, (2) images and explanations 
                         that you have tried as a convincing evidence, and (3) your ideas on how to overcome 
-                        the limitations in a UI. Clicking <b> this icon </b> allows you to browse and select 
+                        the limitations in a UI. Clicking <svg className="uploadImage" width="20" height="20" viewBox="0 0 40 40"></svg> icon allows you to browse and select 
                         images with explanations that you have uploaded. </p>
 
                     <p style={{ marginTop: "10px" }}>After listing up the limitations, create your own prototype of an interactive explainable
@@ -281,7 +286,7 @@ export default function MasterUpload() {
         }
         else if (currentStep === 5) {
             return (
-                <p>Now you are all done! Check out the following work that the server stores, which is going to be used in grading. Note that your submission only in the "Create UI" stage (i.e., reports describing the limitations of explanation algorithm and interactive UI design in Figma) is used in the grading. Please let us know if something went wrong. </p>
+                <p>Now you are all done! It is highly encouraged to try several images across various categories. Your submission has been automatically stored in the server, so you do not need to explicitly submit anything you work on this platform. Please proceed to the discussion items. </p>
             )
         }
         else {

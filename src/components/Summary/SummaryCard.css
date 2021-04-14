@@ -71,6 +71,10 @@
     margin-left: 0.5rem;
 }
 
+.summary-card{
+    cursor: pointer;
+}
+
 .summary-class-result {
     background-color: #2C98F0;
     color: #fff;

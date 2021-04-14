@@ -189,7 +189,10 @@ export default function DropZone(props) {
             setSelectedFiles([... files]);
 
             props.updateAllData([... myData]);
-        })
+        }).catch(res => {
+                     alert("Error! Please contact admin");
+                 })
+
     }, []);
 
     // Remove duplicate files
@@ -249,6 +252,11 @@ export default function DropZone(props) {
 
     // Handles files when you upload them
     const handleFiles = (files) => {
+        if(files.length > 5) {
+            alert("You can upload up to 3 images at a time.")
+            return;
+        }
+
         for (let i = 0; i < files.length; i++) {
             if (validateFile(files[i])) {
                 // add to an array so we can display the name of file
@@ -275,7 +283,15 @@ export default function DropZone(props) {
                 // add to the same array so we can display the name of the file
                 setSelectedFiles(prevArray => [...prevArray, files[i]]);
                 // set error message
-                setErrorMessage('File type not permitted');
+
+                const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+                if(validTypes.indexOf(files[i].type) === -1) {
+                    setErrorMessage('File type not permitted. Only jpg, jpeg, and png are supported.');
+                }
+                else {
+                    setErrorMessage('Filename should consist of alphabets, numbers, and underscore(_). ');
+                }
                 // add files that are invalid
                 setUnsupportedFiles(prevArray => [...prevArray, files[i]]);
                 // applyIcon(files[i]);
@@ -286,9 +302,12 @@ export default function DropZone(props) {
     // checks the validity of the files
     const validateFile = (file) => {
         const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+        var english = /^[A-Za-z0-9_. \-()]*$/;
+
         if (validTypes.indexOf(file.type) === -1) {
             return false;
         }
+        else if(!english.test(file.name)) return false;
         return true;
     }
 
@@ -316,7 +335,7 @@ export default function DropZone(props) {
 
         const validFileIndex = validFiles.findIndex(e => e.name === name);
 
-        if (validFileIndex > 0) {
+        if (validFileIndex >= 0) {
             validFiles.splice(validFileIndex, 1);
 
             console.log([...validFiles]);
@@ -325,7 +344,7 @@ export default function DropZone(props) {
         }
         const selectedFileIndex = selectedFiles.findIndex(e => e.name === name);
 
-        if (selectedFileIndex > 0) {
+        if (selectedFileIndex >= 0) {
 
             const item = selectedFiles[selectedFileIndex];
 
@@ -339,7 +358,7 @@ export default function DropZone(props) {
 
         const allDataIndex = allData.findIndex(e => e.data.name === name);
 
-        if (allDataIndex > 0) {
+        if (allDataIndex >= 0) {
             var dataItem = allData[allDataIndex];
 
             console.log(dataItem);
@@ -347,7 +366,10 @@ export default function DropZone(props) {
             removeImageOnDB(dataItem.imageID).then(() => {
                 allData.splice(allDataIndex, 1);
                 props.updateAllData([...allData]);
-            })
+            }).catch(res => {
+                     alert("Error! Please contact admin");
+                 })
+
         }
 
         // delete from unsupported files

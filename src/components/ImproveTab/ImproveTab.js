@@ -79,7 +79,7 @@ export default function ImproveTab(props) {
     }
 
 
-    useInterval(() => { checkUpdate() }, 5000);
+    useInterval(() => { checkUpdate() }, 2000);
 
     useEffect( () => {
 
@@ -94,7 +94,11 @@ export default function ImproveTab(props) {
                 setFigmaURL(res.data.figmaURL);
                 setEmbedLink(res.data.figmaURL);
             }
-        });
+        }).catch(res => {
+            alert("Error! Please contact admin");
+        })
+
+            ;
 
         get_Improvement().then(res => {
             console.log(res);
@@ -114,7 +118,10 @@ export default function ImproveTab(props) {
 
             setLatestImprovementList(myList);
             updateImprovement(myList);
+        }).catch(res => {
+            alert("Error! Please contact admin");
         })
+
     }, [])
 
     // check if figma link is valid
@@ -166,7 +173,10 @@ export default function ImproveTab(props) {
             // console.log(improvementList);
 
             e.preventDefault();
-        })
+        }).catch(res => {
+                     alert("Error! Please contact admin");
+                 })
+
     }
 
     const deleteImprovement = (e) => {
@@ -180,7 +190,10 @@ export default function ImproveTab(props) {
                 setLatestImprovementList([...improvementList]);
             }
             // console.log(improvementList);
-        });
+        }).catch(res => {
+                     alert("Error! Please contact admin");
+                 })
+;
         
     }
 
@@ -422,7 +435,10 @@ export default function ImproveTab(props) {
             setFigmaLink(link).then( () => {
                 changeLinkDesc(false);
                 setEmbedLink(link);
-            })
+            }).catch(res => {
+                     alert("Error! Please contact admin");
+                 })
+
         }
 
         // if not, make text description appear
@@ -451,7 +467,7 @@ export default function ImproveTab(props) {
                 
                 <p> Clicking <svg className="uploadImage" width="20" height="20" viewBox="0 0 40 40"></svg> icon allows you to browse and select images with explanations 
 
-                that you have uploaded. To resize the markdown editor, drag "..." icon on the bottom right of each editor. Click "this icon" to have a full-screen of a editor.</p>
+                that you have uploaded. To resize the markdown editor, drag "..." icon on the bottom right of each editor.</p>
 
                 <hr />
 

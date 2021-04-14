@@ -50,15 +50,13 @@ function LoginPage(props) {
         if (isEmpty(password)) {
             setPasswordError("Must not be empty.");
             return false;
-        } 
+        } /*
         else if (password.length < 6 ) {
             setPasswordError("Needs to be longer than 6 characters.");
             return false;
-        }
-        else if (!isEmpty(password) && password.length >= 6){
-            setPasswordError("");
-            return true;
-        }
+        }*/
+
+        return true;
     }
 
     const handleSubmit = (e) => {

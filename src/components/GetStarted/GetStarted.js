@@ -20,7 +20,7 @@ function GetStarted() {
             <h1 style={{textAlign: "center"}}> <b> Assignment 2. Explaining Model Predictions to Users</b> </h1> 
 
             <br />
-            <h3> <b> Leaning Objectives </b> </h3>
+            <h3> <b> Learning Objectives </b> </h3>
 
             <p>Explainable AI helps users understand and interpret predictions produced by models. The objective of this assignment is for you to try existing off-the-shelf tools for explanations, think about strengths and weaknesses of the explanations they provide, and design your own user-centered explanations that can address such weaknesses. </p>
 
@@ -50,7 +50,7 @@ function GetStarted() {
             <ol>
                 <li> Go to <a href='https://pair-code.github.io/what-if-tool/demos/image.html'>What-If Tool demo</a> about a smile classification task. You can explore the dataset, browse the model performance, and experiment with the model by asking what-if questions to the tool. </li>
                 <li> Answer questions in <a href=''>Discussion “Stage 1”</a>. The discussion contains a specific task that you need to perform on the What-If tool.</li>
-                <li> Go to <a href='https://server.hyungyu.com:8899'>Jupyter notebook</a> that you already used for the assignment #1. We provide a skeleton code that describes an algorithm that explains which parts of an image contribute to the prediction result. You need to fill out some blanks in the code with your implementation to make it work. The account is same, which means that you need to use the password that you changed. </li>
+                <li> Go to <a href='http://server.hyungyu.com:8899'>Jupyter notebook</a> that you already used for the assignment #1. We provide a skeleton code that describes an algorithm that explains which parts of an image contribute to the prediction result. You need to fill out some blanks in the code with your implementation to make it work. The account is same, which means that you need to use the password that you changed. </li>
                 <li style={{marginBottom:"5px"}}> Follow the following steps in this platform.</li>
                 <ol>
                     <span style={{marginLeft: "40px"}}> <i>Analyze LIME algorithm</i> </span>

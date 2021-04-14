@@ -124,12 +124,11 @@ export default function LabelCard(props) {
                     setImageID(imageID)
                 })
                     .catch(err => {
-                        console.log(err)
+                     alert("Error! Please contact admin");
                     })
-            })
-                .catch(err => {
-                    console.log(err)
-                })
+            }).catch(res => {
+                     alert("Error! Please contact admin");
+                 })
         }
         else {
             if (dataLabel == '') {
@@ -144,7 +143,7 @@ export default function LabelCard(props) {
                     // document.querySelectorAll(".class-result").forEach(a => a.style.display = "block");
                 })
                     .catch(err => {
-                        console.log(err)
+                     alert("Error! Please contact admin");
                     })
             }
         }
@@ -241,27 +240,31 @@ export default function LabelCard(props) {
                         </div>
                         <hr></hr>
                         <div>
-                            <Card.Text>Is the label correct?</Card.Text>
-                            <ButtonGroup toggle>
-                                {radios.map((radio, idx) => (
-                                    <ToggleButton
-                                        key={idx}
-                                        type="radio"
-                                        variant="secondary"
-                                        name="radio"
-                                        value={radio.value}
-                                        checked={ agreeValue === radio.value }
-                                        onChange={(e) => handleSetAgreeValue(e.currentTarget.value)}
-                                    >
-                                        {radio.name}
-                                    </ToggleButton>
-                                ))}
-                            </ButtonGroup>
+                            {loading ? '' :
+                                <div>
+                                    <Card.Text>Is the label correct?</Card.Text>
+                                    <ButtonGroup toggle>
+                                        {radios.map((radio, idx) => (
+                                            <ToggleButton
+                                                key={idx}
+                                                type="radio"
+                                                variant="secondary"
+                                                name="radio"
+                                                value={radio.value}
+                                                checked={agreeValue === radio.value}
+                                                onChange={(e) => handleSetAgreeValue(e.currentTarget.value)}
+                                            >
+                                                {radio.name}
+                                            </ToggleButton>
+                                        ))}
+                                    </ButtonGroup>
+                                </div>
+                            }
                             {
-                                errorFlag ? 
-                                <div className='error'> Please answer the question </div>
-                                :
-                                ''
+                                errorFlag ?
+                                    <div className='error'> Please answer the question </div>
+                                    :
+                                    ''
                             }
                         </div>
                     </div>
