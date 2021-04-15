@@ -24,6 +24,7 @@ function LoginPage(props) {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [changePassword, setChangePassword] = useState(false);
+    const [errPresented, setErrPresented] = useState(false);
 
     const [cPassword1, setChangePassword1] = useState("");
     const [cPassword2, setChangePassword2] = useState("");
@@ -140,6 +141,7 @@ function LoginPage(props) {
         }
     }
 
+    /*
     let errorMessage = null;
     if (props.error) {
         console.log("error: ", props.error.message);
@@ -147,6 +149,7 @@ function LoginPage(props) {
             <p style={{color: 'red'}}>Login failed. Please check your email and password.</p>
         )
     }
+    */
 
     let redirect = null;
     if (props.isAuthenticated) {
@@ -243,7 +246,7 @@ function LoginPage(props) {
                                             </div>
                                     }
                                 </Form>
-                                {errorMessage}
+                                {/*errorMessage*/}
                             </div>)
                             }
                         </div>
