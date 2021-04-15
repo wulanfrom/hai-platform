@@ -66,7 +66,7 @@ export default function TableBody(props) {
 
     function getLimeResult(imageID) {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/get_image_explanation/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/get_image_explanation/'; //for signing in
 
             const data = {
                 image_id: imageID,
@@ -202,7 +202,7 @@ export default function TableBody(props) {
 
     function getUserNote(imageID) {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/get_user_explanation_note/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/get_user_explanation_note/'; //for signing in
             const data = {
                 image_id: imageID,
             }
@@ -229,7 +229,7 @@ export default function TableBody(props) {
 
     function updateUserNote(imageID, user_note) {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/set_user_explanation_note/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/set_user_explanation_note/'; //for signing in
             const data = {
                 image_id: imageID,
                 user_note: user_note
@@ -256,7 +256,7 @@ export default function TableBody(props) {
     }
 
     function updateUserExplanationAnnotation(imageID, flag) {
-        const url = 'http://server.hyungyu.com:1289/poll/update_explanation_annotation/'; //for signing in
+        const url = 'http://172.10.6.40:1289/poll/update_explanation_annotation/'; //for signing in
         const data = {
             image_id: imageID,
             user_annotation: flag

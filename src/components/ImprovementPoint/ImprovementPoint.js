@@ -100,7 +100,7 @@ export default function ImprovementPoint(props) {
                     // We already know the image URL
 
                     for(var i=0;i<selectedImages.length;i++) {
-                        let modifyText = `<img src='${"http://server.hyungyu.com:1289/static" + selectedImages[i].imageURL}' width='200px' />\n` + 
+                        let modifyText = `<img src='${"http://172.10.6.40:1289/static" + selectedImages[i].imageURL}' width='200px' />\n` + 
                                         `<img src='${selectedImages[i].LIMEURL}' width='200px' />\n`;
                         api.replaceSelection(modifyText);
                     }

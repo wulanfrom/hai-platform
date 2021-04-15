@@ -257,7 +257,7 @@ export default function ImproveTab(props) {
         console.log("REMOVE IMPROVEMENT CALLED");
 
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/remove_improvement/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/remove_improvement/'; //for signing in
 
             const data = {
                 id: improvementID
@@ -288,7 +288,7 @@ export default function ImproveTab(props) {
         console.log("UPDATE IMPROVEMENT CALLED");
 
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/update_improvement/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/update_improvement/'; //for signing in
 
             const data = {
                 id: improvementID,
@@ -320,7 +320,7 @@ export default function ImproveTab(props) {
         console.log("ADD IMPROVEMENT CALLED");
 
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/add_improvement/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/add_improvement/'; //for signing in
 
             const data = {
                 improvement_title: title,
@@ -350,7 +350,7 @@ export default function ImproveTab(props) {
 
     function setFigmaLink(figmaURL) {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/set_figma_link/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/set_figma_link/'; //for signing in
 
             const data = {
                 figmaURL: figmaURL,
@@ -379,7 +379,7 @@ export default function ImproveTab(props) {
 
     function get_Improvement() {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/get_improvement/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/get_improvement/'; //for signing in
 
             const options = {
                 method: 'GET',
@@ -403,7 +403,7 @@ export default function ImproveTab(props) {
 
     function getFigmaLink() {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/get_figma_link/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/get_figma_link/'; //for signing in
 
             const options = {
                 method: 'GET',

@@ -50,7 +50,7 @@ function GetStarted() {
             <ol>
                 <li> Go to <a href='https://pair-code.github.io/what-if-tool/demos/image.html'>What-If Tool demo</a> about a smile classification task. You can explore the dataset, browse the model performance, and experiment with the model by asking what-if questions to the tool. </li>
                 <li> Answer questions in <a href=''>Discussion “Stage 1”</a>. The discussion contains a specific task that you need to perform on the What-If tool.</li>
-                <li> Go to <a href='http://server.hyungyu.com:8899'>Jupyter notebook</a> that you already used for the assignment #1. We provide a skeleton code that describes an algorithm that explains which parts of an image contribute to the prediction result. You need to fill out some blanks in the code with your implementation to make it work. The account is same, which means that you need to use the password that you changed. </li>
+                <li> Go to <a href='http://172.10.6.40:8899'>Jupyter notebook</a> that you already used for the assignment #1. We provide a skeleton code that describes an algorithm that explains which parts of an image contribute to the prediction result. You need to fill out some blanks in the code with your implementation to make it work. The account is same, which means that you need to use the password that you changed. </li>
                 <li style={{marginBottom:"5px"}}> Follow the following steps in this platform.</li>
                 <ol>
                     <span style={{marginLeft: "40px"}}> <i>Analyze LIME algorithm</i> </span>

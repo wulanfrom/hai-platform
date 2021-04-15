@@ -52,6 +52,7 @@ function LoginPage(props) {
                 setPasswordChangeError('');
 
             }).catch(err => {
+				console.log(err.response);
                 setPasswordChangeError(err.response.data.error);
             })
         }
@@ -59,7 +60,7 @@ function LoginPage(props) {
 
     function postChangePassword() {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/change_password/'; //for signing in
+            const url = 'http://172.10.6.40:1289/poll/change_password/'; //for signing in
             const data = {
                 email: email,
                 password: password,
