@@ -10,3 +10,12 @@
 .error-msg {
     color: red;
 }
+
+.btn-primary {
+    margin: 5px;
+}
+
+.myNotice {
+    color: green;
+    text-align: center;
+}
