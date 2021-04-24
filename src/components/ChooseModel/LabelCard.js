@@ -115,6 +115,7 @@ export default function LabelCard(props) {
 
                 var imageID = res.data.id;
                 setImageURL("http://server.hyungyu.com:1289/static" + res.data.image);
+                setIsUploaded(true);
 
                 getImageLabel(imageID).then(res => {
                     // loading label
