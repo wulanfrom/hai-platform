@@ -259,14 +259,17 @@ export default function DropZone(props) {
 
         for (let i = 0; i < files.length; i++) {
             if (validateFile(files[i])) {
+                var blob = files[i].slice(0, files[i].size); 
+                var newFile = new File([blob], makeid(5) + '_' + files[i].name, {type: files[i].type});
+
                 // add to an array so we can display the name of file
-                setSelectedFiles(prevArray => [...prevArray, files[i]]);
+                setSelectedFiles(prevArray => [...prevArray, newFile]);
                 // applyIcon(files[i]);
                 
                 // create new card post? and add to globalCardList
                 props.addData({
-                    id: files[i].name,
-                    data: files[i],
+                    id: newFile.name,
+                    data: newFile,
                     agreeLabel: -1,
                     agreeExp: -1,
                     explanation: "",
@@ -299,6 +302,19 @@ export default function DropZone(props) {
         }
     }
 
+    function makeid(length) {
+        var result           = [];
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+          result.push(characters.charAt(Math.floor(Math.random() * 
+     charactersLength)));
+       }
+       return result.join('');
+    }
+    
+    console.log(makeid(5));
+
     // checks the validity of the files
     const validateFile = (file) => {
         const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -307,6 +323,7 @@ export default function DropZone(props) {
         if (validTypes.indexOf(file.type) === -1) {
             return false;
         }
+
         else if(!english.test(file.name)) return false;
         return true;
     }
