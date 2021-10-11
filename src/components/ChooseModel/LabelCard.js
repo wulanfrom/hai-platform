@@ -56,7 +56,7 @@ export default function LabelCard(props) {
 
     function uploadImage(img) {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/upload_image/'; //for signing in
+            const url = 'http://15.165.96.51:1289/poll/upload_image/'; //for signing in
 
             let form_data = new FormData();
             form_data.append('image', img, img.name);
@@ -80,7 +80,7 @@ export default function LabelCard(props) {
 
     function getImageLabel(imageID) {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/get_image_label/'; //for signing in
+            const url = 'http://15.165.96.51:1289/poll/get_image_label/'; //for signing in
             const data = {
                 image_id: imageID,
             }
@@ -114,7 +114,7 @@ export default function LabelCard(props) {
                 console.log(res)
 
                 var imageID = res.data.id;
-                setImageURL("http://server.hyungyu.com:1289/static" + res.data.image);
+                setImageURL("http://15.165.96.51:1289/static" + res.data.image);
                 setIsUploaded(true);
 
                 getImageLabel(imageID).then(res => {
@@ -186,7 +186,7 @@ export default function LabelCard(props) {
     }
 
     function updateUserLabelAnnotation(imageID, flag) {
-        const url = 'http://server.hyungyu.com:1289/poll/update_label_annotation/'; //for signing in
+        const url = 'http://15.165.96.51:1289/poll/update_label_annotation/'; //for signing in
         const data = {
             image_id: imageID,
             user_annotation: flag

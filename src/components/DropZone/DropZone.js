@@ -58,7 +58,7 @@ export default function DropZone(props) {
 
     function getUploadedImages() {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/get_uploaded_image/'; //for signing in
+            const url = 'http://15.165.96.51:1289/poll/get_uploaded_image/'; //for signing in
 
             // const config = {
             //     onUploadProgress: function(progressEvent) {
@@ -102,7 +102,7 @@ export default function DropZone(props) {
 
     function removeImageOnDB(imageID) {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/remove_single_image/'; //for signing in
+            const url = 'http://15.165.96.51:1289/poll/remove_single_image/'; //for signing in
 
             const data = {
                 image_id: imageID,
@@ -178,7 +178,7 @@ export default function DropZone(props) {
                     isUploaded: true 
                 };
 
-                files.push(await getImageObject("http://server.hyungyu.com:1289/static" + res.data[i].imgURL));
+                files.push(await getImageObject("http://15.165.96.51:1289/static" + res.data[i].imgURL));
 
                 elem.data = files[files.length-1]
 

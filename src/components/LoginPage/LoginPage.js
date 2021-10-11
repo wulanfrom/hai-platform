@@ -59,7 +59,7 @@ function LoginPage(props) {
 
     function postChangePassword() {
         return new Promise((resolve, reject) => {
-            const url = 'http://server.hyungyu.com:1289/poll/change_password/'; //for signing in
+            const url = 'http://15.165.96.51:1289/poll/change_password/'; //for signing in
             const data = {
                 email: email,
                 password: password,
