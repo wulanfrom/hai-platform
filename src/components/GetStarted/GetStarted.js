@@ -30,48 +30,31 @@ function GetStarted() {
 
             <h3> <b> What should I do? </b> </h3>
 
-            <p>In this assignment, you are asked to (1) explore Google’s What-If Tool, 
-                a platform that helps users understand the performance of models, (2) 
-                build and run an algorithm based on LIME for presenting which parts of 
+            <p>In this assignment, you are asked to (1) run LIME explainer for presenting which parts of 
                 an image contribute to the prediction for better interpretation of 
-                classification results, and (3) design a UI that further helps users 
+                classification results, and (2) design a UI that further helps users 
                 interpret the results especially when such explanation is not enough. 
                 For each of the stages, you are asked to discuss what can be explained 
-                with such tools/methods, and limitations of such explanations. </p> 
-
-            <p> This platform helps you easily apply your implementation of generating 
-                explanations to images and organize the results so that you can focus more on 
-                analyzing the algorithm. After finishing your implementation task, the platform runs
-                your code with images that you uploaded in the platform. Also, the platform suggests you 
-                categories of images that you have not explored to encourage more diverse exploration.</p>
+                with such tools/methods, and limitations of such explanations. </p>
 
             <h3> <b> Instructions </b> </h3>
 
-            <ol>
-                <li> Go to <a href='https://pair-code.github.io/what-if-tool/demos/image.html'>What-If Tool demo</a> about a smile classification task. You can explore the dataset, browse the model performance, and experiment with the model by asking what-if questions to the tool. </li>
-                <li> Answer questions in <a href=''>Discussion “Stage 1”</a>. The discussion contains a specific task that you need to perform on the What-If tool.</li>
-                <li> Go to <a href='http://15.165.96.51:8899'>Jupyter notebook</a> that you already used for the assignment #1. We provide a skeleton code that describes an algorithm that explains which parts of an image contribute to the prediction result. You need to fill out some blanks in the code with your implementation to make it work. The account is same, which means that you need to use the password that you changed. </li>
-                <li style={{marginBottom:"5px"}}> Follow the following steps in this platform.</li>
                 <ol>
-                    <span style={{marginLeft: "40px"}}> <i>Analyze LIME algorithm</i> </span>
+                    <span> <i>Analyze LIME algorithm</i> </span>
                     <li className='indented'>Upload images </li>
                     <li className='indented'>Get the classification labels from the model inception v3 </li>
                     <li className='indented'>Get the explanations that your implementation provides </li>
                     <li className='indented'>Annotate whether the explanation makes sense or not </li>
                     <li className='indented' style={{marginBottom:"10px"}}>Browse the summary of results that allow you to go through your annotations </li>
 
-                    <span style={{marginLeft: "40px"}}> <i>Design interactive UI</i> </span>
+                    <span> <i>Design interactive UI</i> </span>
                     <li className='indented'>Describe limitations of LIME algorithm and your ideas on how to overcome the limitations </li>
                     <li className='indented'>Create prototype with Figma </li>
                     {/* <Button variant="primary" onClick={goToModels}>Start Assignment</Button> */}
                 </ol>
-                <li seq="5"> Answer questions in <a href=''> Discussion Stage 2 and 3</a>. </li>
-            </ol>
-
             <hr />
 
             <div style={{ margin: "auto", textAlign: "center" }}>
-                Please make sure that you finish your implementation before proceeding.  <br /> <br />
                 <Link to="/upload" className="btn btn-primary">Start Activity</Link>
             </div>
 
